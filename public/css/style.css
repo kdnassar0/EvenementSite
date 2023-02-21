@@ -1,0 +1,54 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+
+}
+
+body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ------- nav ---------- */
+
+
+nav {
+
+ background-color: rgba(255, 0, 0, 0.218);
+ width: 40%;
+ margin-top:20px ;
+
+
+
+}
+nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction :row ;
+    gap: 20px;
+    height: 40px;
+}
+
+
+nav li {
+    list-style: none;
+}
+
+nav ul a {
+    text-decoration: none;
+}
+
+
+.ul1{
+   border-bottom: 5px solid red     ;
+}
+
+
+
+
+/* -------fin nav ------- */
+
