@@ -10,7 +10,12 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    background-image: url('https://img.wallpapersafari.com/desktop/1536/864/17/82/9b1Im0.jpg') ;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
 }
+
 
 /* ------- nav ---------- */
 
@@ -19,7 +24,12 @@ nav {
 
  background-color: rgba(255, 0, 0, 0.218);
  width: 40%;
- margin-top:20px ;
+ margin-top:70px ;
+ 
+
+
+
+
 
 
 
@@ -51,4 +61,36 @@ nav ul a {
 
 
 /* -------fin nav ------- */
+
+
+
+/* --------categorie-------- */
+.categorie{
+    display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: row;
+   margin-top : 200px;
+   flex-wrap: wrap;
+   width: 90%;
+   gap: 80px;
+}
+
+
+.categorieElements{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.categorie img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+
+/* --------fin categorie-------- */
 

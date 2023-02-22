@@ -57,11 +57,6 @@ class Categorie
     }
 
 
-    public function __toString()
-    {
-        $this->nomCategorie ; 
-    }
-
     /**
      * @return Collection<int, Evenement>
      */
@@ -102,5 +97,13 @@ class Categorie
         $this->image = $image;
 
         return $this;
+    }
+
+
+    
+
+    public function __toString()
+    {
+       return $this->nomCategorie  ." ".$this->image ; 
     }
 }

@@ -57,6 +57,6 @@ class Home
     }
     public function __toString()
     {
-        $this->text ." ".$this->image ;
+     return $this->text ." ".$this->image ;
     }
 }
