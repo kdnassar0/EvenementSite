@@ -17,16 +17,22 @@
         </div> 
 
     {% endfor %}
-</div>
+</div> 
 
 
-{{ form (formAddCategorie) }}
 
-{# {{ form_start(formAddCategorie) }}
-    {{ form_row(formAddCategorie.nomCategorie) }}
-    {{ form_row(formAddCategorie.image) }}
+
+{{ form_start(formAddCategorie) }}
+   <div class="formulaireCategorie">
+    <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }}  </div>
+    <div class="chmpsImage">{{ form_row(formAddCategorie.image) }} </div>
     {{ form_row(formAddCategorie.submit) }}
-{{ form_end(formAddCategorie) }}  #}
+  </div>
+{{ form_end(formAddCategorie) }}  
+
+  
+
+
 
 
 

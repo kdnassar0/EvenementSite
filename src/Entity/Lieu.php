@@ -49,6 +49,11 @@ class Lieu
      */
     private $salles;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->salles = new ArrayCollection();
@@ -121,10 +126,7 @@ class Lieu
 
 
 
-    public function __toString()
-    {
-        $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville ." ".$this->date_creation ;
-    }
+   
 
     /**
      * @return Collection<int, Salle>
@@ -154,5 +156,27 @@ class Lieu
         }
 
         return $this;
+    }
+
+
+
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+
+    
+    public function __toString()
+    {
+      return  $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville ." ".$this->date_creation ;
     }
 }

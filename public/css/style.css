@@ -91,6 +91,34 @@ nav ul a {
     border-radius: 50%;
 }
 
+.formulaireCategorie {
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chmpsImage input {
+    width: 100%;
+}
+.chmpsNom input {
+     width: 100%;
+}
 
 /* --------fin categorie-------- */
+
+/* ------------lieu--------------------- */
+
+.containersalle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.elemantsSalle img{
+    width: 150px;
+    height: 150px;
+}
+
+/* ------------fin lieu--------------------- */
 

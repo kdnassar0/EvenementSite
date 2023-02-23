@@ -44,6 +44,16 @@ class Salle
      */
     private $lieu;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $discreption;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
@@ -92,7 +102,7 @@ class Salle
 
     public function __toString()
     {
-        $this->capacite ." ". $this->numero ." ".$this->prix ;
+        return $this->capacite ." ". $this->numero ." ".$this->prix ;
     }
 
     /**
@@ -130,6 +140,30 @@ class Salle
     public function setLieu(?Lieu $lieu): self
     {
         $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getDiscreption(): ?string
+    {
+        return $this->discreption;
+    }
+
+    public function setDiscreption(string $discreption): self
+    {
+        $this->discreption = $discreption;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

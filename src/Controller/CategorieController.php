@@ -16,6 +16,7 @@ class CategorieController extends AbstractController
 
      /**
      * @Route("/categorie", name="app_categorie")
+     * @Route("/add/categorie" , name="add_categorie")
      */
     public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request): Response
    
