@@ -45,7 +45,7 @@ class Lieu
     private $adress;
 
     /**
-     * @ORM\OneToMany(targetEntity=Salle::class, mappedBy="lieu")
+     * @ORM\OneToMany(targetEntity=Salle::class,orphanRemoval="true", mappedBy="lieu")
      */
     private $salles;
 

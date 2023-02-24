@@ -7,31 +7,38 @@
 
 
 {% for lieu in lieus %}
-        {{ lieu.nom }}
-        {{ lieu.description  }}
-        {{ lieu.dateCreation | date('d/m/y')  }}
-        {{ lieu.ville }}
-        {{ lieu.adress}}
-       <img src="{{ lieu.image }}" alt=""> 
+    {{ lieu.nom }}
+    {{ lieu.dateCreation | date('d/m/y') }}
+    {{ lieu.ville }}
+    {{ lieu.adress}}
+    {{ lieu.description }}
+<img src="{{ lieu.image }}" alt="">
 
-       <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
-       <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
-    
+<a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
+<a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
+
 <div class="containersalle">
-    {% for salle in lieu.salles %} 
-    <div class="elemantsSalle">  
-            {{ salle.numero }}
-            {{ salle.capacite }}
-            {{ salle.discreption }}
-            <img src=" {{ salle.image }}" alt=""><br>
-        </div>    
+    {% for salle in lieu.salles %}
+    <div class="elemantsSalle">
+        {{ salle.numero }}
+        {{ salle.capacite }}
+        <a href=" {{ path ('show_salle',{'id':salle.id}) }} "><img src=" {{ salle.image }}" alt=""></a>
+        <a href="{{ path ('supprimer_salle',{'id':salle.id}) }}">supprimer</a>
+    </div>
     {% endfor %}
-        
-{% endfor %} 
-
-{{ form (formAddlieu) }}
-
 </div>
+    <a href=" {{ path ('add_salle',{'idLieu':lieu.id}) }} ">ajouter une salle</a><br>
+    {% endfor %}
+
+
+    
+<h1>Ajouter/Modifier un lieu</h1>
+{{ form_start(formAddlieu) }}
+<div class="formulaire">
+    {{ form (formAddlieu) }}
+</div>
+{{ form_end(formAddlieu) }}
+
 
 
 

@@ -2,7 +2,6 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-
 }
 
 body{
@@ -91,12 +90,13 @@ nav ul a {
     border-radius: 50%;
 }
 
-.formulaireCategorie {
+.formulaire {
     display: flex;
     align-items: center ;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
+    border: 1px solid;
 }
 
 .chmpsImage input {

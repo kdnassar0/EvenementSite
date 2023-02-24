@@ -100,10 +100,6 @@ class Salle
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->capacite ." ". $this->numero ." ".$this->prix ;
-    }
 
     /**
      * @return Collection<int, Evenement>
@@ -166,5 +162,12 @@ class Salle
         $this->image = $image;
 
         return $this;
+    }
+
+
+    
+    public function __toString()
+    {
+        return $this->capacite ." ". $this->numero ." ".$this->prix ." ".$this->discreption ." ".$this->image ;
     }
 }

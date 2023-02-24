@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LieuController!{% endblock %}
+
+{% block body %}
+
+
+{{ infoSalle.capacite }}
+{{ infoSalle.discreption }}
+<img src=" {{ infoSalle.image }} " alt="">
+
+<h1>Modifier une salle</h1>
+{{ form(formEditSalle) }}
+{% endblock %}  

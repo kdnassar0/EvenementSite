@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LieuController!{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(formAddSalle) }}
+{{ form_errors(formAddSalle) }}
+<div class="formulaire">
+    {{ form (formAddSalle) }}
+</div>
+{{ form_end(formAddSalle) }}
+
+
+
+
+
+
+{% endblock %}
