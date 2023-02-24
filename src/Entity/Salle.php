@@ -39,10 +39,7 @@ class Salle
      */
     private $evenements;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="salles")
-     */
-    private $lieu;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,6 +50,12 @@ class Salle
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="Salles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lieu;
 
     public function __construct()
     {
@@ -128,17 +131,7 @@ class Salle
         return $this;
     }
 
-    public function getLieu(): ?Lieu
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(?Lieu $lieu): self
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
+ 
 
     public function getDiscreption(): ?string
     {
@@ -169,5 +162,17 @@ class Salle
     public function __toString()
     {
         return $this->capacite ." ". $this->numero ." ".$this->prix ." ".$this->discreption ." ".$this->image ;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
     }
 }

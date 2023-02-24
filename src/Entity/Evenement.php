@@ -62,6 +62,7 @@ class Evenement
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 
@@ -72,6 +73,7 @@ class Evenement
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="evenements")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $createur;
 

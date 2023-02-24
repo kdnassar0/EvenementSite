@@ -44,21 +44,24 @@ class Lieu
      */
     private $adress;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Salle::class,orphanRemoval="true", mappedBy="lieu")
-     */
-    private $salles;
+ 
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Salle::class, mappedBy="lieu", orphanRemoval=true)
+     */
+    private $Salles;
+
     public function __construct()
     {
-        $this->salles = new ArrayCollection();
+        $this->Salles = new ArrayCollection();
     }
 
+ 
     public function getId(): ?int
     {
         return $this->id;
@@ -128,35 +131,6 @@ class Lieu
 
    
 
-    /**
-     * @return Collection<int, Salle>
-     */
-    public function getSalles(): Collection
-    {
-        return $this->salles;
-    }
-
-    public function addSalle(Salle $salle): self
-    {
-        if (!$this->salles->contains($salle)) {
-            $this->salles[] = $salle;
-            $salle->setLieu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        if ($this->salles->removeElement($salle)) {
-            // set the owning side to null (unless already changed)
-            if ($salle->getLieu() === $this) {
-                $salle->setLieu(null);
-            }
-        }
-
-        return $this;
-    }
 
 
 
@@ -178,5 +152,35 @@ class Lieu
     public function __toString()
     {
       return  $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville ." ".$this->date_creation ;
+    }
+
+    /**
+     * @return Collection<int, Salle>
+     */
+    public function getSalles(): Collection
+    {
+        return $this->Salles;
+    }
+
+    public function addSalle(Salle $salle): self
+    {
+        if (!$this->Salles->contains($salle)) {
+            $this->Salles[] = $salle;
+            $salle->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalle(Salle $salle): self
+    {
+        if ($this->Salles->removeElement($salle)) {
+            // set the owning side to null (unless already changed)
+            if ($salle->getLieu() === $this) {
+                $salle->setLieu(null);
+            }
+        }
+
+        return $this;
     }
 }
