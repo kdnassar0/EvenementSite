@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategorieController extends AbstractController
 {
@@ -18,32 +20,69 @@ class CategorieController extends AbstractController
      * @Route("/categorie", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
      */
-    public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request): Response
+    public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request,SluggerInterface $slugger): Response
    
     {
         $categories = $ca->findBy([],['nomCategorie'=>'ASC']);
 
         $form =$this->createForm(CategorieType::class,$categorie) ;
         $form->handleRequest($request) ;
+          
+
+        
       
         if($form->isSubmitted() && $form->isValid())
         {
-           
-                $categorie=$form->getData() ; 
-                $entityManager=$doctrine->getManager();
-                $entityManager->persist($categorie);
-                $entityManager->flush() ; 
+                     
+             
+                $file = $form->get('image')->getData(); 
+  
+                if ($file) {
+
+                    
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME );
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+                    $categorie=$form->getData() ; 
+                    $categorie->setImage($newFilename) ;                
+                    $entityManager=$doctrine->getManager();
+                    $entityManager->persist($categorie);
+                    $entityManager->flush() ; 
+                 
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $file->move(
+                            $this->getParameter('categorie_directory'),
+                            $newFilename 
+                        );
+                     
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                       
+                    } 
+                   
 
                 
          return $this->redirectToRoute('app_categorie') ;
                 
         }
 
-        return $this->render('categorie/index.html.twig', [
-            'categories' => $categories , 
-            'formAddCategorie'=>$form->createView()
-        ]);
-    }
+      
+    } 
+    return $this->render('categorie/index.html.twig', [
+        'categories' => $categories , 
+        'formAddCategorie'=>$form->createView()
+    ]);
+         
+         
+}
+
+
+
+
+
 
 
     /**
