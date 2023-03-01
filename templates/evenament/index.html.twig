@@ -13,6 +13,8 @@
 
  <img src="{{ evenementEncours.image }}" alt=""> 
  {{ evenementEncours.dateDebut | date('y-m-d') }}
+
+ <a href="{{ path ('supprimer_evenement',{'id':evenementEncours.id}) }}">supprimer</a>
     
 {% endfor %}
 
@@ -27,6 +29,8 @@
 
  <img src="{{ evenementPassee.image }}" alt=""> 
  {{evenementPassee.dateDebut | date('y-m-d') }}
+    
+ <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
     
 {% endfor %}
 
