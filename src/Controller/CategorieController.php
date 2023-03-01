@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categorie;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
+use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,12 @@ class CategorieController extends AbstractController
      /**
      * @Route("/categorie", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
+     * @Route("/evenementAvenir" , name="app_evenementAvenir")
      */
-    public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request,SluggerInterface $slugger): Response
+    public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request,SluggerInterface $slugger,EvenementRepository $e): Response
    
     {
+        $evenementsAvenir = $e-> findEvenementsAvenir() ;
         $categories = $ca->findBy([],['nomCategorie'=>'ASC']);
 
         $form =$this->createForm(CategorieType::class,$categorie) ;
@@ -73,7 +76,8 @@ class CategorieController extends AbstractController
     } 
     return $this->render('categorie/index.html.twig', [
         'categories' => $categories , 
-        'formAddCategorie'=>$form->createView()
+        'formAddCategorie'=>$form->createView(),
+        'evenementsAvenir'=>$evenementsAvenir
     ]);
          
          

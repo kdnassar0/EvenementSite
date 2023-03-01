@@ -3,18 +3,38 @@
 {% block title %}Hello EvenamentController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/EvenementSite/src/Controller/EvenamentController.php'|file_link(0) }}">src/Controller/EvenamentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/EvenementSite/templates/evenament/index.html.twig'|file_link(0) }}">templates/evenament/index.html.twig</a></code></li>
-    </ul>
-</div>
+<h1>Evenements Encours</h1>
+{% for evenementEncours in evenementsEncours %}
+
+{{ evenementEncours.nom }} <br>
+{{ evenementEncours.description }}
+
+ <img src="{{ evenementEncours.image }}" alt=""> 
+ {{ evenementEncours.dateDebut | date('y-m-d') }}
+    
+{% endfor %}
+
+
+<h2>-------------------------------------------------</h2>
+
+<h1>Evenements passses</h1>
+{% for evenementPassee in evenementsPassees %}
+
+{{ evenementPassee.nom }} <br>
+{{ evenementPassee.description }}
+
+ <img src="{{ evenementPassee.image }}" alt=""> 
+ {{evenementPassee.dateDebut | date('y-m-d') }}
+    
+{% endfor %}
+
+
+<h2>-------------------------------------------------</h2>
+
+
+
+ 
+
 {% endblock %}

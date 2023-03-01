@@ -34,6 +34,14 @@
 
 
 
+{% for evenementAvenir in evenementsAvenir %}
+
+
+{{ evenementAvenir.nom }} <br>
+{{ evenementAvenir.description }}
+ <img src=" {{ evenementAvenir.image }}" alt="">
+{{ evenementAvenir.dateDebut | date('y-m-d') }}
+{% endfor %}
 
 
 {% endblock %}

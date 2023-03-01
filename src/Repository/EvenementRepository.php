@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Evenement;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Evenement>
@@ -38,6 +39,53 @@ class EvenementRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+
+
+    public function findEvenementsAvenir()
+    {
+
+        // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
+        $now = new \DateTime() ; 
+        // on fait createquerybuilder
+        return $this->createQueryBuilder('e')
+        // on fait une condition 
+        ->andWhere('e.date_debut > :val')
+        // on met les paramettre
+        ->setParameter('val',$now)
+        ->orderBy('e.date_debut','ASC')
+        ->getQuery()
+        ->getResult() ;
+
+    }
+
+    public function findEvenementsPassees()
+    {
+        $now = new \DateTime() ; 
+        return $this->createQueryBuilder('e')
+        ->andWhere('e.date_fin < :val')
+        ->setParameter('val',$now)
+        ->orderBy('e.date_debut','ASC')
+        ->getQuery()
+        ->getResult() ;
+
+    } 
+
+    public function findEvenementsEncours()
+    {
+        $now = new \DateTime() ; 
+        
+        return $this->createQueryBuilder('e')
+        ->andWhere('e.date_debut < :val and e.date_fin > :val')
+        ->setParameter('val',$now)
+        ->orderBy('e.date_debut','ASC')
+        ->getQuery()
+        ->getResult() ;
+       
+    }
+
+
+    
 
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
