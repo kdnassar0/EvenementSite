@@ -68,47 +68,6 @@ class LieuController extends AbstractController
 
 
 
-    /**
-     *@Route("/add/salle/{idLieu}" ,name ="add_salle") 
-     */
-
-     public function addSalle(LieuRepository $li, Salle $salle=null, ManagerRegistry $doctrine ,Request $request, Lieu $idLieu )
-
-
-     {
-
-   
-      if(!$salle){
-        $salle = new salle() ;
-      }
-       $salle->setLieu($li->findOneBy(["id"=>$idLieu],[]));
-      
-      $form = $this->createForm(SalleType::class,$salle) ; 
-      $form->handleRequest($request) ;
-      
-      $capacite =$form["capacite"]->getData();
-    
-      if($form->isSubmitted() && $form->isValid() && $capacite >=1)
-      {
-        $entityManager =$doctrine->getManager() ; 
-        $entityManager->persist($salle) ; 
-        $entityManager->flush() ;
-      
-        return $this->redirectToRoute('app_lieu') ;
-      
-      }
-      else
-      {
-       
-      }
-      return $this->render('salle/add.html.twig',[
-        'formAddSalle'=>$form->createView()
-      ]);
-      
-
-     }
-
-
 
 
 

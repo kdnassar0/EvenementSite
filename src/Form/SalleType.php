@@ -25,14 +25,14 @@ class SalleType extends AbstractType
             ->add('capacite',IntegerType::class,
             ['attr'=>['min'=>'1']])
             ->add('numero',IntegerType::class)
-            ->add('prix',NumberType::class)
+            ->add('prix',NumberType::class,['required'=>false])
             ->add('discreption',TextType::class)
             ->add('image',UrlType::class) 
-            ->add('lieu',EntityType::class,
-            [
-                'class'=>Lieu::class,
-                'choice_label'=>'nom'
-            ])
+            // ->add('lieu',EntityType::class,
+            // [
+            //     'class'=>Lieu::class,
+            //     'choice_label'=>'nom'
+            // ])
             ->add('submit',SubmitType::class)
         ;
     }

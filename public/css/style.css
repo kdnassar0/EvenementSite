@@ -10,7 +10,7 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-image: url('https://img.wallpapersafari.com/desktop/1536/864/17/82/9b1Im0.jpg') ;
+    /* background-image: url('https://img.wallpapersafari.com/desktop/1536/864/17/82/9b1Im0.jpg') ; */
     background-repeat: no-repeat;
     background-attachment:fixed;
 }

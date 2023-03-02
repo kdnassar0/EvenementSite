@@ -41,6 +41,7 @@
 {{ evenementAvenir.description }}
  <img src=" {{ evenementAvenir.image }}" alt="">
 {{ evenementAvenir.dateDebut | date('y-m-d') }}
+<a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
 {% endfor %}
 
 

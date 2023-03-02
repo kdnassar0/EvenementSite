@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-use App\Repository\SalleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Lieu;
 use App\Entity\Salle;
 use App\Form\SalleType;
+use App\Repository\LieuRepository;
+use App\Repository\SalleRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SalleController extends AbstractController
 {
@@ -17,13 +19,10 @@ class SalleController extends AbstractController
      * @Route("/salle/{id}/show", name="show_salle")
      * @Route("/salle/edit", name="edit_salle")
      */
-    public function index(SalleRepository $sa ,Salle $id,ManagerRegistry $doctrine,Request $request,Salle $salle=null): Response
+    public function index(ManagerRegistry $doctrine,Request $request,Salle $salle): Response
     {
      
 
-        $salle=$sa->findOneBy(["id"=>$id],["numero"=>"ASC"]) ;
-        
-        
         $form = $this->createForm(SalleType::class,$salle) ;
         $form->handleRequest($request) ;
 
@@ -44,4 +43,52 @@ class SalleController extends AbstractController
            "formEditSalle"=>$form->createView() 
         ]);
     }
+
+
+    /**
+     *@Route("/add/salle/{idLieu}" ,name ="add_salle") 
+     */
+
+     public function addSalle(LieuRepository $li, Salle $salle=null, ManagerRegistry $doctrine ,Request $request, Lieu $idLieu )
+
+
+     {
+
+   
+      
+        $salle = new salle() ;
+
+
+      //ici on recupere l'id du lieu pour pouvoir ajouter une salle dans ce lieu 
+       $salle->setLieu($li->findOneBy(["id"=>$idLieu],[]));
+      
+      $form = $this->createForm(SalleType::class,$salle) ; 
+      $form->handleRequest($request) ;
+      
+
+    //   c'est pour que l'utilisateur puisee pas saisir un numero negative 
+      $capacite =$form["capacite"]->getData();
+    
+      if($form->isSubmitted() && $form->isValid() && $capacite >=1)
+      {
+        $entityManager =$doctrine->getManager() ; 
+        $entityManager->persist($salle) ; 
+        $entityManager->flush() ;
+      
+        return $this->redirectToRoute('app_lieu') ;
+      
+      }
+      else
+      {
+       
+      }
+      return $this->render('salle/add.html.twig',[
+        'formAddSalle'=>$form->createView()
+      ]);
+      
+
+     }
+
+
+
 }

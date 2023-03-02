@@ -6,6 +6,7 @@
 
 parameters:
    categorie_directory: '%kernel.project_dir%/public/images/categorie'
+   evenement_directory: '%kernel.project_dir%/public/images/evenement'
 
 services:
     # default configuration for services in *this* file

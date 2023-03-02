@@ -20,7 +20,6 @@ class CategorieController extends AbstractController
      /**
      * @Route("/categorie", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
-     * @Route("/evenementAvenir" , name="app_evenementAvenir")
      */
     public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request,SluggerInterface $slugger,EvenementRepository $e): Response
    
@@ -36,13 +35,9 @@ class CategorieController extends AbstractController
       
         if($form->isSubmitted() && $form->isValid())
         {
-                     
-             
+                
                 $file = $form->get('image')->getData(); 
-  
                 if ($file) {
-
-                    
                     $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME );
                     // this is needed to safely include the file name as part of the URL
                     $safeFilename = $slugger->slug($originalFilename);

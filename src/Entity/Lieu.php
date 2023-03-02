@@ -151,7 +151,7 @@ class Lieu
     
     public function __toString()
     {
-      return  $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville ." ".$this->date_creation ;
+      return  $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville  ;
     }
 
     /**

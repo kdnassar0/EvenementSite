@@ -2,31 +2,39 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Evenement;
+use App\Entity\Salle;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\User;
 
 class EvenementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('date_debut')
-            ->add('date_fin')
-            ->add('nb_des_palces')
-            ->add('description')
-            ->add('statue')
-            ->add('prix')
-            ->add('paiement_valid')
-            ->add('image')
-            ->add('categorie')
-            ->add('salles')
+            ->add('nom',TextType::class)
+            ->add('date_debut',DateType::class)
+            ->add('date_fin',DateType::class)
+            ->add('nb_des_palces',NumberType::class)
+            ->add('description',TextType::class)
+            ->add('statue',TextType::class)
+            ->add('prix',NumberType::class)
+            ->add('image',FileType::class)
             ->add('createur')
-            ->add('participants')
-            ->add('submit')
-        ;
+            ->add('categorie',EntityType::class,
+            ['class'=>Categorie::class,'choice_label'=>'nom'])
+            // ->add('salles',EntityType::class,['class'=>Salle::class,'choice_label'=>'numero'])
+            ->add('submit',SubmitType::class)
+        ;   
     }
 
     public function configureOptions(OptionsResolver $resolver): void
