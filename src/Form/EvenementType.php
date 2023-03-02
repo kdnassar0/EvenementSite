@@ -29,10 +29,10 @@ class EvenementType extends AbstractType
             ->add('statue',TextType::class)
             ->add('prix',NumberType::class)
             ->add('image',FileType::class)
-            ->add('createur')
             ->add('categorie',EntityType::class,
             ['class'=>Categorie::class,'choice_label'=>'nom'])
-            // ->add('salles',EntityType::class,['class'=>Salle::class,'choice_label'=>'numero'])
+            
+            ->add('salles',EntityType::class,['class'=>Salle::class,'choice_label'=>'numero'])
             ->add('submit',SubmitType::class)
         ;   
     }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EvenamentController!{% endblock %}
+{% block title %}Hello EvenementController!{% endblock %}
 
 {% block body %}
 
@@ -14,7 +14,8 @@
  <img src="{{asset('images/evenement/'~ evenementEncours.image) }}" alt=""> 
  {{ evenementEncours.dateDebut | date('y-m-d') }}
 
- <a href="{{ path ('supprimer_evenement',{'id':evenementEncours.id}) }}">supprimer</a>
+ <a href="{{ path ('supprimer_evenement',{'id':evenementEncours.id})}}">supprimer</a>
+ <a href="{{ path ('add_participant',{'id':evenementEncours.id}) }}">participer</a>
     
 {% endfor %}
 
@@ -31,6 +32,7 @@
  {{evenementPassee.dateDebut | date('y-m-d') }}
     
  <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
+ <a href="{{ path ('add_participant',{'id':evenementPassee.id}) }}">participer</a>
     
 {% endfor %}
 
@@ -38,7 +40,7 @@
 <h2>-------------------------------------------------</h2>
 
 
-{{ form(formAddEvenement) }}
+
 
  
 

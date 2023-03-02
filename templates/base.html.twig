@@ -1,44 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-         <nav>
-            <ul class="ul1">
-                <a href="{{ path('app_register') }}"><li>s'inscrire</li></a> 
-                <a href="{{ path('app_login') }}"><li>se connecter</li></a>
-                <a href="{{ path('app_logout') }}"><li>logout</li></a>
-            </ul>
-            <div class="line"></div>
-            <ul class="ul2">
-                <a href="{{ path ('app_categorie')}}"> <li>Accueil</li></a>
-                <a href=" {{ path ('app_evenament') }}"><li>Evenements</li></a>  
-                <a href=" {{ path ('app_lieu') }}"><li>Lieu</li></a>
-                <a href=""><li>Organiser</li></a>
-                <a href="#"><li>contact</li></a>
-            </ul>
-        </nav>
-        
-       
-        {% block body %}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <ul class="ul1">
+            <a href="{{ path('app_register') }}">
+                <li>s'inscrire</li>
+            </a>
+            <a href="{{ path('app_login') }}">
+                <li>se connecter</li>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <li>logout</li>
+            </a>
+        </ul>
+        <div class="line"></div>
+        <ul class="ul2">
+            <a href="{{ path ('app_categorie')}}">
+                <li>Accueil</li>
+            </a>
+            <a href=" {{ path ('app_evenement') }}">
+                <li>Evenements</li>
+            </a>
+            <a href=" {{ path ('app_lieu') }}">
+                <li>Lieu</li>
+            </a>
+            <a href="{{ path ('add_evenement') }}">
+                <li>Organiser</li>
+            </a>
+            <a href="#">
+                <li>contact</li>
+            </a>
+        </ul>
+    </nav>
 
 
-        {% endblock %}
+    {% block body %}
 
-    </body>
+
+    {% endblock %}
+
+</body>
 
 
 </html>
