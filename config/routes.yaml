@@ -1,3 +1,16 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# // config/routes.yaml
+# admin_event_validate:
+#     path: '/admin/evenement/{id}/validate'
+#     controller: 'App\Controller\UserController::validateEvent'
+#     requirements:
+#         id: '\d+'
+
+# admin_event_refuse:
+#     path: '/admin/evenement/{id}/refuse'
+#     controller: 'App\Controller\UserController::refuseEvent'
+#     requirements:
+#         id: '\d+'

@@ -37,6 +37,8 @@ class EvenementController extends AbstractController
   }
 
 
+
+
   /**
    * @Route("/evenement/add",name="add_evenement")
    */
@@ -61,9 +63,12 @@ class EvenementController extends AbstractController
         $evenement = $form->getData();
         $evenement->setImage($newFilename);
         $evenement->setCreateur($this->getUser());
+        $evenement->setStatue('en attente') ;
         $entityManager = $doctrine->getManager();
         $entityManager->persist($evenement);
         $entityManager->flush();
+
+
 
 
         try {
@@ -74,9 +79,10 @@ class EvenementController extends AbstractController
         } catch (FileException $e) {
         }
 
-        return $this->redirectToRoute('app_evenement');
+        return $this->redirectToRoute('app_categorie');
       }
     }
+
 
 
     return $this->render('evenement/add.html.twig', [
@@ -85,8 +91,9 @@ class EvenementController extends AbstractController
 
 
     ]);
-  }
+   
 
+  }
 
   /**
    *@Route("/evenement/{id}/suprimmer",name="supprimer_evenement")
@@ -103,22 +110,20 @@ class EvenementController extends AbstractController
   }
 
 
-/**
- * @Route("evenement/{id}/add/",name="add_participant")
- */
+  /**
+   * @Route("evenement/{id}/add/",name="add_participant")
+   */
 
- public function addParticipant(Evenement $evenement,ManagerRegistry $doctrine)
- {
+  public function addParticipant(Evenement $evenement, ManagerRegistry $doctrine)
+  {
 
-    $entityManager =$doctrine->getManager() ; 
+    $entityManager = $doctrine->getManager();
     $evenement->addParticipant($this->getUser());
-    $entityManager->flush() ; 
-
-        
-    return $this->redirectToRoute('app_evenement') ;
+    $entityManager->flush();
 
 
- }
+    return $this->redirectToRoute('app_evenement');
+  }
 
 
 

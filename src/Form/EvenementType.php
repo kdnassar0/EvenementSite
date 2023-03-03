@@ -26,13 +26,12 @@ class EvenementType extends AbstractType
             ->add('date_fin',DateType::class)
             ->add('nb_des_palces',NumberType::class)
             ->add('description',TextType::class)
-            ->add('statue',TextType::class)
             ->add('prix',NumberType::class)
             ->add('image',FileType::class)
             ->add('categorie',EntityType::class,
             ['class'=>Categorie::class,'choice_label'=>'nom'])
             
-            ->add('salles',EntityType::class,['class'=>Salle::class,'choice_label'=>'numero'])
+            // ->add('salles',EntityType::class,['class'=>Salle::class,'choice_label'=>'numero'])
             ->add('submit',SubmitType::class)
         ;   
     }

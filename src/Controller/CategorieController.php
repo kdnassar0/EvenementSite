@@ -17,66 +17,64 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class CategorieController extends AbstractController
 {
 
-     /**
+    /**
      * @Route("/categorie", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
      */
-    public function index(CategorieRepository $ca,ManagerRegistry $doctrine,Categorie $categorie = null,Request $request,SluggerInterface $slugger,EvenementRepository $e): Response
-   
+    public function index(CategorieRepository $ca, ManagerRegistry $doctrine, Categorie $categorie = null, Request $request, SluggerInterface $slugger, EvenementRepository $e): Response
+
     {
-        $evenementsAvenir = $e-> findEvenementsAvenir() ;
-        $categories = $ca->findBy([],['nomCategorie'=>'ASC']);
 
-        $form =$this->createForm(CategorieType::class,$categorie) ;
-        $form->handleRequest($request) ;
-          
+         
+        $evenementsAvenir = $e->findEvenementsAvenir();
 
-        
-      
-        if($form->isSubmitted() && $form->isValid())
-        {
-                
-                $file = $form->get('image')->getData(); 
-                if ($file) {
-                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME );
-                    // this is needed to safely include the file name as part of the URL
-                    $safeFilename = $slugger->slug($originalFilename);
-                    $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
-                    $categorie=$form->getData() ; 
-                    $categorie->setImage($newFilename) ;                
-                    $entityManager=$doctrine->getManager();
-                    $entityManager->persist($categorie);
-                    $entityManager->flush() ; 
-                 
-                    // Move the file to the directory where brochures are stored
-                    try {
-                        $file->move(
-                            $this->getParameter('categorie_directory'),
-                            $newFilename 
-                        );
-                     
-                    } catch (FileException $e) {
-                        // ... handle exception if something happens during file upload
-                       
-                    } 
-                   
+        $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
 
-                
-         return $this->redirectToRoute('app_categorie') ;
-                
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $form->get('image')->getData();
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                $categorie = $form->getData();
+                $categorie->setImage($newFilename);
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($categorie);
+                $entityManager->flush();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('categorie_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+
+                }
+
+
+
+                return $this->redirectToRoute('app_categorie');
+            }
         }
+        return $this->render('categorie/index.html.twig', [
+            'categories' => $categories,
+            'formAddCategorie' => $form->createView(),
+            'evenementsAvenir' => $evenementsAvenir
 
-      
-    } 
-    return $this->render('categorie/index.html.twig', [
-        'categories' => $categories , 
-        'formAddCategorie'=>$form->createView(),
-        'evenementsAvenir'=>$evenementsAvenir
-    ]);
-         
-         
-}
+        ]);
+    }
 
 
 
@@ -88,21 +86,14 @@ class CategorieController extends AbstractController
      * @Route("/categorie/{id}/suprimmer", name="supprimer_categorie")
      */
 
-     public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine)
-     {
-        
-        $entityManager = $doctrine->getManager(); 
+    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine)
+    {
+
+        $entityManager = $doctrine->getManager();
         $entityManager->remove($categorie);
         $entityManager->flush();
-       
-     
-        return $this->redirectToRoute('app_categorie') ;
 
- 
+
+        return $this->redirectToRoute('app_categorie');
     }
- 
-
-
-
-
 }

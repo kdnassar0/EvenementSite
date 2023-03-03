@@ -46,7 +46,7 @@ class Evenement
 
  
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50,options={"default" : "en attente"})
      */
     private $statue;
 

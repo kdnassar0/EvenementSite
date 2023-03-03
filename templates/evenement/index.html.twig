@@ -32,7 +32,7 @@
  {{evenementPassee.dateDebut | date('y-m-d') }}
     
  <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
- <a href="{{ path ('add_participant',{'id':evenementPassee.id}) }}">participer</a>
+
     
 {% endfor %}
 

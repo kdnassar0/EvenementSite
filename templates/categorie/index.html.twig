@@ -32,17 +32,22 @@
 
   
 
-
-
 {% for evenementAvenir in evenementsAvenir %}
 
-
+{% if evenementAvenir.statue == 'validé' %}
 {{ evenementAvenir.nom }} <br>
 {{ evenementAvenir.description }}
- <img src=" {{ evenementAvenir.image }}" alt="">
+ <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
 {{ evenementAvenir.dateDebut | date('y-m-d') }}
 <a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
+<a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
+
+{% endif %}
+
 {% endfor %}
+
+
+
 
 
 {% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EvenementController!{% endblock %}
+
+{% block body %}
+
+
+
+{% for evenementAvenir in evenementsAvenir %}
+
+{% if evenementAvenir.statue == 'en attente' %}
+{{ evenementAvenir.nom }} <br>
+{{ evenementAvenir.description }}
+ <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+{{ evenementAvenir.dateDebut | date('y-m-d') }}
+<a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
+<a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
+
+<a href="{{ path('admin_event_validate', {'id': evenementAvenir.id}) }}">Valider</a>
+<a href="{{ path('admin_event_refuse', {'id': evenementAvenir.id}) }}">Refuser</a>
+
+{% endif %}
+{% endfor %}
+
+
+
+
+{% endblock %}  
