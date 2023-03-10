@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+{{ user }}
+
+{% for evenement in evenements %}
+    {{ evenement.nom }}
+   <img src=" {{ evenement.image }}" alt="">
+{% endfor %}
+
+
+
+
+{% endblock %}

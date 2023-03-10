@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Evenement;
+use App\Repository\UserRepository;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +40,28 @@ class UserController extends AbstractController
             ]);
         
     }
+
+
+
+    /**
+     * @Route("/organisateur",name="app_oragnisateur")
+     */
+
+     public function Organisateur(EvenementRepository $ev)
+     {
+    
+
+      
+        $user = $this->getUser();
+        $evenements=$ev->findBy(["createur"=>$user]);
+
+            return $this->render('user/organisateur.html.twig', [
+            'user'=>$user,
+            'evenements'=>$evenements
+            ]);
+    
+     
+     }
 
     
     /**
