@@ -8,7 +8,7 @@
 
 {% for evenementAvenir in evenementsAvenir %}
 
-{% if evenementAvenir.statue == 'en attente' %}
+{% if evenementAvenir.statut == 'en attente' %}
 {{ evenementAvenir.nom }} <br>
 {{ evenementAvenir.description }}
  <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">

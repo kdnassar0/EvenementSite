@@ -25,7 +25,7 @@ class CategorieController extends AbstractController
 
     {
 
-         
+   
         $evenementsAvenir = $e->findEvenementsAvenir();
 
 

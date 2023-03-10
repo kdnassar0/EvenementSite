@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Salle;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
-use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
+use App\Repository\EvenementRepository;
+use App\Repository\SalleRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,14 +45,18 @@ class EvenementController extends AbstractController
    * @Route("/evenement/add",name="add_evenement")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger,SalleRepository $sa ): Response
   {
 
 
-
+      $salles = $sa->findAll([],['numero'=>'ASC']) ;
+   
 
     $form = $this->createForm(EvenementType::class, $evenement);
+    // Transmission des salles au formulaire
+    $form->get('salles')->setData($salles);
     $form->handleRequest($requeste);
+ 
 
     if ($form->isSubmitted() && $form->isValid()) {
       $file = $form->get('image')->getData();
@@ -59,15 +65,18 @@ class EvenementController extends AbstractController
         // this is needed to safely include the file name as part of the URL
         $safeFilename = $slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-
-        $evenement = $form->getData();
+        $evenement = $form->getData(); 
         $evenement->setImage($newFilename);
+     
+     
+     
+
         $evenement->setCreateur($this->getUser());
-        $evenement->setStatue('en attente') ;
+        $evenement->setStatut('en attente') ;
         $entityManager = $doctrine->getManager();
         $entityManager->persist($evenement);
         $entityManager->flush();
-
+        dump($form);
 
 
 
@@ -88,6 +97,7 @@ class EvenementController extends AbstractController
     return $this->render('evenement/add.html.twig', [
 
       'formAddEvenement' => $form->createView()
+
 
 
     ]);

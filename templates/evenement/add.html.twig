@@ -6,9 +6,28 @@
 
 
 
-{{ form(formAddEvenement) }}
 
+{{ form_start(formAddEvenement) }}
+   <div class="formulaire">
+    <div class="chmpsNom"> {{ form_row(formAddEvenement.nom) }}  </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.date_debut) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.date_fin) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.nb_des_places) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.description) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.prix) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.image) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddEvenement.categorie) }} </div>
 
+ 
+
+    {{ form_row(formAddEvenement.salles, {'attr': {'class': 'form-control', 'multiple': false}, 'full_name': 'formAddEvenement[salles][]'}) }} 
+    
+   
+  
+
+    {{ form_row(formAddEvenement.submit) }}
+ 
+{{ form_end(formAddEvenement) }}  
 
 
 

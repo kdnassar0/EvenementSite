@@ -37,7 +37,7 @@ class Evenement
     /**
      * @ORM\Column(type="integer")
      */
-    private $nb_des_palces;
+    private $nb_des_places;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,7 +48,7 @@ class Evenement
     /**
      * @ORM\Column(type="string", length=50,options={"default" : "en attente"})
      */
-    private $statue;
+    private $statut;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -140,14 +140,14 @@ class Evenement
         return $this;
     }
 
-    public function getNbDesPalces(): ?int
+    public function getNbDesPlaces(): ?int
     {
-        return $this->nb_des_palces;
+        return $this->nb_des_places;
     }
 
-    public function setNbDesPalces(int $nb_des_palces): self
+    public function setNbDesPlaces(int $nb_des_places): self
     {
-        $this->nb_des_palces = $nb_des_palces;
+        $this->nb_des_places = $nb_des_places;
 
         return $this;
     }
@@ -167,14 +167,14 @@ class Evenement
   
 
 
-    public function getStatue(): ?string
+    public function getStatut(): ?string
     {
-        return $this->statue;
+        return $this->statut;
     }
 
-    public function setStatue(string $statue): self
+    public function setStatut(string $statut): self
     {
-        $this->statue = $statue;
+        $this->statut = $statut;
 
         return $this;
     }
@@ -325,7 +325,7 @@ class Evenement
     
     public function __toString()
     {
-        $this->nom ." ".$this->date_debut ." ". $this->date_fin  ." ".$this->nb_des_palces ." ".$this->prix ." ".$this->description ." ".
+      return  $this->nom ." ".$this->date_fin ." ".$this->date_debut." ".$this->nb_des_places ." ".$this->prix ." ".$this->description ." ".
         $this->image ; 
     }
 

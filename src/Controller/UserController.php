@@ -46,7 +46,7 @@ class UserController extends AbstractController
     public function validateEvent(Evenement $evenement,ManagerRegistry $doctrine)
     {
         {
-            $evenement->setStatue('validé');
+            $evenement->setStatut('validé');
             $entityManager=$doctrine->getManager();
             $entityManager->flush() ;
     
@@ -63,7 +63,7 @@ class UserController extends AbstractController
      */
     public function refuseEvent(Evenement $evenement,ManagerRegistry $doctrine)
     {
-        $evenement->setStatue('refusé');
+        $evenement->setStatut('refusé');
         $entityManager=$doctrine->getManager();
         $entityManager->flush() ;
 

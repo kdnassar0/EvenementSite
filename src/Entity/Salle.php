@@ -161,7 +161,7 @@ class Salle
     
     public function __toString()
     {
-        return $this->capacite ." ". $this->numero ." ".$this->prix ." ".$this->discreption ." ".$this->image ;
+        return $this->capacite ."  ". $this->numero ."  ".$this->prix ."  ".$this->discreption ;
     }
 
     public function getLieu(): ?Lieu

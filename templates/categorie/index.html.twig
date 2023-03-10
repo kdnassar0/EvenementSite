@@ -34,7 +34,7 @@
 
 {% for evenementAvenir in evenementsAvenir %}
 
-{% if evenementAvenir.statue == 'validé' %}
+{% if evenementAvenir.statut == 'validé' %}
 {{ evenementAvenir.nom }} <br>
 {{ evenementAvenir.description }}
  <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">

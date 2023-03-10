@@ -28,11 +28,6 @@ class SalleType extends AbstractType
             ->add('prix',NumberType::class,['required'=>false])
             ->add('discreption',TextType::class)
             ->add('image',UrlType::class) 
-            // ->add('lieu',EntityType::class,
-            // [
-            //     'class'=>Lieu::class,
-            //     'choice_label'=>'nom'
-            // ])
             ->add('submit',SubmitType::class)
         ;
     }
