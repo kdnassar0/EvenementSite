@@ -8,8 +8,12 @@
 
 {% for evenement in evenements %}
     {{ evenement.nom }}
-   <img src=" {{ evenement.image }}" alt="">
+   <a href="{{ path ('details_evenement',{'id':evenement.id}) }}"><img src="{{ evenement.image }}" alt=""></a>
+
+
+   
 {% endfor %}
+
 
 
 

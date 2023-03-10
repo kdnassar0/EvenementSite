@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
@@ -49,20 +50,17 @@ class UserController extends AbstractController
 
      public function Organisateur(EvenementRepository $ev)
      {
-    
-
-      
         $user = $this->getUser();
         $evenements=$ev->findBy(["createur"=>$user]);
-
             return $this->render('user/organisateur.html.twig', [
             'user'=>$user,
             'evenements'=>$evenements
             ]);
     
-     
      }
 
+
+   
     
     /**
      * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
@@ -93,4 +91,23 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_evenement');
     }
+
+      /**
+      * @Route("/details/{id}",name="details_evenement")
+      */
+      public function detailsEvenement(ManagerRegistry $doctrine,Evenement $evenement=null,$id)
+      {
+ 
+        $participants = $evenement->getParticipant();
+          $evenement=$doctrine->getRepository(Evenement::class)->findOneBy(['id'=>$id]) ;
+       
+         
+          return $this->render('evenement/details.html.twig',[
+              "evenement"=>$evenement,
+              "participants" => $participants
+           
+        ]);
+
+      }
+
 }

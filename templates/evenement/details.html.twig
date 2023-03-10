@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+{{ evenement.nom }}
+{{ evenement.dateDebut | date('y-m-d H:i') }}
+
+{% for participant in participants %}
+
+    {{ participant }}
+    
+   {% endfor %}
+    
+
+
+
+{% endblock %}
