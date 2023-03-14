@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommentaireController!{% endblock %}
+
+{% block body %}
+
+{{form_start( formAddCommentaire) }}
+{{form_row( formAddCommentaire.text) }}
+{{form_end( formAddCommentaire) }}
+
+{% endblock %}
