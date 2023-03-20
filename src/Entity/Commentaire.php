@@ -80,7 +80,7 @@ class Commentaire
 
     public function __toString()
     {
-        $this->text ; 
+     return   $this->text ; 
     }
 
 

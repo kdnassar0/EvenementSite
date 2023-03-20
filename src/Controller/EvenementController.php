@@ -29,6 +29,8 @@ class EvenementController extends AbstractController
     $evenementsPassees = $e->findEvenementsPassees();
     $evenementsEncours = $e->findEvenementsEncours();
 
+    
+
     return $this->render('evenement/index.html.twig', [
       'evenementsEncours' => $evenementsEncours,
       'evenementsPassees' => $evenementsPassees,

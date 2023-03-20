@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+
 use App\Entity\Evenement;
-use App\Repository\UserRepository;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
@@ -95,16 +96,46 @@ class UserController extends AbstractController
       /**
       * @Route("/details/{id}",name="details_evenement")
       */
-      public function detailsEvenement(ManagerRegistry $doctrine,Evenement $evenement=null,$id)
+      public function detailsEvenement(ManagerRegistry $doctrine,Evenement $evenement=null,$id,Request $request)
       {
  
         $participants = $evenement->getParticipant();
-          $evenement=$doctrine->getRepository(Evenement::class)->findOneBy(['id'=>$id]) ;
+        $evenement=$doctrine->getRepository(Evenement::class)->findOneBy(['id'=>$id]) ;
+
+        $commentaires =$evenement->getCommentaires();
+
+
+          $commentaire = new Commentaire();
+          $form = $this->createForm(CommentaireType::class, $commentaire);
+          $form->handleRequest($request);
+
+      
+
+      
+          
+          if ($form->isSubmitted() && $form->isValid()) {
+          
+      
+              $commentaire->setEvenement($evenement);
+              $commentaire->setUtilisateur($this->getUser());
+              $entityManager = $doctrine->getManager();
+              $entityManager->persist($commentaire);
+              $entityManager->flush();
+      
+              return $this->redirectToRoute('details_evenement',['id'=> $evenement->getId()
+            ]);
+      
+           
+          }
+           
+    
        
          
           return $this->render('evenement/details.html.twig',[
               "evenement"=>$evenement,
-              "participants" => $participants
+              "participants" => $participants,
+              "commentaires" =>$commentaires,
+              'formAddCommentaire'=>$form->createView()
            
         ]);
 

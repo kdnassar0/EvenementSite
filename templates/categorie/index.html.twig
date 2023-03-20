@@ -37,11 +37,10 @@
 {% if evenementAvenir.statut == 'validé' %}
 {{ evenementAvenir.nom }} <br>
 {{ evenementAvenir.description }}
- <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+<a href="{{ path('details_evenement',{'id':evenementAvenir.id}) }}"><img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt=""></a> 
 {{ evenementAvenir.dateDebut | date('y-m-d') }}
 <a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
 <a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
-
 {% endif %}
 
 {% endfor %}
@@ -50,7 +49,9 @@
 
 
 
-  
+
+
+
 
 
 {% endblock %}

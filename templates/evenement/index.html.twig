@@ -11,9 +11,8 @@
 {{ evenementEncours.nom }} <br>
 {{ evenementEncours.description }}
 
- <img src="{{asset('images/evenement/'~ evenementEncours.image) }}" alt=""> 
+ <a href=" {{ path('details_evenement',{'id':evenementEncours.id}) }}"><img src="{{asset('images/evenement/'~ evenementEncours.image) }}" alt=""></a>
  {{ evenementEncours.dateDebut | date('y-m-d') }}
-
  <a href="{{ path ('supprimer_evenement',{'id':evenementEncours.id})}}">supprimer</a>
  <a href="{{ path ('add_participant',{'id':evenementEncours.id}) }}">participer</a>
     
@@ -30,7 +29,8 @@
 {{ evenementPassee.nom }} <br>
 {{ evenementPassee.description }}
 
- <img src=" {{asset('images/evenement/'~ evenementPassee.image) }}" alt=""> 
+<a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
+ 
  {{evenementPassee.dateDebut | date('y-m-d') }}
     
  <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>

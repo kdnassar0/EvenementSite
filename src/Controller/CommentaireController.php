@@ -2,46 +2,40 @@
 
 namespace App\Controller;
 
-use App\Entity\Evenement;
+
 use App\Entity\Commentaire;
-use App\Form\CommentaireType;
-use Doctrine\ORM\EntityManager;
+use App\Entity\Evenement;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommentaireController extends AbstractController
 {
 
-    /**
- * @Route("/evenement/{id}/commentaire", name="evenement_commentaire")
+
+ /**
+ * @Route("/commentaire/{id}",name="supprimer_commentaire")
  */
-public function Commentaire(Request $request, ManagerRegistry $doctrine, Evenement $evenement)
-{
-    $commentaire = new Commentaire();
-    $form = $this->createForm(CommentaireType::class, $commentaire);
-    $form->handleRequest($request);
 
+public function supprimerCommentaire(ManagerRegistry $doctrine,Commentaire $commentaire,$id)
+  {
+
+  
+  //ici on  va recuperer l'id d'un evenement pour pouvoir rediriger l'utilisateur vers la page detail evenement   
+  $evenementId = $commentaire->getEvenement()->getId();
+
+
+   $entityManager=$doctrine->getManager();
+   $entityManager->remove($commentaire) ; 
+   $entityManager->flush();
+
+ 
+  
     
-    if ($form->isSubmitted() && $form->isValid()) {
-    
 
-        $commentaire->setEvenement($evenement);
-        $commentaire->setUtilisateur($this->getUser());
-        $entityManager = $doctrine->getManager();
-        $entityManager->persist($commentaire);
-        $entityManager->flush();
+   return $this->redirectToRoute('details_evenement',['id'=>$evenementId
+]);
 
-        return $this->redirectToRoute('app_categorie');
-
-     
-    }
-
-    return $this->render('commentaire/index.html.twig', [
-        'formAddCommentaire'=>$form->createView()
-
-    ]);
 }
 
 } 

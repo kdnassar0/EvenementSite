@@ -12,8 +12,19 @@
     {{ participant }}
     
    {% endfor %}
+
+   <br>
+
+{% for commentaire in commentaires %}
+    {{ commentaire }} <br>
+    <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}">supprimer</a>
+{% endfor %}   
     
 
+   {{form_start( formAddCommentaire) }}
+   {{form_row( formAddCommentaire.text) }}
+   {{form_end( formAddCommentaire) }}
+   
 
 
 {% endblock %}
