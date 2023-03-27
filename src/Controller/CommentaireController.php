@@ -17,7 +17,7 @@ class CommentaireController extends AbstractController
  * @Route("/commentaire/{id}",name="supprimer_commentaire")
  */
 
-public function supprimerCommentaire(ManagerRegistry $doctrine,Commentaire $commentaire,$id)
+public function supprimerCommentaire(ManagerRegistry $doctrine,Commentaire $commentaire)
   {
 
   
@@ -29,9 +29,6 @@ public function supprimerCommentaire(ManagerRegistry $doctrine,Commentaire $comm
    $entityManager->remove($commentaire) ; 
    $entityManager->flush();
 
- 
-  
-    
 
    return $this->redirectToRoute('details_evenement',['id'=>$evenementId
 ]);

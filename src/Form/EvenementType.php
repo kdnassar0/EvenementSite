@@ -20,7 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EvenementType extends AbstractType
 {
@@ -34,15 +34,15 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom',TextType::class)
+            ->add('nom',TextType::class,['label'=>"Nom de l'événement :"])
             ->add('date_debut',DateTimeType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text','label'=>'Date de debut :'
             ])
             ->add('date_fin',DateTimeType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text','label'=>'Date de fin :'
             ])
-            ->add('nb_des_places',NumberType::class)
-            ->add('description',TextType::class)
+            ->add('nb_des_places',NumberType::class,['label'=>'Nombre des places :'])
+            ->add('description',TextareaType::class,['label'=>'Déscription :'])
             ->add('prix',NumberType::class)
             ->add('image',FileType::class)
             ->add('categorie',EntityType::class,
@@ -55,7 +55,7 @@ class EvenementType extends AbstractType
             ])
           
 
-            ->add('submit',SubmitType::class)
+            ->add('submit',SubmitType::class,['label'=>'Envoyer'])
         ;   
     }
 

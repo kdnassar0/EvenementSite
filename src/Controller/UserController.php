@@ -98,14 +98,15 @@ class UserController extends AbstractController
       */
       public function detailsEvenement(ManagerRegistry $doctrine,Evenement $evenement=null,$id,Request $request)
       {
- 
+
+        
+      
+        $commentaire = new Commentaire ();
         $participants = $evenement->getParticipant();
         $evenement=$doctrine->getRepository(Evenement::class)->findOneBy(['id'=>$id]) ;
-
         $commentaires =$evenement->getCommentaires();
 
-
-          $commentaire = new Commentaire();
+        
           $form = $this->createForm(CommentaireType::class, $commentaire);
           $form->handleRequest($request);
 

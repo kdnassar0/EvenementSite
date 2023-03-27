@@ -66,7 +66,7 @@ class SalleController extends AbstractController
       $form->handleRequest($request) ;
       
 
-    //   c'est pour que l'utilisateur puisee pas saisir un numero negative 
+    //   c'est pour que l'utilisateur ne puisee pas saisir un numero negative 
       $capacite =$form["capacite"]->getData();
     
       if($form->isSubmitted() && $form->isValid() && $capacite >=1)

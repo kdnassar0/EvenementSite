@@ -7,27 +7,79 @@
 
 
 
-{{ form_start(formAddEvenement) }}
-   <div class="formulaire">
-    <div class="chmpsNom"> {{ form_row(formAddEvenement.nom) }}  </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.date_debut) }} </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.date_fin) }} </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.nb_des_places) }} </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.description) }} </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.prix) }} </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.image) }} </div>
-    <div class="chmpsImage">{{ form_row(formAddEvenement.categorie) }} </div>
 
- 
-
-    {{ form_row(formAddEvenement.salles, {'attr': {'class': 'form-control', 'multiple': false}, 'full_name': 'formAddEvenement[salles][]'}) }} 
+<div class="elemantPageOganiser">
+    <div class="elementsNav">
+        <div class="logo">LOGO</div>
+        <nav>
+            <ul class="ul1">
+                <a href="{{ path ('app_categorie')}}">
+                    <li>Accueil</li>
+                </a>
+                
+                <a href=" {{ path ('app_lieu') }}">
+                    <li>Lieu</li>
+                </a>
+                <a href="{{ path ('add_evenement') }}">
+                    <li>Organiser</li>
+                </a>
+                <a href="{{ path ('app_oragnisateur') }}">
+                    <li>Profil</li>
+                </a>
+                <a href="#">
+                    <li>contact</li>
+                </a>
+            </ul>
+        </nav>
     
-   
-  
+        <div class="search">
+            <a href="{{ path ('app_admin') }}">
+                <li>Admin</li>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <li>logout</li>
+            </a>
+        </div>
+    </div>
+    <div class="formulaireOrganiser">
+        <h2 class="textExplique">Bienvenue sur la page d'organisation d'événements ! <br> Si vous cherchez à organiser
+            un événement, vous êtes au bon endroit. <br> Ici, vous pouvez créer votre propre événement en quelques
+            étapes simples. Tout d'abord, remplissez le formulaire avec toutes les informations importantes sur votre
+            événement, telles que la date,la salle et le nombre de places. <br> Assurez-vous de fournir suffisamment de
+            détails pour que les invités puissent se faire une idée de ce à quoi ils peuvent s'attendre. <br> Enfin,
+            n'oubliez pas de sauvegarder votre événement une fois que vous avez terminé, et on vous remercie pour votre
+            patient pendant que l'admin confirme votre événement. <br> Nous sommes impatients de voir ce que vous avez
+            en tête pour votre prochain événement !</h2>
+        {{ form_start(formAddEvenement) }}
 
-    {{ form_row(formAddEvenement.submit) }}
- 
-{{ form_end(formAddEvenement) }}  
+        <label class="titre">Organiser un événement</label>
+        <div class="champsFormumlaireOrganiser">
+            <p> {{ form_row(formAddEvenement.nom) }} </p>
+
+            <spam>{{ form_row(formAddEvenement.date_debut) }} </spam>
+
+            <spam>{{ form_row(formAddEvenement.date_fin) }} </spam>
+
+            <spam>{{ form_row(formAddEvenement.nb_des_places) }} </spam>
+
+            <p>{{ form_row(formAddEvenement.description) }} </p>
+
+            <spam>{{ form_row(formAddEvenement.prix) }} </spam>
+
+            <spam>{{ form_row(formAddEvenement.image) }} </spam>
+
+            <p>{{ form_row(formAddEvenement.categorie) }} </p>
+
+            <spam class="champSalle"> {{ form_row(formAddEvenement.salles, {'attr': {'class': 'form-control',
+                'multiple':
+                false}, 'full_name': 'formAddEvenement[salles][]'}) }} </spam>
+
+            <spam class="button"> {{ form_row(formAddEvenement.submit) }} </spam>
+        </div>
+    </div>
+</div>
+
+{{ form_end(formAddEvenement) }}
 
 
 

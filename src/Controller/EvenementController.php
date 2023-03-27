@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Salle;
+use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
-use App\Repository\UserRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\SalleRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,27 +17,26 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class EvenementController extends AbstractController
 {
-  /**
-   * @Route("/evenement", name="app_evenement")
-   */
-  public function index(EvenementRepository $e): Response
-  {
 
 
-    $evenementsPassees = $e->findEvenementsPassees();
-    $evenementsEncours = $e->findEvenementsEncours();
+
+
+     /**
+     * @Route("/categorie/{id}", name="evenement_categorie")
+     */
+    public function evenementsParCategorie(EvenementRepository $e, Categorie $categorie): Response
+    {
+        
+        $evenementsPassees = $e->findEvenementsPasseesParCategorie($categorie->getId());
+        $evenementsEncours = $e->findEvenementsEncoursParCategorie($categorie->getId());
+
+        return $this->render('evenement/index.html.twig', [
+            'evenementsPassees' => $evenementsPassees,
+            'evenementsEncours'=>$evenementsEncours
+        ]);
+    }
 
     
-
-    return $this->render('evenement/index.html.twig', [
-      'evenementsEncours' => $evenementsEncours,
-      'evenementsPassees' => $evenementsPassees,
-
-
-
-    ]);
-  }
-
 
 
 
@@ -114,11 +111,13 @@ class EvenementController extends AbstractController
   public function supprimerEvenement(Evenement $evenement, ManagerRegistry $doctrine)
   {
 
+    $categorieId =$evenement->getCategorie()->getId() ;
+
     $entityManager = $doctrine->getManager();
     $entityManager->remove($evenement);
     $entityManager->flush();
 
-    return $this->redirectToRoute('app_evenement');
+    return $this->redirectToRoute('evenement_categorie',['id'=>$categorieId]);
   }
 
 
@@ -128,13 +127,15 @@ class EvenementController extends AbstractController
 
   public function addParticipant(Evenement $evenement, ManagerRegistry $doctrine)
   {
-
+    
+    $categorieId =$evenement->getCategorie()->getId() ;
+    dd($categorieId);
     $entityManager = $doctrine->getManager();
     $evenement->addParticipant($this->getUser());
     $entityManager->flush();
 
 
-    return $this->redirectToRoute('app_evenement');
+    return $this->redirectToRoute('evenement_categorie',['id'=>$categorieId]);
   }
 
 

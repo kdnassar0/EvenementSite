@@ -59,31 +59,35 @@ class EvenementRepository extends ServiceEntityRepository
 
     }
 
-    public function findEvenementsPassees()
+    public function findEvenementsPasseesParCategorie($categorieId)
     {
-        $now = new \DateTime() ; 
+        $now = new \DateTime();
         return $this->createQueryBuilder('e')
-        ->andWhere('e.date_fin < :val')
-        ->setParameter('val',$now)
-        ->orderBy('e.date_debut','ASC')
-        ->getQuery()
-        ->getResult() ;
-
-    } 
-
-    public function findEvenementsEncours()
-    {
-        $now = new \DateTime() ; 
-        
-        return $this->createQueryBuilder('e')
-        ->andWhere('e.date_debut < :val and e.date_fin > :val')
-        ->setParameter('val',$now)
-        ->orderBy('e.date_debut','ASC')
-        ->getQuery()
-        ->getResult() ;
-       
+            ->innerJoin('e.categorie', 'c')
+            ->andWhere('c.id = :categorie_id')
+            ->andWhere('e.date_fin < :date_now')
+            ->setParameter('categorie_id', $categorieId)
+            ->setParameter('date_now', $now)
+            ->orderBy('e.date_debut', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
+    public function findEvenementsEncoursParCategorie($categorieId)
+    {
+        $now = new \DateTime();
+        return $this->createQueryBuilder('e')
+            ->innerJoin('e.categorie', 'c')
+            ->andWhere('c.id = :categorie_id')
+            ->andWhere('e.date_debut < :date_now and e.date_fin > :date_now')
+            ->setParameter('categorie_id', $categorieId)
+            ->setParameter('date_now', $now)
+            ->orderBy('e.date_debut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+ 
     
 
 

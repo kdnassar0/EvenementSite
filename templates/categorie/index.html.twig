@@ -6,49 +6,95 @@
 
 
 
+<div class="containerPage1">
+  <div class="elementsNav">
+    <div class="logo">LOGO</div>
+    <nav>
+      <ul class="ul1">
+        <a href="{{ path ('app_categorie')}}">
+          <li>Accueil</li>
+        </a>
+      
+        <a href=" {{ path ('app_lieu') }}">
+          <li>Lieu</li>
+        </a>
+        <a href="{{ path ('add_evenement') }}">
+          <li>Organiser</li>
+        </a>
+        <a href="{{ path ('app_oragnisateur') }}">
+          <li>Profil</li>
+        </a>  
+        <a href="#">
+          <li>contact</li>
+        </a>
+      </ul>
+    </nav>
+   
+    <div class="search">
+      <a href="{{ path ('app_admin') }}">
+        <li>Admin</li>
+      </a>
+      <a href="{{ path('app_logout') }}">
+        <li>logout</li>
+      </a>
+    </div>
+  </div>
+  <div class="text1">Partageons nos événements <br> et ouvrons les murs
+    <div class="elementText1">
+    <a href="{{ path('app_register') }}">
+      <li>s'inscrire -  </li>
+    </a>
+    <a href="{{ path('app_login') }}">
+      <li>   se connecter</li>
+    </a>
+  </div>
+  </div>
+</div>
 
 
-<div class="categorie">
+
+<div class="containerCategorie">
+  <div class="categorie">
     {% for categorie in categories %}
-        <div class="categorieElements">
-                <img src=" {{asset('images/categorie/'~ categorie.image) }}" alt="">   
-                <h1> {{ categorie.nom }} </h1> 
-                <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}">supprimer</a>
-        </div> 
+    <div class="categorieElements">
+     <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
+      <h1> {{ categorie.nom }} </h1>
+      <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}">supprimer</a>
+    </div>
 
     {% endfor %}
-</div> 
+  </div>
 
-
-
-
-{{ form_start(formAddCategorie) }}
-   <div class="formulaire">
-    <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }}  </div>
+  <div class="formulaire-categorie">
+    {{ form_start(formAddCategorie) }}
+    <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }} </div>
     <div class="chmpsImage">{{ form_row(formAddCategorie.image) }} </div>
     {{ form_row(formAddCategorie.submit) }}
+    {{ form_end(formAddCategorie) }}
   </div>
-{{ form_end(formAddCategorie) }}  
-
-  
-
-{% for evenementAvenir in evenementsAvenir %}
-
-{% if evenementAvenir.statut == 'validé' %}
-{{ evenementAvenir.nom }} <br>
-{{ evenementAvenir.description }}
-<a href="{{ path('details_evenement',{'id':evenementAvenir.id}) }}"><img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt=""></a> 
-{{ evenementAvenir.dateDebut | date('y-m-d') }}
-<a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
-<a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
-{% endif %}
-
-{% endfor %}
 
 
+</div>
 
 
-
+<div class="container-evenements">
+  {% for evenementAvenir in evenementsAvenir %}
+  {% if evenementAvenir.statut == 'validé' %}
+  <div class="evenement">
+    <a href="{{ path('details_evenement',{'id':evenementAvenir.id}) }}">
+      <img src="{{ asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+    </a>
+    <h1>{{ evenementAvenir.nom }}</h1>
+    <p>{{ evenementAvenir.description }}</p>
+    <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
+    <div class="action">
+      <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
+      <a href="{{ path('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
 
 
 
