@@ -2,15 +2,16 @@
 
 namespace App\Form;
 
+use Attribute;
 use App\Entity\Lieu;
 use App\Entity\Salle;
 use App\Entity\Evenement;
-use Attribute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -27,7 +28,7 @@ class SalleType extends AbstractType
             ->add('numero',IntegerType::class)
             ->add('prix',NumberType::class,['required'=>false])
             ->add('discreption',TextType::class)
-            ->add('image',UrlType::class) 
+            ->add('image',FileType::class,array ('data_class'=>null)) 
             ->add('submit',SubmitType::class)
         ;
     }

@@ -2,14 +2,16 @@
 
 namespace App\Form;
 
+
 use App\Entity\Lieu;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class LieuType extends AbstractType
 {
@@ -21,7 +23,7 @@ class LieuType extends AbstractType
             ->add('date_creation',DateType::class)
             ->add('ville',TextType::class)
             ->add('adress',TextType::class)
-            ->add('image',UrlType::class)
+            ->add('image',FileType::class,array('data_class'=>null))
             ->add('submit',SubmitType::class)
         ;
     }

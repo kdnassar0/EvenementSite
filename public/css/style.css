@@ -776,14 +776,73 @@ div .champSalle .required {
 
 /* ------------lieu--------------------- */
 
-.containersalle {
+
+.elementLieu{
+        display:flex ;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+.buttonsLieu{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+
+.textEtImage{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px  ;
+    width: 100%;
+}
+.textEtImage .description {
+   
+    width: 40%
+}
+
+.textEtImage img {
+ width: 500px;
+ height: 330px;
+ border-radius: 10px;
+
+   
+
+}
+
+
+.containersalle {
+    width: 100%;
+    height: 100vh;
+    background-image: url('/images/home page-01.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.numeroEtCapacite{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.elemantsSalle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .elemantsSalle img {
-    width: 150px;
+    width: 350px;
     height: 150px;
 }
 

@@ -6,48 +6,91 @@
 
 
 
-{% for lieu in lieus %}
-    {{ lieu.nom }}
-    {{ lieu.dateCreation | date('d/m/y') }}
-    {{ lieu.ville }}
-    {{ lieu.adress}}
-    {{ lieu.description }}
-<img src="{{ lieu.image }}" alt="">
+<div class="containerPage1">
+    <div class="elementsNav">
+        <div class="logo">LOGO</div>
+        <nav>
+            <ul class="ul1">
+                <a href="{{ path ('app_categorie')}}">
+                    <li>Accueil</li>
+                </a>
 
-<a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
-<a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
+                <a href=" {{ path ('app_lieu') }}">
+                    <li>Lieu</li>
+                </a>
+                <a href="{{ path ('add_evenement') }}">
+                    <li>Organiser</li>
+                </a>
+                <a href="{{ path ('app_oragnisateur') }}">
+                    <li>Profil</li>
+                </a>
+                <a href="#">
+                    <li>contact</li>
+                </a>
+            </ul>
+        </nav>
+
+        <div class="search">
+            <a href="{{ path ('app_admin') }}">
+                <li>Admin</li>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <li>logout</li>
+            </a>
+        </div>
+    </div>
+
+    <div class="elementLieu">
+        {% for lieu in lieus %}
+        <h1>{{ lieu.nom }}</h1>
+        Date de creation : {{ lieu.dateCreation | date('d/m/y') }} <br>
+        Ville : {{ lieu.ville }}
+        <h2> Adresse : {{ lieu.adress}} </h2>
+        <div class="textEtImage">
+            <div class="description"> {{ lieu.description }} </div>
+          <img src=" {{asset('images/lieu/'~ lieu.image) }}" alt=""> 
+        </div>
+       
+    </div>
+    <div class="buttonsLieu">
+        <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
+        <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
+    </div>
+   
+  
+
+
+
+</div>
+
+
 
 <div class="containersalle">
     {% for salle in lieu.salles %}
     <div class="elemantsSalle">
-        {{ salle.numero }}
-        {{ salle.capacite }}
-        <a href=" {{ path ('show_salle',{'id':salle.id}) }} "><img src=" {{ salle.image }}" alt=""></a>
+        <spam class="numeroEtCapacite">
+      Numero :  {{ salle.numero }} 
+       capacite : {{ salle.capacite }}
+      </spam>
+        <a href=" {{ path ('show_salle',{'id':salle.id}) }} "><img src=" {{ asset('images/salle/'~ salle.image) }}" alt=""></a>
         <a href="{{ path ('supprimer_salle',{'id':salle.id}) }}">supprimer</a>
     </div>
-    {% endfor %}
+ 
+{% endfor %}
 </div>
-    <a href=" {{ path ('add_salle',{'idLieu':lieu.id}) }} ">ajouter une salle</a><br>
-    {% endfor %}
+<a href=" {{ path ('add_salle',{'idLieu':lieu.id}) }} ">ajouter une salle</a><br>
+{% endfor %}
 
-
+<div class="formulaireLieu">
+    <h1>Ajouter/Modifier un lieu</h1>
     
-<h1>Ajouter/Modifier un lieu</h1>
-{{ form_start(formAddlieu) }}
-<div class="formulaire">
-    {{ form (formAddlieu) }}
+    {{ form_start(formAddlieu) }}
+    <div class="formulaire">
+        {{ form (formAddlieu) }}
+    </div>
+    {{ form_end(formAddlieu) }}
+ </div>  
+
+
 </div>
-{{ form_end(formAddlieu) }}
-
-
-
-
-
-
-
-
-
-
-
-
-{% endblock %}
+    {% endblock %}

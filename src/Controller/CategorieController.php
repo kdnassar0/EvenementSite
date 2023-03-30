@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class CategorieController extends AbstractController
@@ -32,7 +33,7 @@ class CategorieController extends AbstractController
         $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
 
 
-   
+
 
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
@@ -89,11 +90,15 @@ class CategorieController extends AbstractController
      * @Route("/categorie/{id}/suprimmer", name="supprimer_categorie")
      */
 
-    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine)
+    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine, Filesystem $filesystem)
     {
 
         $entityManager = $doctrine->getManager();
         $entityManager->remove($categorie);
+        // Récupérer le chemin du fichier image de la salle à supprimer
+        $imagePath = $this->getParameter('categorie_directory') . '/' . $categorie->getImage();
+
+        $filesystem->remove($imagePath);
         $entityManager->flush();
 
 

@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class SalleController extends AbstractController
 {
@@ -49,21 +51,25 @@ class SalleController extends AbstractController
      *@Route("/add/salle/{idLieu}" ,name ="add_salle") 
      */
 
-     public function addSalle(LieuRepository $li, Salle $salle=null, ManagerRegistry $doctrine ,Request $request, Lieu $idLieu )
+     public function addSalle(LieuRepository $li, Salle $salle=null, ManagerRegistry $doctrine ,Request $request, Lieu $idLieu,SluggerInterface $slugger )
 
 
      {
-
-   
-      
-        $salle = new salle() ;
-
-
+      $salle = new salle() ;
       //ici on recupere l'id du lieu pour pouvoir ajouter une salle dans ce lieu 
-       $salle->setLieu($li->findOneBy(["id"=>$idLieu],[]));
-      
+      $salle->setLieu($li->findOneBy(["id"=>$idLieu],[]));
       $form = $this->createForm(SalleType::class,$salle) ; 
       $form->handleRequest($request) ;
+
+
+      $file = $form->get('image')->getData();
+      if ($file) {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // this is needed to safely include the file name as part of the URL
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+        $evenement = $form->getData();
+        $evenement->setImage($newFilename);
       
 
     //   c'est pour que l'utilisateur ne puisee pas saisir un numero negative 
@@ -74,14 +80,24 @@ class SalleController extends AbstractController
         $entityManager =$doctrine->getManager() ; 
         $entityManager->persist($salle) ; 
         $entityManager->flush() ;
+        try {
+          $file->move(
+            $this->getParameter('salle_directory'),
+            $newFilename
+          );
+        } catch (FileException $e) {
+        }
+
       
         return $this->redirectToRoute('app_lieu') ;
       
       }
+
       else
       {
        
       }
+    }
       return $this->render('salle/add.html.twig',[
         'formAddSalle'=>$form->createView()
       ]);
