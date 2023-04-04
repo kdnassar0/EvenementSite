@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
 use App\Entity\Lieu;
 use App\Entity\Salle;
 use App\Form\SalleType;
@@ -14,97 +15,69 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 class SalleController extends AbstractController
 {
-    /**
-     * @Route("/salle/{id}/show", name="show_salle")
-     * @Route("/salle/edit", name="edit_salle")
-     */
-    public function index(ManagerRegistry $doctrine,Request $request,Salle $salle): Response
-    {
-     
 
-        $form = $this->createForm(SalleType::class,$salle) ;
-        $form->handleRequest($request) ;
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $salle = $form->getData() ;
-            $entityManager= $doctrine->getManager() ; 
-            $entityManager->persist($salle) ; 
-            $entityManager->flush() ; 
-
-            return $this->redirectToRoute('app_lieu') ;
+  /**
+   * @Route("/salle/{id}/show", name="show_salle")
+   */
+  public function index(Salle $salle): Response
+  {
+    return $this->render('salle/show.html.twig', [
+      "infoSalle" => $salle
+    ]);
+  }
 
 
-        }
-
-        return $this->render('salle/show.html.twig', [
-           "infoSalle"=>$salle ,
-           "formEditSalle"=>$form->createView() 
-        ]);
-    }
 
 
-    /**
-     *@Route("/add/salle/{idLieu}" ,name ="add_salle") 
-     */
-
-     public function addSalle(LieuRepository $li, Salle $salle=null, ManagerRegistry $doctrine ,Request $request, Lieu $idLieu,SluggerInterface $slugger )
-
-
-     {
-      $salle = new salle() ;
-      //ici on recupere l'id du lieu pour pouvoir ajouter une salle dans ce lieu 
-      $salle->setLieu($li->findOneBy(["id"=>$idLieu],[]));
-      $form = $this->createForm(SalleType::class,$salle) ; 
-      $form->handleRequest($request) ;
-
-
-      $file = $form->get('image')->getData();
-      if ($file) {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        // this is needed to safely include the file name as part of the URL
-        $safeFilename = $slugger->slug($originalFilename);
-        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-        $evenement = $form->getData();
-        $evenement->setImage($newFilename);
-      
-
-    //   c'est pour que l'utilisateur ne puisee pas saisir un numero negative 
-      $capacite =$form["capacite"]->getData();
+  
+  /**
+   * @Route("/salle/{idLieu}/add", name="add_salle")
+   * @ParamConverter("lieu", class="App\Entity\Lieu", options={"id" = "idLieu"})
+   */
+  public function addSalle(Request $request, Lieu $lieu, ManagerRegistry $doctrine, SluggerInterface $slugger,Salle $salle)
+  {
+  
+        $salle = new Salle();
     
-      if($form->isSubmitted() && $form->isValid() && $capacite >=1)
-      {
-        $entityManager =$doctrine->getManager() ; 
-        $entityManager->persist($salle) ; 
-        $entityManager->flush() ;
-        try {
-          $file->move(
-            $this->getParameter('salle_directory'),
-            $newFilename
-          );
-        } catch (FileException $e) {
-        }
+   
 
-      
-        return $this->redirectToRoute('app_lieu') ;
-      
+      $form = $this->createForm(SalleType::class, $salle);
+      $form->handleRequest($request);
+  
+      if ($form->isSubmitted() && $form->isValid()) {
+          $file = $form->get('image')->getData();
+          if ($file) {
+              $orginalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+  
+              $safeFileName = $slugger->slug($orginalFilename);
+              $newFilename = $safeFileName . '-' . uniqid() . '.' . $file->guessExtension();
+              $salle->setImage($newFilename);
+  
+              $entityManager = $doctrine->getManager();
+              $salle->setLieu($lieu); // assigner la salle au lieu correspondant
+              $entityManager->persist($salle);
+              $entityManager->flush();
+  
+              try {
+                  $file->move(
+                      $this->getParameter('salle_directory'),
+                      $newFilename
+                  );
+              } catch (FileException $e) {
+              }
+  
+              return $this->redirectToRoute('app_lieu');
+          }
       }
-
-      else
-      {
-       
-      }
-    }
-      return $this->render('salle/add.html.twig',[
-        'formAddSalle'=>$form->createView()
+  
+      return $this->render('salle/add.html.twig', [
+          'formAddSalle' => $form->createView()
       ]);
-      
-
-     }
-
-
-
+  }
+  
 }

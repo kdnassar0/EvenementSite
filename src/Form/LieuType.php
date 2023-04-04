@@ -24,7 +24,7 @@ class LieuType extends AbstractType
             ->add('ville',TextType::class)
             ->add('adress',TextType::class)
             ->add('image',FileType::class,array('data_class'=>null))
-            ->add('submit',SubmitType::class)
+            ->add('submit',SubmitType::class,['label'=>'Ajouter'])
         ;
     }
 

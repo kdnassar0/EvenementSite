@@ -5,14 +5,14 @@
 {% block body %}
 
 
-{{ form_start(formAddSalle) }}
-{{ form_errors(formAddSalle) }}
-<div class="formulaire">
-    {{ form (formAddSalle) }}
-</div>
-{{ form_end(formAddSalle) }}
+<div class="containerFormulaireLieu">
 
-
+    <h1>Ajouter/Modifier une salle</h1>
+    {{ form_start(formAddSalle) }}
+    <div class="formulaireLieu">
+        {{ form (formAddSalle) }}
+    </div>
+    {{ form_end(formAddSalle) }}
 
 
 

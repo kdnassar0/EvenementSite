@@ -3,12 +3,55 @@
 {% block title %}Hello LieuController!{% endblock %}
 
 {% block body %}
+<div class="containerPage1">
+   
+    <div class="elementsNav">
+        <div class="logo">LOGO</div>
+        <nav>
+            <ul class="ul1">
+                <a href="{{ path ('app_categorie')}}">
+                    <li>Accueil</li>
+                </a>
+
+                <a href=" {{ path ('app_lieu') }}">
+                    <li>Lieu</li>
+                </a>
+                <a href="{{ path ('add_evenement') }}">
+                    <li>Organiser</li>
+                </a>
+                <a href="{{ path ('app_oragnisateur') }}">
+                    <li>Profil</li>
+                </a>
+                <a href="#">
+                    <li>contact</li>
+                </a>
+            </ul>
+        </nav>
+
+        <div class="search">
+            <a href="{{ path ('app_admin') }}">
+                <li>Admin</li>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <li>logout</li>
+            </a>
+        </div>
+    </div>
 
 
-{{ infoSalle.capacite }}
-{{ infoSalle.discreption }}
-<img src=" {{ infoSalle.image }} " alt="">
+   {{ infoSalle.numero }}
+   {{ infoSalle.discreption }}
+   <img src="{{asset('images/salle/'~ infoSalle.image) }}" alt=""></a>
 
-<h1>Modifier une salle</h1>
-{{ form(formEditSalle) }}
+   {% for evenement in infoSalle.evenements %}
+   {{ evenement.nom }}
+   <img src="{{asset('images/evenement/'~ evenement.image) }}" alt=""></a>
+ 
+   {% endfor %}
+  
+</div>
+   
+
+
+
 {% endblock %}  

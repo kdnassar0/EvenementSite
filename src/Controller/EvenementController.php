@@ -7,6 +7,7 @@ use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use App\Repository\SalleRepository;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,20 +46,22 @@ class EvenementController extends AbstractController
    * @Route("/evenement/add",name="add_evenement")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, SalleRepository $sa): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, SalleRepository $sa
+  ): Response
   {
 
 
     $salles = $sa->findAll([], ['numero' => 'ASC']);
-
+  
 
     $form = $this->createForm(EvenementType::class, $evenement);
     // Transmission des salles au formulaire
     $form->get('salles')->setData($salles);
     $form->handleRequest($requeste);
 
-
+{
     if ($form->isSubmitted() && $form->isValid()) {
+     
       $file = $form->get('image')->getData();
       if ($file) {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -68,8 +71,7 @@ class EvenementController extends AbstractController
         $evenement = $form->getData();
         $evenement->setImage($newFilename);
 
-
-
+      
 
         $evenement->setCreateur($this->getUser());
         $evenement->setStatut('en attente');
@@ -77,8 +79,8 @@ class EvenementController extends AbstractController
         $entityManager->persist($evenement);
         $entityManager->flush();
 
-
-
+        }
+      
 
         try {
           $file->move(
@@ -92,7 +94,7 @@ class EvenementController extends AbstractController
       }
     }
 
-
+  
 
     return $this->render('evenement/add.html.twig', [
 
