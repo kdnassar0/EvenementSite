@@ -7,7 +7,7 @@
 
 
 <div class="containerPage1">
-   
+
     <div class="elementsNav">
         <div class="logo">LOGO</div>
         <nav>
@@ -43,46 +43,47 @@
 
     <div class="elementLieu">
         {% for lieu in lieus %}
-      
+
         <h1>{{ lieu.nom }}</h1>
         Date de creation : {{ lieu.dateCreation | date('d/m/y') }} <br>
         Ville : {{ lieu.ville }}
         <h2> Adresse : {{ lieu.adress}} </h2>
         <div class="textEtImage">
             <div class="description"> {{ lieu.description }} </div>
-          <img src=" {{asset('images/lieu/'~ lieu.image) }}" alt=""> 
-        
+            <img src=" {{asset('images/lieu/'~ lieu.image) }}" alt="">
+
         </div>
+
+        <div class="buttonsLieu">
+            <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
+            <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
+        </div>
+    
+        <a href="{{ path('add_salle', {'idLieu': lieu.id}) }}">Ajouter une salle</a>
     </div>
-    <div class="buttonsLieu">
-        <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
-        <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
-    </div>
-   
+
 </div>
-
-
-<a href="{{ path('add_salle', {'idLieu': lieu.id}) }}">Ajouter une salle</a>
 
 <div class="containersalle">
     {% for salle in lieu.salles %}
     <div class="elemantsSalle">
-   
-      <a href="{{ path ('show_salle',{'id':salle.id}) }}"><img src="{{ asset('images/salle/'~ salle.image) }}" alt=""></a>
-      <span class="numeroEtCapacite">
-        capacite : {{ salle.capacite }}
-      </span>
-      <a href="{{ path ('supprimer_salle',{'id':salle.id}) }}">supprimer</a>
-     
+
+        <a href="{{ path ('show_salle',{'id':salle.id}) }}"><img src="{{ asset('images/salle/'~ salle.image) }}"
+                alt=""></a>
+        <span class="numeroEtCapacite">
+            capacite : {{ salle.capacite }}
+        </span>
+        <a href="{{ path ('supprimer_salle',{'id':salle.id}) }}">supprimer</a>
+
     </div>
     {% endfor %}
 </div>
 
 
-        
+
 {% endfor %}
 
-<div class="containerFormulaireLieu">
+<div class="formulaire-categorie">
 
     <h1>Ajouter/Modifier un lieu</h1>
     {{ form_start(formAddlieu) }}
@@ -90,9 +91,11 @@
         {{ form (formAddlieu) }}
     </div>
     {{ form_end(formAddlieu) }}
-  
-</div>
+
 </div>
 
 
-    {% endblock %}
+</div>
+
+
+{% endblock %}

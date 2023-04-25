@@ -62,24 +62,24 @@ class UserController extends AbstractController
 
 
    
-    
-    /**
-     * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
-     */
-    public function validateEvent(Evenement $evenement,ManagerRegistry $doctrine)
-    {
+        
+        /**
+         * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
+         */
+        public function validateEvent(Evenement $evenement,ManagerRegistry $doctrine)
         {
-            $evenement->setStatut('validé');
-            $entityManager=$doctrine->getManager();
-            $entityManager->flush() ;
-    
-            return $this->redirectToRoute('app_evenement');
+            {
+                $evenement->setStatut('validé');
+                $entityManager=$doctrine->getManager();
+                $entityManager->flush() ;
+        
+                return $this->redirectToRoute('app_categorie');
+            }
+            return $this->render('categorie/add.html.twig',[
+
+            ]);
+
         }
-        return $this->render('categorie/add.html.twig',[
-
-        ]);
-
-    }
 
     /**
      * @Route("/admin/evenement/{id}/refuse", name="admin_event_refuse")
@@ -102,7 +102,7 @@ class UserController extends AbstractController
         
       
         $commentaire = new Commentaire ();
-        $participants = $evenement->getParticipant();
+        $createur = $evenement->getCreateur();
         $evenement=$doctrine->getRepository(Evenement::class)->findOneBy(['id'=>$id]) ;
         $commentaires =$evenement->getCommentaires();
 
@@ -134,7 +134,7 @@ class UserController extends AbstractController
          
           return $this->render('evenement/details.html.twig',[
               "evenement"=>$evenement,
-              "participants" => $participants,
+              "createur" => $createur,
               "commentaires" =>$commentaires,
               'formAddCommentaire'=>$form->createView()
            

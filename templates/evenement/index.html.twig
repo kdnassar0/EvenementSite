@@ -8,7 +8,7 @@
 {% for evenementsEncours in evenementsEncours %}
 
 {{ evenementsEncours.nom }} <br>
-{{ evenementsEncours.description }}
+
 
 <a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
  
@@ -24,7 +24,7 @@
 {% for evenementPassee in evenementsPassees %}
 
 {{ evenementPassee.nom }} <br>
-{{ evenementPassee.description }}
+
 
 <a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
  

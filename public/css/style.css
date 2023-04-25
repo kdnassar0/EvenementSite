@@ -2,6 +2,7 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -783,6 +784,8 @@ div .champSalle .required {
         justify-content: center;
         flex-direction: column;
         gap: 40px;
+       
+
     }
 
 .buttonsLieu{
@@ -862,37 +865,77 @@ div .champSalle .required {
     height: 150px;
 }
 
-.containerFormulaireLieu {
-    width: 100%;
-    height: auto;
-    background-image: url('/images/home page-03.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-top: 10px solid;
-    display: flex;
-   flex-direction: column;
-    align-items: center;
-    gap: 20px;
-   
-   
-   
-}
-
-.formulaireLieu {
-    
-    margin: 50px;
- 
-}
-
-.formulaireLieu :nth-child(7) {
-    
-    text-align: center;
-   
-}
-
 
 
 
 
 
 /* ------------fin lieu--------------------- */
+
+
+
+
+/*---------------------details evenement--------------------*/
+
+.titreEvenement {
+    text-align: center;
+    margin: 50px;
+  }
+  
+  .titreEvenement h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .description img {
+    width: 320px;
+    height: 320px;
+    border-radius: 2%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: pulsate 2s ease-out;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes pulsate {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+    
+    }
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 50px rgba(0, 0, 0, 0);
+      
+    }
+  }
+
+  .elementDetails{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+  
+  }
+  
+  
+
+  
+
+
+/*---------------------fin details evenement--------------------*/
+

@@ -85,7 +85,7 @@
       <img src="{{ asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
     </a>
     <h1>{{ evenementAvenir.nom }}</h1>
-    <p>{{ evenementAvenir.description }}</p>
+
     <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
     <div class="action">
       <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>

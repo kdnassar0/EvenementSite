@@ -39,9 +39,7 @@ class EvenementController extends AbstractController
   }
 
 
-
-
-
+  
   /**
    * @Route("/evenement/add",name="add_evenement")
    */
@@ -99,11 +97,13 @@ class EvenementController extends AbstractController
     return $this->render('evenement/add.html.twig', [
 
       'formAddEvenement' => $form->createView()
-
-
-
     ]);
   }
+
+
+
+
+
 
   /**
    *@Route("/evenement/{id}/suprimmer",name="supprimer_evenement")
@@ -116,8 +116,6 @@ class EvenementController extends AbstractController
     $entityManager->remove($evenement);
     // Récupérer le chemin du fichier image de la salle à supprimer
     $imagePath = $this->getParameter('evenement_directory') . '/' . $evenement->getImage();
-
-
     $filesystem->remove($imagePath);
     $entityManager->flush();
 
