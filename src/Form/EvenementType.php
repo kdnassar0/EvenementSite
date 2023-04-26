@@ -34,6 +34,7 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+       
             ->add('nom',TextType::class,['label'=>"Nom de l'événement :"])
             ->add('date_debut',DateTimeType::class, [
                 'widget' => 'single_text','label'=>'Date de debut :'

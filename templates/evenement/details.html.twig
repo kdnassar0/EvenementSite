@@ -3,7 +3,7 @@
 
 {% block body %}
 
-<div class="containerPage1">
+<div class="containerPageDetails">
 
     <div class="elementsNav">
         <div class="logo">LOGO</div>
@@ -49,21 +49,37 @@
         </div>
         <div class="info">
             <div class="email">référence : {{ createur.email }}</div>
-            <div class="date">{{ evenement.dateDebut | date('y-m-d H:i') }}</div>
+            <div class="date">le : {{ evenement.dateDebut | date('y-m-d H:i') }}</div>
         </div>
 
+
     </div>
-    <br>
+    
+    <div class="espaceCommentaire">
+        laissez un commentaire :   
+        <div class="commentaires">
 
-    {% for commentaire in commentaires %}
-    {{ commentaire }} <br>
-    <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}">supprimer</a>
-    {% endfor %}
+            {# {% for information in commentaires.utilisateur %}
+            {{ dump(information) }}
+                {{ information.email }}
+            {% endfor %} #}
+
+            {% for commentaire in commentaires %}
+            {{ commentaire }}
+            {{ commentaire.utilisateur.nom }}
+            <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}">supprimer</a> 
+            {% endfor %}
+        </div>
+        {{form_start( formAddCommentaire) }}
+        {{form_row( formAddCommentaire.text) }}
+        {{form_row( formAddCommentaire.submit) }}
+        {{form_end( formAddCommentaire) }}
+
+    </div>
+
+</div>
 
 
-    {{form_start( formAddCommentaire) }}
-    {{form_row( formAddCommentaire.text) }}
-    {{form_end( formAddCommentaire) }}
 
 
 

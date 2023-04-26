@@ -29,7 +29,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @ROute("/Admin", name = "app_admin")
+     * @ROute("/Adminn", name = "app_admin")
      */
 
     public function admin(EvenementRepository $e): Response

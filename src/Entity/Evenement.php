@@ -40,7 +40,7 @@ class Evenement
     private $nb_des_places;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2000)
      */
     private $description ;
 

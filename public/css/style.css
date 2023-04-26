@@ -36,6 +36,7 @@ body {
 }
 
 
+
 /* ------- nav ---------- */
 
 .elementsNav {
@@ -877,6 +878,19 @@ div .champSalle .required {
 
 /*---------------------details evenement--------------------*/
 
+.containerPageDetails{
+    width: 100%;
+    height: auto;
+    background-image: url('/images/home page-01.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+
+}
 .titreEvenement {
     text-align: center;
     margin: 50px;
@@ -892,11 +906,12 @@ div .champSalle .required {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 50px;
   }
   
   .description img {
-    width: 320px;
-    height: 320px;
+    width: 400px;
+    height: 400px;
     border-radius: 2%;
     object-fit: cover;
     margin-right: 20px;
@@ -922,6 +937,7 @@ div .champSalle .required {
   .elementDetails{
     display: flex;
     flex-direction: column;
+    
   }
   
   .info {
@@ -931,9 +947,30 @@ div .champSalle .required {
     padding: 20px;
   
   }
-  
-  
 
+ .descriptionTexte {
+    width: 400px;
+    height: 400px;
+    font-size: 20px;
+
+ }
+  
+  
+.espaceCommentaire{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid;
+    margin: 20px;
+
+}
+
+.commentaires{
+    display: flex;
+
+
+}
   
 
 

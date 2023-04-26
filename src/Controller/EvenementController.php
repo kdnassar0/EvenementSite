@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\SalleRepository;
 use DateTime;
@@ -44,17 +45,18 @@ class EvenementController extends AbstractController
    * @Route("/evenement/add",name="add_evenement")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, SalleRepository $sa
-  ): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, SalleRepository $sa ): Response
   {
 
 
     $salles = $sa->findAll([], ['numero' => 'ASC']);
   
+  
 
     $form = $this->createForm(EvenementType::class, $evenement);
     // Transmission des salles au formulaire
     $form->get('salles')->setData($salles);
+  
     $form->handleRequest($requeste);
 
 {
