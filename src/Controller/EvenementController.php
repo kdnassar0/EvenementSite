@@ -2,20 +2,21 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\SalleRepository;
+use Symfony\Component\Form\FormError;
 use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
-use App\Repository\SalleRepository;
-use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class EvenementController extends AbstractController
@@ -63,6 +64,11 @@ class EvenementController extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
      
       $file = $form->get('image')->getData();
+      $dateDebut = $form->get('date_debut')->getData();
+      $dateAujourdhui = new \DateTime();
+      if($dateDebut < $dateAujourdhui){
+        $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
+      }else{
       if ($file) {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         // this is needed to safely include the file name as part of the URL
@@ -80,6 +86,7 @@ class EvenementController extends AbstractController
         $entityManager->flush();
 
         }
+
       
 
         try {
@@ -90,8 +97,10 @@ class EvenementController extends AbstractController
         } catch (FileException $e) {
         }
 
+
         return $this->redirectToRoute('app_categorie');
       }
+    }
     }
 
   

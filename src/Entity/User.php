@@ -81,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
@@ -316,6 +317,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+  
 
   
     

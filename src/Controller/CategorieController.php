@@ -10,12 +10,13 @@ use App\Form\CommentaireType;
 use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class CategorieController extends AbstractController
@@ -40,7 +41,8 @@ class CategorieController extends AbstractController
 
 
 
-
+        if ($this->isGranted('ROLE_ADMIN')){
+            
         if ($form->isSubmitted() && $form->isValid()) {
 
             $file = $form->get('image')->getData();
@@ -72,6 +74,7 @@ class CategorieController extends AbstractController
                 return $this->redirectToRoute('app_categorie');
             }
         }
+    }
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
             'formAddCategorie' => $form->createView(),

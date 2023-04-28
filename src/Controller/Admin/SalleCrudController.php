@@ -24,7 +24,7 @@ class SalleCrudController extends AbstractCrudController
             Field::new('capacite'),
             Field::new('discreption'),
             Field::new('prix'),
-            AssociationField::new('lieu')
+            AssociationField::new('lieu'),
             ImageField::new('image')
                 ->setBasePath('public/images/salle')
                 ->setUploadDir('public/images/salle'),
