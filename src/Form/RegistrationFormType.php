@@ -53,12 +53,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            // ->add('password_confirmation', RepeatedType::class, [
-            //     'type' => PasswordType::class,
-            //     'invalid_message' => 'Les mots de passe doivent correspondre.',
-            //     'first_options' => ['label' => 'Mot de passe'],
-            //     'second_options' => ['label' => 'Confirmation du mot de passe'],
-            // ]);
+ 
         ;
     }
 

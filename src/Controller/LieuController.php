@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
 use App\Entity\Lieu;
 use App\Entity\Salle;
 use App\Form\LieuType;
@@ -30,7 +31,7 @@ class LieuController extends AbstractController
   public function index(LieuRepository $li, ManagerRegistry $doctrine, Lieu $lieu = null, Request $request, SluggerInterface $slugger): Response
   {
     $lieus = $li->findBy([], ['nom' => 'ASC']);
-
+  
     // pour le formulaire d'Edition
     // si le lieu ne existe pas->il va faire un neuveau 
     //si ie lieu existe ->il va modifier 
@@ -56,7 +57,7 @@ class LieuController extends AbstractController
         $safeFilename = $slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
         //si les condition sont juste il va recuperer la data 
-       
+
         $lieu = $form->getData();
         $lieu->setImage($newFilename);
 
@@ -67,9 +68,6 @@ class LieuController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->persist($lieu);
         $entityManager->flush();
-
-
-
         try {
           $file->move(
             $this->getParameter('lieu_directory'),
@@ -83,13 +81,14 @@ class LieuController extends AbstractController
       }
     }
 
-    // dd($form);
+
+
 
 
     return $this->render('lieu/index.html.twig', [
       'lieus' => $lieus,
       'formAddlieu' => $form->createView()
-
+      
     ]);
   }
 
@@ -97,15 +96,15 @@ class LieuController extends AbstractController
    *@Route("/lieu/{id}/supprimer", name="supprimer_lieu")
    */
 
-  public function supprimerLieu(Lieu $lieu, ManagerRegistry $doctrine,Filesystem $filesystem)
+  public function supprimerLieu(Lieu $lieu, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
     $entityManager = $doctrine->getManager();
     $entityManager->remove($lieu);
-        // Récupérer le chemin du fichier image de la salle à supprimer
-        $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
+    // Récupérer le chemin du fichier image de la salle à supprimer
+    $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
 
-        // Supprimer le fichier image du lieu
-        $filesystem->remove($imagePath);
+    // Supprimer le fichier image du lieu
+    $filesystem->remove($imagePath);
 
 
     $entityManager->flush();
@@ -119,11 +118,11 @@ class LieuController extends AbstractController
    *@Route("/salle/{id}/supprimer",name="supprimer_salle") 
    */
 
-  public function supprimerSalle(Salle $salle, ManagerRegistry $doctrine,Filesystem $filesystem)
+  public function supprimerSalle(Salle $salle, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
     $entityManager = $doctrine->getManager();
     $entityManager->remove($salle);
-    
+
     // Récupérer le chemin du fichier image de la salle à supprimer
     $imagePath = $this->getParameter('salle_directory') . '/' . $salle->getImage();
 

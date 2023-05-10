@@ -48,12 +48,7 @@ class EvenementType extends AbstractType
             ->add('image',FileType::class)
             ->add('categorie',EntityType::class,
             ['class'=>Categorie::class,'choice_label'=>'nom'])
-            ->add('salles', EntityType::class, [
-                'class' => Salle::class,
-                'choice_label' => 'numero',
-                'multiple' => true,
-                'expanded' => true,
-            ])
+          
           
 
             ->add('submit',SubmitType::class,['label'=>'Envoyer'])

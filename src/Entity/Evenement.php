@@ -66,10 +66,7 @@ class Evenement
      */
     private $categorie;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Salle::class, inversedBy="evenements")
-     */
-    private $salles;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="evenements")
@@ -88,15 +85,27 @@ class Evenement
     private $commentaires;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="evenements")
+     */
+    private $salles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+
+     /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
 
+
+
     public function __construct()
     {
-        $this->salles = new ArrayCollection();
         $this->participants = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->salles = new ArrayCollection();
+    
     }
 
     public function getId(): ?int
@@ -218,29 +227,6 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection<int, Salle>
-     */
-    public function getSalles(): Collection
-    {
-        return $this->salles;
-    }
-
-    public function addSalle(Salle $salle): self
-    {
-        if (!$this->salles->contains($salle)) {
-            $this->salles[] = $salle;
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        $this->salles->removeElement($salle);
-
-        return $this;
-    }
 
     public function getCreateur(): ?User
     {
@@ -319,15 +305,41 @@ class Evenement
 
         return $this;
     }
-
-
-
+ 
     
     public function __toString()
     {
       return  $this->nom ." ".$this->date_fin ." ".$this->date_debut." ".$this->nb_des_places ." ".$this->prix ." ".$this->description ." ".
         $this->image ; 
     }
+
+    /**
+     * @return Collection<int, Salle>
+     */
+    public function getSalles(): Collection
+    {
+        return $this->salles;
+    }
+
+    public function addSalle(Salle $salle): self
+    {
+        if (!$this->salles->contains($salle)) {
+            $this->salles[] = $salle;
+            $salle->addEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalle(Salle $salle): self
+    {
+        if ($this->salles->removeElement($salle)) {
+            $salle->removeEvenement($this);
+        }
+
+        return $this;
+    }
+
 
 
 

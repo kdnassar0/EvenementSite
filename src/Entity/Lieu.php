@@ -51,15 +51,7 @@ class Lieu
      */
     private $image;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Salle::class, mappedBy="lieu", orphanRemoval=true)
-     */
-    private $Salles;
-
-    public function __construct()
-    {
-        $this->Salles = new ArrayCollection();
-    }
+    
 
  
     public function getId(): ?int
@@ -154,33 +146,4 @@ class Lieu
       return  $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville ;
     }
 
-    /**
-     * @return Collection<int, Salle>
-     */
-    public function getSalles(): Collection
-    {
-        return $this->Salles;
-    }
-
-    public function addSalle(Salle $salle): self
-    {
-        if (!$this->Salles->contains($salle)) {
-            $this->Salles[] = $salle;
-            $salle->setLieu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        if ($this->Salles->removeElement($salle)) {
-            // set the owning side to null (unless already changed)
-            if ($salle->getLieu() === $this) {
-                $salle->setLieu(null);
-            }
-        }
-
-        return $this;
-    }
 }

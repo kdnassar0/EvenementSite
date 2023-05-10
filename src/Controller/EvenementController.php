@@ -55,8 +55,8 @@ class EvenementController extends AbstractController
   
 
     $form = $this->createForm(EvenementType::class, $evenement);
-    // Transmission des salles au formulaire
-    $form->get('salles')->setData($salles);
+    
+
   
     $form->handleRequest($requeste);
 

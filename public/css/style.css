@@ -82,8 +82,10 @@ nav ul a {
     justify-content: center;
     flex-direction: column;
     margin-top: 200px;
-}
-
+  
+  
+  }
+ 
 .text1 li {
     list-style: none;
 }

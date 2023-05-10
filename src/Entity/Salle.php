@@ -34,12 +34,7 @@ class Salle
      */
     private $prix;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Evenement::class, mappedBy="salles")
-     */
-    private $evenements;
-
-
+   
 
     /**
      * @ORM\Column(type="string", length=2000)
@@ -52,15 +47,18 @@ class Salle
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="Salles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Evenement::class, inversedBy="salles")
      */
-    private $lieu;
+    private $evenements;
 
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
     }
+
+
+
+   
 
     public function getId(): ?int
     {
@@ -104,33 +102,7 @@ class Salle
     }
 
 
-    /**
-     * @return Collection<int, Evenement>
-     */
-    public function getEvenements(): Collection
-    {
-        return $this->evenements;
-    }
-
-    public function addEvenement(Evenement $evenement): self
-    {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements[] = $evenement;
-            $evenement->addSalle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvenement(Evenement $evenement): self
-    {
-        if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeSalle($this);
-        }
-
-        return $this;
-    }
-
+ 
  
 
     public function getDiscreption(): ?string
@@ -164,15 +136,33 @@ class Salle
         return $this->capacite ."  ". $this->numero ."  ".$this->prix ."  ".$this->discreption ;
     }
 
-    public function getLieu(): ?Lieu
+    /**
+     * @return Collection<int, Evenement>
+     */
+    public function getEvenements(): Collection
     {
-        return $this->lieu;
+        return $this->evenements;
     }
 
-    public function setLieu(?Lieu $lieu): self
+    public function addEvenement(Evenement $evenement): self
     {
-        $this->lieu = $lieu;
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements[] = $evenement;
+        }
 
         return $this;
     }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        $this->evenements->removeElement($evenement);
+
+        return $this;
+    }
+
+
+    
+   
+    
+
 }
