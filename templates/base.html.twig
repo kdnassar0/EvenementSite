@@ -8,6 +8,7 @@
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
@@ -119,9 +120,11 @@
             </span>
         </div>
       </footer>  
-
+  
+      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.js" integrity="sha256-AdIaIA/hJcb+8KseTxjLWe+RuN9peiU4eVKZQZAMTgM=" crossorigin="anonymous"></script>
       {% block javascripts %}
       <script src="{{ asset('js/test.js') }}"></script>
+   
       {% endblock %}
 </body>
 

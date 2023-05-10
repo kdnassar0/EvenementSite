@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApiController!{% endblock %}
+
+{% block stylesheet %}
+<style>
+    #Calendrier {
+        width: 80%;
+        margin:auto;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div id="Calendrier">
+    
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            let CalendarElt = document.querySelector('#Calendrier')
+            let Calendar = new FullCalendar.Calendar(CalendarElt,{
+                    initialView:'dayGridMonth'
+            })
+
+            Calendar.render();
+        }
+    </script>
+{% endblock javascripts %}
