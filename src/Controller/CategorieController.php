@@ -18,6 +18,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Security;
 
 class CategorieController extends AbstractController
 {
@@ -26,60 +28,68 @@ class CategorieController extends AbstractController
      * @Route("/categorie", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
      */
-    public function index(CategorieRepository $ca, ManagerRegistry $doctrine, Categorie $categorie = null, Request $request, SluggerInterface $slugger, EvenementRepository $e): Response
+    public function index(CategorieRepository $ca, ManagerRegistry $doctrine, Categorie $categorie = null, Request $request, SluggerInterface $slugger, EvenementRepository $e, Security $security): Response
 
     {
+
 
         $evenementsAvenir = $e->findEvenementsAvenir();
         $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
 
+        $isAdmin = $security->isGranted('ROLE_ADMIN');
+
+        if ($isAdmin) {
+            $form = $this->createForm(CategorieType::class, $categorie);
+            $form->handleRequest($request);
 
 
 
-        $form = $this->createForm(CategorieType::class, $categorie);
-        $form->handleRequest($request);
+
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $file = $form->get('image')->getData();
+                if ($file) {
+                    $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                    $categorie = $form->getData();
+                    $categorie->setImage($newFilename);
+                    $entityManager = $doctrine->getManager();
+                    $entityManager->persist($categorie);
+                    $entityManager->flush();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $file->move(
+                            $this->getParameter('categorie_directory'),
+                            $newFilename
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+
+                    }
 
 
 
-        if ($this->isGranted('ROLE_ADMIN')){
-            
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $file = $form->get('image')->getData();
-            if ($file) {
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-
-                $categorie = $form->getData();
-                $categorie->setImage($newFilename);
-                $entityManager = $doctrine->getManager();
-                $entityManager->persist($categorie);
-                $entityManager->flush();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $file->move(
-                        $this->getParameter('categorie_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-
+                    return $this->redirectToRoute('app_categorie');
                 }
-
-
-
-                return $this->redirectToRoute('app_categorie');
             }
+
+            return $this->render('categorie/index.html.twig', [
+                'categories' => $categories,
+                'formAddCategorie' => $form->createView(),
+                'evenementsAvenir' => $evenementsAvenir,
+
+            ]);
         }
-    }
+        // Si l'utilisateur n'est pas un administrateur, n'afficher que les événements et les catégories
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
-            'formAddCategorie' => $form->createView(),
             'evenementsAvenir' => $evenementsAvenir,
-
+            'formAddCategorie' => null,
         ]);
     }
 
