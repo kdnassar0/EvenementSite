@@ -1,46 +1,56 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
-{% block title %}Hello ApiController!{% endblock %}
+    {% block title %}Hello ApiController!{% endblock %}
 
-{% block stylesheets %}
-<style>
-    #Calendrier {
-        width: 80%;
-        margin:auto;
-       
-    }
-</style>
-{% endblock %}
-
-
-{% block body %}
-
-
-<div id="Calendrier">
+    {% block javascripts %}
     
-</div>
-{% endblock %}
+ 
 
-{% block javascripts %}
+    {% endblock javascripts %}
+    {% block stylesheets %}
+    <style>
+        #Calendrier {
+            width: 80%;
+            margin: auto;
+
+        }
+    </style>
+    {% endblock %}
+
+
+
+    {% block body %}
+   {# {{ dump(events) }} #}
+   
+    <div id="Calendrier">
+
+    </div>
+
     <script>
+    
         window.onload = () => {
             let CalendarElt = document.querySelector('#Calendrier')
-            let Calendar = new FullCalendar.Calendar(CalendarElt,{
-                    initialView:'timeGridWeek',
-                    locale :'fr',
-                    timeZone : 'Eroupe/paris',
-                    headerToolbar : {
-                        start : 'prev,next today',
-                        centre :'title',
-                        end :'dayGridMonth,timeGridWeek',
-                       
-                    },
-                    events : {{ data|json_encode|raw}}
-                       
-        })
-        
+            let data = JSON.parse('{{ data|raw }}');
+            let Calendar = new FullCalendar.Calendar(CalendarElt, {
+                initialView: 'timeGridWeek',
+                locale: 'fr',
+                timeZone: 'Eroupe/paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek',
+                  
 
-            Calendar.render();
-        } 
+                },    
+                events : data
+                
+            })
+           
+         
+        Calendar.render();
+       console.log(data)
+        }
+      
     </script>
-{% endblock javascripts %}
+
+    {% endblock %}
