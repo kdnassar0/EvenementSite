@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 class EvenementController extends AbstractController
 {
@@ -47,17 +49,16 @@ class EvenementController extends AbstractController
 
   /**
    * @Route("/evenement/add",name="add_evenement")
-   * @Security("is_granted('ROLE_USER')")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, AuthorizationCheckerInterface $authorizationChecker): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, AuthorizationCheckerInterface $authorizationChecker,SessionInterface $session): Response
   {
 
      // Vérifier si l'utilisateur est connecté
-     if (!$authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-      throw new AccessDeniedException('Veuillez vous connecter pour ajouter un événement.');
+     if (!$this->getUser()) {
+     $this->addFlash('warning',' Veuillez vous connecter pour ajouter un événement.');
+      return $this->redirectToRoute('app_login');
   }
-   
 
 
 
