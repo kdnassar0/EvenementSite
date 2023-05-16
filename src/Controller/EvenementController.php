@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use DateTime;
+
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
-use App\Repository\SalleRepository;
 use Symfony\Component\Form\FormError;
-use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Filesystem\Filesystem;
@@ -18,6 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class EvenementController extends AbstractController
 {
@@ -34,7 +35,7 @@ class EvenementController extends AbstractController
     $evenementsPassees = $e->findEvenementsPasseesParCategorie($categorie->getId());
     $evenementsEncours = $e->findEvenementsEncoursParCategorie($categorie->getId());
 
-   
+
 
     return $this->render('evenement/index.html.twig', [
       'evenementsPassees' => $evenementsPassees,
@@ -43,69 +44,79 @@ class EvenementController extends AbstractController
   }
 
 
-  
+
   /**
    * @Route("/evenement/add",name="add_evenement")
+   * @Security("is_granted('ROLE_USER')")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, SalleRepository $sa ): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, AuthorizationCheckerInterface $authorizationChecker): Response
   {
 
+     // Vérifier si l'utilisateur est connecté
+     if (!$authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+      throw new AccessDeniedException('Accès refusé. Veuillez vous connecter pour ajouter un événement.');
+  }
+   
 
-    $salles = $sa->findAll([], ['numero' => 'ASC']);
-  
-  
+
 
     $form = $this->createForm(EvenementType::class, $evenement);
-    
 
-  
-    $form->handleRequest($requeste);
 
-{
-    if ($form->isSubmitted() && $form->isValid()) {
-     
-      $file = $form->get('image')->getData();
-      $dateDebut = $form->get('date_debut')->getData();
-      $dateAujourdhui = new \DateTime();
-      if($dateDebut < $dateAujourdhui){
-        $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
-      }else{
-      if ($file) {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        // this is needed to safely include the file name as part of the URL
-        $safeFilename = $slugger->slug($originalFilename);
-        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-        $evenement = $form->getData();
-        $evenement->setImage($newFilename);
 
-      
+    $form->handleRequest($requeste); {
+      if ($form->isSubmitted() && $form->isValid()) {
+        $dateDebut = $form->get('date_debut')->getData();
 
-        $evenement->setCreateur($this->getUser());
-        $evenement->setStatut('en attente');
-        $entityManager = $doctrine->getManager();
-        $entityManager->persist($evenement);
-        $entityManager->flush();
+        // Vérifier si un événement existe déjà à la même date
+        $existingEvent = $doctrine->getRepository(Evenement::class)->findOneBy(['date_debut' => $dateDebut]);
 
+        if ($existingEvent) {
+          $form->get('date_debut')->addError(new FormError('Un événement existe déjà à cette date.'));
+        } else {
+          // Le code pour créer et enregistrer l'événement ici
+        
+        $file = $form->get('image')->getData();
+        $dateDebut = $form->get('date_debut')->getData();
+        $dateAujourdhui = new \DateTime();
+        if ($dateDebut < $dateAujourdhui) {
+          $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
+        } else {
+          if ($file) {
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+            $evenement = $form->getData();
+            $evenement->setImage($newFilename);
+
+
+
+            $evenement->setCreateur($this->getUser());
+            $evenement->setStatut('en attente');
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($evenement);
+            $entityManager->flush();
+          }
+
+
+
+          try {
+            $file->move(
+              $this->getParameter('evenement_directory'),
+              $newFilename
+            );
+          } catch (FileException $e) {
+          }
+
+
+          return $this->redirectToRoute('app_categorie');
         }
-
-      
-
-        try {
-          $file->move(
-            $this->getParameter('evenement_directory'),
-            $newFilename
-          );
-        } catch (FileException $e) {
-        }
-
-
-        return $this->redirectToRoute('app_categorie');
       }
     }
-    }
+  }
 
-  
 
     return $this->render('evenement/add.html.twig', [
 

@@ -65,8 +65,9 @@
     {% endfor %}
   </div>
 
+  
+  {# if pour verfier si le formaddcategorie n'est pas null #}
   {% if formAddCategorie %}
-
   <div class="formulaire-categorie">
     {{ form_start(formAddCategorie) }}
     <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }} </div>
