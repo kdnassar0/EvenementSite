@@ -55,7 +55,7 @@ class EvenementController extends AbstractController
 
      // Vérifier si l'utilisateur est connecté
      if (!$authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-      throw new AccessDeniedException('Accès refusé. Veuillez vous connecter pour ajouter un événement.');
+      throw new AccessDeniedException('Veuillez vous connecter pour ajouter un événement.');
   }
    
 
