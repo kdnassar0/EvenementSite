@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\CategorieRepository;
 use Symfony\Component\Form\FormError;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -136,7 +137,7 @@ class EvenementController extends AbstractController
 
   public function supprimerEvenement(Evenement $evenement, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
-
+   $categorie = $evenement->getCategorie();
     $entityManager = $doctrine->getManager();
     $entityManager->remove($evenement);
     // Récupérer le chemin du fichier image de la salle à supprimer
@@ -144,7 +145,7 @@ class EvenementController extends AbstractController
     $filesystem->remove($imagePath);
     $entityManager->flush();
 
-    return $this->redirectToRoute('app_categorie');
+    return $this->redirectToRoute('evenement_categorie',['id'=>$categorie->getId()]);
   }
 
 

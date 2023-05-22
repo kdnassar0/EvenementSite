@@ -25,7 +25,7 @@ class Categorie
     private $nomCategorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie",cascade={"remove"})
      */
     private $evenements;
 

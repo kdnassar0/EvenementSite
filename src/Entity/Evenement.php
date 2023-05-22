@@ -80,7 +80,7 @@ class Evenement
     private $participants;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="evenement")
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="evenement",cascade ={"remove"})
      */
     private $commentaires;
 

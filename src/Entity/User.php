@@ -44,27 +44,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $nom;
+    private $pseudo;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $prenom;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $dateNaissance;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $ville;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $adresse;
 
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="createur")
@@ -178,72 +159,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getNom(): ?string
+    public function getPseudo(): ?string
     {
-        return $this->nom;
+        return $this->pseudo;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom(?string $pseudo): self
     {
-        $this->nom = $nom;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(?string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateNaissance;
-    }
-
-    public function setDateNaissance(?\DateTimeInterface $dateNaissance): self
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(?string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-
+ 
 
 
     public function __toString()
     {
-      return  $this->nom ." ".$this->prenom ." ".$this->ville ." ".$this->adresse ." ".$this->email ;
+      return  $this->pseudo ." ".$this->email ;
     }
 
     /**

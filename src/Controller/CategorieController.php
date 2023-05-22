@@ -108,7 +108,7 @@ class CategorieController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $entityManager->remove($categorie);
-        // Récupérer le chemin du fichier image de la salle à supprimer
+        // Récupérer le chemin du fichier image de la categorie à supprimer
         $imagePath = $this->getParameter('categorie_directory') . '/' . $categorie->getImage();
 
         $filesystem->remove($imagePath);
