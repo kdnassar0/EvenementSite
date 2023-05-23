@@ -889,91 +889,88 @@ div .champSalle .required {
     display: flex;
     align-items: center;
     flex-direction: column;
+    position : relative;
 
 
 
 }
-.titreEvenement {
-    text-align: center;
-    margin: 50px;
-  }
-  
-  .titreEvenement h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .description {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 50px;
-  }
-  
-  .description img {
-    width: 400px;
-    height: 400px;
-    border-radius: 2%;
-    object-fit: cover;
-    margin-right: 20px;
-    border: 2px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    animation: pulsate 2s ease-out;
-    animation-iteration-count: infinite;
-  }
-  
-  @keyframes pulsate {
-    0% {
-      transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
-    
-    }
-    50% {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 50px rgba(0, 0, 0, 0);
-      
-    }
-  }
 
-  .elementDetails{
+.containerEelmentsDetails {
+    width: 80%;
     display: flex;
-    flex-direction: column;
-    
-  }
-  
-  .info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    background-image: url('/images/gggrain.svg');
+    background-size: cover ;
     padding: 20px;
-  
-  }
+    border-radius: 10px;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 50px;
+ 
+}
 
- .descriptionTexte {
-    width: 400px;
-    height: 400px;
-    font-size: 20px;
 
- }
-  
-  
-.espaceCommentaire{
+
+.info {
+   
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 2px solid;
-    margin: 20px;
+    justify-content: space-between;
+    flex-direction: row;
 
+    
 }
 
-.commentaires{
+.titleEvenement {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.disreption {
+  width: 100%;
     display: flex;
-
+    padding: 80px;
+    flex-direction: row;
+    gap: 50px;
 
 }
+
+.containerEelmentsDetails h1 {
+    display: flex;
+}
+.containerEelmentsDetails img {
+    
+    height: 250px;
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 10px;
+}
+
+.containerEelmentsDetails:hover img {
+    transform: translatez(-20%);
   
+   
+    opacity: 0.8;
+}
+
+.containerEelmentsDetails span {
+    width: 60%;
+    word-wrap: break-word;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: rgb(163, 29, 29);
+   
+
+}
+
+.containerEelmentsDetails:hover span {
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+
+
 
 
 /*---------------------fin details evenement--------------------*/
