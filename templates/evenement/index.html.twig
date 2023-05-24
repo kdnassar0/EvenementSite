@@ -4,44 +4,86 @@
 
 {% block body %}
 
-<h1>Evenements Encours</h1>
-{% for evenementsEncours in evenementsEncours %}
+<div class="containerPageEvenements">
 
-{{ evenementsEncours.nom }} <br>
+    <div class="elementsNav">
+        <div class="logo">LOGO</div>
+        <nav>
+            <ul class="ul1">
+                <a href="{{ path ('app_categorie')}}">
+                    <li>Accueil</li>
+                </a>
 
+                <a href=" {{ path ('app_lieu') }}">
+                    <li>Lieu</li>
+                </a>
+                <a href="{{ path ('add_evenement') }}">
+                    <li>Organiser</li>
+                </a>
+                <a href="{{ path ('app_oragnisateur') }}">
+                    <li>Profil</li>
+                </a>
+                <a href="#">
+                    <li>contact</li>
+                </a>
+            </ul>
+        </nav>
 
-<a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img  src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
- 
- {{evenementsEncours.dateDebut | date('y-m-d') }}
-    
- <a href="{{ path ('supprimer_evenement',{'id':evenementsEncours.id}) }}">supprimer</a>
-
-    
-{% endfor %}
-<h2>-------------------------------------------------</h2>
-
-<h1>Evenements passses</h1>
-{% for evenementPassee in evenementsPassees %}
-
-{{ evenementPassee.nom }} <br>
-
-
-<a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
- 
- {{evenementPassee.dateFin | date('y-m-d') }}
-    
- <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
-
-    
-{% endfor %}
-
-
-<h2>-------------------------------------------------</h2>
-
-
-
+        <div class="search">
+            <a href="{{ path ('app_admin') }}">
+                <li>Admin</li>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <li>logout</li>
+            </a>
+        </div>
+    </div>
 
 
- 
+    <h1>Evenements Encours</h1>
+    <div class="evenementsListes">
+        {% for evenementsEncours in evenementsEncours %}
+        <div class="evenementCarte">
+         {{ evenementsEncours.nom }} 
+
+
+        <a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img
+                src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
+
+        {{evenementsEncours.dateDebut | date('y-m-d H:i') }}
+
+        <a href="{{ path ('supprimer_evenement',{'id':evenementsEncours.id}) }}">supprimer</a>
+
+    </div>
+        {% endfor %}
+
+    </div>
+    <h2>-------------------------------------------------</h2>
+
+    <h1>Evenements passses</h1>
+
+    <div class="evenementsListes">
+    {% for evenementPassee in evenementsPassees %}
+
+   <div class="evenementCarte">
+    {{ evenementPassee.nom }} 
+    <a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img
+            src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
+
+    {{evenementPassee.dateFin | date('y-m-d H:i') }}
+
+    <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
+
+</div>
+    {% endfor %}
+
+</div>
+    <h2>-------------------------------------------------</h2>
+
+
+
+
+</div>
+
 
 {% endblock %}
