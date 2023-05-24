@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use DateTime;
+use DateTimeZone;
 use App\Entity\Evenement;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -92,7 +93,8 @@ class EvenementRepository extends ServiceEntityRepository
 
     public function findEvenementsEncoursParCategorie($categorieId)
     {
-        $now = new \DateTime();
+        $now = new DateTime('Europe/paris');
+       
         return $this->createQueryBuilder('e')
             ->innerJoin('e.categorie', 'c')
             ->andWhere('c.id = :categorie_id')
