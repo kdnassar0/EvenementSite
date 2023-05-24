@@ -10,7 +10,7 @@
 {{ evenementsEncours.nom }} <br>
 
 
-<a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
+<a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img  src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
  
  {{evenementsEncours.dateDebut | date('y-m-d') }}
     
@@ -37,6 +37,7 @@
 
 
 <h2>-------------------------------------------------</h2>
+
 
 
 

@@ -50,43 +50,50 @@
             <img src="{{asset ('images/evenement/'~ evenement.image) }}" alt="">
             <span>{{ evenement.description }} </span>
         </div>
-        
-    <div class="info">
-        <strong>Référence : {{ createur.email }}</strong>
-        <strong> du : {{ evenement.dateDebut | date('y-m-d H:i') }}</strong>
-        <strong> au : {{ evenement.dateFin | date('y-m-d H:i') }} </strong>
-    </div>
+
+        <div class="info">
+            <strong>Référence : {{ createur.email }}</strong>
+            <strong> du : {{ evenement.dateDebut | date('y-m-d H:i') }}</strong>
+            <strong> au : {{ evenement.dateFin | date('y-m-d H:i') }} </strong>
+        </div>
     </div>
 
 
 
     <div class="espaceCommentaire">
-        laissez un commentaire :
-        <div class="commentaires">
-            {% for commentaire in commentaires %}
-            {{ commentaire }}
-            {% if commentaire.utilisateur == app.user %}
-            {{ commentaire.utilisateur.pseudo }}
-            <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}">supprimer</a>
+        
+   
+        <strong>Laissez un commentaire :</strong>
+        {% set flashMessages = app.flashes('success') %}
+
+        {% if flashMessages is not empty %}
+        <div class="alert alert-success">
+            {{ flashMessages[0] }}
             {% endif %}
+        <div class="commentaires">
+
+            {% for commentaire in commentaires %}
+            <span>{{ commentaire.utilisateur.pseudo }}</span>
+            <div class="cmmentaireEtSupprimer">
+                <span class="commentaire"> {{ commentaire }} </span>
+                {% if commentaire.utilisateur == app.user %}
+                <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i class="fa-solid fa-trash"></i></a>
+                {% endif %}
+            </div>
             {% endfor %}
-
         </div>
-        {{form_start( formAddCommentaire) }}
-        {{form_row( formAddCommentaire.text) }}
-        {{form_row( formAddCommentaire.submit) }}
-        {{form_end( formAddCommentaire) }}
 
+        <div class="ecrireUnCommentaire">
+            {{form_start( formAddCommentaire) }}
+            {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}}) }}
+            <span>
+                {{form_row( formAddCommentaire.submit) }}
+            </span>
+            {{form_end( formAddCommentaire) }}
+        </div>
     </div>
 
-    {% set flashMessages = app.flashes('success') %}
-
-    {% if flashMessages is not empty %}
-    <div class="alert alert-success">
-        {{ flashMessages[0] }}
-        {% endif %}
 
     </div>
-
 
     {% endblock %}

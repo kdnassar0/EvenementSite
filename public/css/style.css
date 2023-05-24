@@ -905,10 +905,16 @@ div .champSalle .required {
     overflow: hidden;
     flex-direction: column;
     margin-top: 50px;
+    transform: translateY(-1%);
  
 }
 
-
+.containerPageDetails.animation-active .containerEelmentsDetails {
+    /* Styles d'animation pendant l'exécution */
+    transform: translateY(10%);
+    transition: 10s;
+  
+}
 
 .info {
    
@@ -916,6 +922,8 @@ div .champSalle .required {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    opacity: 0;
+    transform: translateX(-1%);
 
     
 }
@@ -924,6 +932,10 @@ div .champSalle .required {
 display: flex;
 align-items: center;
 justify-content: center;
+opacity: 0;
+transform: translateY(-40%);
+
+
 }
 
 .disreption {
@@ -939,27 +951,33 @@ justify-content: center;
     display: flex;
 }
 .containerEelmentsDetails img {
-    
     height: 250px;
-    opacity: 1;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: opacity 0.3s ease;
     border-radius: 10px;
 }
 
-.containerEelmentsDetails:hover img {
-    transform: translatez(-20%);
-  
-   
+.containerEelmentsDetails:hover img{
     opacity: 0.8;
 }
+
+.containerPageDetails:hover .titleEvenement {
+    opacity: 1;
+    transition: 1.5s;
+    transform: translateY(40%);
+}
+.containerPageDetails:hover .info {
+    opacity: 1 ;
+    transition: 1.5s;
+    transform: translateX(1%);
+}
+
 
 .containerEelmentsDetails span {
     width: 60%;
     word-wrap: break-word;
-    font-size: 18px;
-    opacity: 0;
+    font-size: 18px ;
     transition: opacity 0.3s ease;
-    color: rgb(163, 29, 29);
+    color: rgb(74, 31, 31);
    
 
 }
@@ -969,9 +987,97 @@ justify-content: center;
     transition-delay: 0.2s;
 }
 
+.espaceCommentaire {
+ display: flex;
+    width: 50%;
+    flex-direction: column;
 
 
+}  
+
+.espaceCommentaire strong{
+  display: flex;
+
+  justify-content: center;
+  margin:20px 0 20px 0 ;
+}
+
+.commentaires{
+  background-color: wheat;
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.commentaires .commentaire {
+   padding: 10px;
+    word-wrap: break-word;
+    width: 80%;
+    height: auto;
+ 
+
+}
 
 
+.cmmentaireEtSupprimer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #c6a8a8;
+    border-radius: 10px;
+   
+}
+.cmmentaireEtSupprimer a {
+    padding: 10px;
+}
+.cmmentaireEtSupprimer a i {
+    color: #f9f9f9;
+}
+
+.ecrireUnCommentaire{
+ display: flex;
+justify-content: center;
+}
+.ecrireUnCommentaire {
+    /* background-color: #f1f1f1; */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .ecrireUnCommentaire textarea {
+    width: 50vw;
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+  
+
+  
+  #commentaire_submit {
+    background-color: black;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+  }
+  
+  #commentaire_submit:hover {
+    background-color: #45a049;
+    transition: 0.5s;
+  }
+
+  .ecrireUnCommentaire span {
+    text-align: center;
+  }
+  
+   
 /*---------------------fin details evenement--------------------*/
 
