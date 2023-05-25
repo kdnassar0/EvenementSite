@@ -37,12 +37,19 @@ class EvenementController extends AbstractController
 
     $evenementsPassees = $e->findEvenementsPasseesParCategorie($categorie->getId());
     $evenementsEncours = $e->findEvenementsEncoursParCategorie($categorie->getId());
+    $evenemetImges = $e->findAll();
 
-// dd($evenementsPassees);
+    $images = [];
+    foreach ($evenemetImges as $image) {
+      $images[] = $image->getImage();
+    }
+
+
 
     return $this->render('evenement/index.html.twig', [
       'evenementsPassees' => $evenementsPassees,
-      'evenementsEncours' => $evenementsEncours
+      'evenementsEncours' => $evenementsEncours,
+      'images' => $images
     ]);
   }
 
@@ -52,14 +59,14 @@ class EvenementController extends AbstractController
    * @Route("/evenement/add",name="add_evenement")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, AuthorizationCheckerInterface $authorizationChecker,SessionInterface $session): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session): Response
   {
 
-     // Vérifier si l'utilisateur est connecté
-     if (!$this->getUser()) {
-     $this->addFlash('warning',' Veuillez vous connecter pour ajouter un événement.');
+    // Vérifier si l'utilisateur est connecté
+    if (!$this->getUser()) {
+      $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un événement.');
       return $this->redirectToRoute('app_login');
-  }
+    }
 
 
 
@@ -78,46 +85,46 @@ class EvenementController extends AbstractController
           $form->get('date_debut')->addError(new FormError('Un événement existe déjà à cette date.'));
         } else {
           // Le code pour créer et enregistrer l'événement ici
-        
-        $file = $form->get('image')->getData();
-        $dateDebut = $form->get('date_debut')->getData();
-        $dateAujourdhui = new \DateTime();
-        if ($dateDebut < $dateAujourdhui) {
-          $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
-        } else {
-          if ($file) {
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            // this is needed to safely include the file name as part of the URL
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-            $evenement = $form->getData();
-            $evenement->setImage($newFilename);
+
+          $file = $form->get('image')->getData();
+          $dateDebut = $form->get('date_debut')->getData();
+          $dateAujourdhui = new \DateTime();
+          if ($dateDebut < $dateAujourdhui) {
+            $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
+          } else {
+            if ($file) {
+              $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+              // this is needed to safely include the file name as part of the URL
+              $safeFilename = $slugger->slug($originalFilename);
+              $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+              $evenement = $form->getData();
+              $evenement->setImage($newFilename);
 
 
 
-            $evenement->setCreateur($this->getUser());
-            $evenement->setStatut('en attente');
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($evenement);
-            $entityManager->flush();
+              $evenement->setCreateur($this->getUser());
+              $evenement->setStatut('en attente');
+              $entityManager = $doctrine->getManager();
+              $entityManager->persist($evenement);
+              $entityManager->flush();
+            }
+
+
+
+            try {
+              $file->move(
+                $this->getParameter('evenement_directory'),
+                $newFilename
+              );
+            } catch (FileException $e) {
+            }
+
+
+            return $this->redirectToRoute('app_categorie');
           }
-
-
-
-          try {
-            $file->move(
-              $this->getParameter('evenement_directory'),
-              $newFilename
-            );
-          } catch (FileException $e) {
-          }
-
-
-          return $this->redirectToRoute('app_categorie');
         }
       }
     }
-  }
 
 
     return $this->render('evenement/add.html.twig', [
@@ -137,7 +144,7 @@ class EvenementController extends AbstractController
 
   public function supprimerEvenement(Evenement $evenement, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
-   $categorie = $evenement->getCategorie();
+    $categorie = $evenement->getCategorie();
     $entityManager = $doctrine->getManager();
     $entityManager->remove($evenement);
     // Récupérer le chemin du fichier image de la salle à supprimer
@@ -145,7 +152,7 @@ class EvenementController extends AbstractController
     $filesystem->remove($imagePath);
     $entityManager->flush();
 
-    return $this->redirectToRoute('evenement_categorie',['id'=>$categorie->getId()]);
+    return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]);
   }
 
 

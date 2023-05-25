@@ -38,6 +38,49 @@
             </a>
         </div>
     </div>
+
+    <div class="imagesSlide">
+        <div class="slider">
+            {% for image in images %}
+            <div class="slide">
+                
+                <img src="{{asset('images/evenement/'~ image) }}" alt="">
+
+            </div>
+            {% endfor %}
+        </div>
+       
+    </div>
+  
+ 
+
+
+    <h1>Evenements Encours</h1>
+    <div class="iconFlech">
+        <i class="fa-solid fa-turn-down fa-bounce"></i>
+        <i class="fa-solid fa-turn-down fa-bounce"></i>
+        <i class="fa-solid fa-turn-down fa-bounce"></i>
+        <i class="fa-solid fa-turn-down fa-bounce"></i>
+    </div>
+    <div class="evenementsListes">
+        {% for evenementsEncours in evenementsEncours %}
+        <div class="evenementCarte">
+            {{ evenementsEncours.nom }}
+
+
+            <a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img
+                    src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
+
+            {{evenementsEncours.dateDebut | date('y-m-d H:i') }}
+
+            <a href="{{ path ('supprimer_evenement',{'id':evenementsEncours.id}) }}">supprimer</a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <h1>Evenements passses</h1>
     <div class="iconFlech">
         <i class="fa-solid fa-turn-down fa-bounce"></i>
         <i class="fa-solid fa-turn-down fa-bounce"></i>
@@ -45,49 +88,33 @@
         <i class="fa-solid fa-turn-down fa-bounce"></i>
     </div>
 
-    <h1>Evenements Encours</h1>
     <div class="evenementsListes">
-        {% for evenementsEncours in evenementsEncours %}
+        {% for evenementPassee in evenementsPassees %}
+
         <div class="evenementCarte">
-         {{ evenementsEncours.nom }} 
+            {{ evenementPassee.nom }}
+            <a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img
+                    src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
 
+            {{evenementPassee.dateFin | date('y-m-d H:i') }}
 
-        <a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img
-                src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
+            <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
 
-        {{evenementsEncours.dateDebut | date('y-m-d H:i') }}
-
-        <a href="{{ path ('supprimer_evenement',{'id':evenementsEncours.id}) }}">supprimer</a>
-
-    </div>
+        </div>
         {% endfor %}
 
     </div>
 
-    <h1>Evenements passses</h1>
-
-    <div class="evenementsListes">
-    {% for evenementPassee in evenementsPassees %}
-
-   <div class="evenementCarte">
-    {{ evenementPassee.nom }} 
-    <a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img
-            src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
-
-    {{evenementPassee.dateFin | date('y-m-d H:i') }}
-
-    <a href="{{ path ('supprimer_evenement',{'id':evenementPassee.id}) }}">supprimer</a>
-
-</div>
-    {% endfor %}
-
-</div>
-
 
 
 
 
 </div>
+
+{% block javascripts %}
+<script src="{{ asset('js/test.js') }}"></script>
+{% endblock javascripts %}
+
 
 
 {% endblock %}

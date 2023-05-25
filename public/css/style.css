@@ -780,17 +780,21 @@ div .champSalle .required {
     align-items: center;
     flex-direction: column;
     position: relative;
-    background-color:#F2884B;
+    background-color: #F2884B;
 
 }
+
 .containerPageEvenements .elementsNav nav ul li {
-    color: #333333 ;
-}
-.containerPageEvenements h1  {
     color: #333333;
 }
+
+.containerPageEvenements h1 {
+    color: #333333;
+    margin-top: 50px;
+}
+
 .containerPageEvenements .elementsNav .logo {
-    color: #333333  ;
+    color: #333333;
 }
 
 
@@ -809,10 +813,10 @@ div .champSalle .required {
     width: 80%;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 12px 20px 4px;
-  
 
 
-  
+
+
 
 }
 
@@ -835,15 +839,51 @@ div .champSalle .required {
 }
 
 
-.iconFlech{
+.iconFlech {
     display: flex;
     flex-direction: row;
     gap: 50px;
     font-size: 30px;
     margin-top: 50px;
+
 }
 
 
+.imagesSlide {
+    width: 80%;
+    overflow: hidden;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+   margin-top: 50px;
+   border: 1px solid;
+
+
+  }
+
+  
+  
+  .slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 0; /* Ajout d'une marge pour l'espacement entre les images */
+  }
+  
+  .slide {
+    flex: 0 0 calc(100% / 3); /* Ajustement de la largeur des slides pour afficher 3 images */
+  
+   
+  }
+  
+ 
+  
+  .slide img {
+    width: 70%;
+    height: auto;
+    border-radius: 10px;
+
+  }
+  
 
 
 
