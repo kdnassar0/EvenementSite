@@ -780,14 +780,21 @@ div .champSalle .required {
     align-items: center;
     flex-direction: column;
     position: relative;
-    background-color: #000000;
+    background-color:#F2884B;
+
 }
-.containerPageEvenements h1 ,h2 {
-    color: #fff;
+.containerPageEvenements .elementsNav nav ul li {
+    color: #333333 ;
+}
+.containerPageEvenements h1  {
+    color: #333333;
 }
 .containerPageEvenements .elementsNav .logo {
-    color: #fff;
+    color: #333333  ;
 }
+
+
+
 .evenementsListes {
     display: flex;
     align-items: center;
@@ -796,6 +803,14 @@ div .champSalle .required {
     width: 80%;
     flex-wrap: wrap;
     gap: 10px;
+    background-color: #a6447adc;
+    margin: 20px;
+    padding: 20px;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 12px 20px 4px;
+  
+
 
   
 
@@ -803,6 +818,7 @@ div .champSalle .required {
 
 .evenementsListes img {
     width: 300px;
+    border-radius: 10px;
 }
 
 .evenementCarte {
@@ -812,7 +828,19 @@ div .champSalle .required {
     justify-content: center;
     flex-direction: column;
     padding: 10px;
-    background-color: #ffffff
+    background-color: #a6447ac1;
+    border-radius: 10px;
+    border-color: #A6447A;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+
+.iconFlech{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    font-size: 30px;
+    margin-top: 50px;
 }
 
 

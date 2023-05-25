@@ -79,7 +79,7 @@ class EvenementRepository extends ServiceEntityRepository
 
     public function findEvenementsPasseesParCategorie($categorieId)
     {
-        $now = new \DateTime();
+        $now = new DateTime('Europe/paris');
         return $this->createQueryBuilder('e')
             ->innerJoin('e.categorie', 'c')
             ->andWhere('c.id = :categorie_id')
