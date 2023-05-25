@@ -38,22 +38,20 @@
             </a>
         </div>
     </div>
+    <div class="containerSlider">
+        <div class="imagesSlide">
+            <div class="slider">
+                {% for image in images %}
+                <div class="slide">
 
-    <div class="imagesSlide">
-        <div class="slider">
-            {% for image in images %}
-            <div class="slide">
-                
-                <img src="{{asset('images/evenement/'~ image) }}" alt="">
+                    <img src="{{asset('images/evenement/'~ image) }}" alt="">
 
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-       
-    </div>
-  
- 
 
+        </div>
+    </div>
 
     <h1>Evenements Encours</h1>
     <div class="iconFlech">
