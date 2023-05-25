@@ -109,25 +109,50 @@ nav ul a {
 
 .containerCategorie {
     width: 100%;
+    height: 100vh;
     background-image: url('/images/home page-02.png');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-top: 10px solid;
+    flex-direction: row;
+    border-top: 10px solid black;
+
+
+
+
+}
+
+.presentationCategorie {
+
+    width: 40%;
+    height: 100vh;
+    background-image: url('https://th.bing.com/th?q=Background%20to%20Put%20On%20Text&pid=ImgDet&w=150&h=150&c=1&p=1&rs=1&t=1&dpr=1,3&mkt=fr-fr&adlt=strict');
+    background-repeat: repeat;
+    background-size: contain;
+
+
+}
+
+.presentationCategorie h1 {
+    font-size: 40px;
+
 
 }
 
 .categorie {
     display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin-top: 50px;
+    width: 60%;
     flex-wrap: wrap;
-    width: 70%;
-    gap: 120px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+
+
+
+
 }
+
 
 
 .categorieElements {
@@ -137,18 +162,13 @@ nav ul a {
     flex-direction: column;
     gap: 5px;
 
+
 }
 
-
-
-
-
-
-
 .categorie img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
+    width: 225px;
+    height: 240px;
+
 }
 
 .formulaire-categorie {
@@ -781,22 +801,12 @@ div .champSalle .required {
     flex-direction: column;
     position: relative;
     background-color: #F2884B;
-  
-    
-}
+    /* padding: 50px; */
 
-.containerSlider
-{
-    width: 100%;
-    height: 70vh;
-    background-image: url('https://i.pinimg.com/originals/38/7f/77/387f773b755c6469e43c39e665b11c99.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
 
 }
+
+
 
 .containerPageEvenements .elementsNav nav ul li {
     color: #333333;
@@ -821,7 +831,7 @@ div .champSalle .required {
     width: 80%;
     flex-wrap: wrap;
     gap: 10px;
-    background-color: #a6447adc;
+    background-color: #c55d96dc;
     margin: 20px;
     padding: 20px;
     width: 80%;
@@ -834,6 +844,10 @@ div .champSalle .required {
     border-radius: 10px;
 }
 
+.evenementsListes a i {
+    color: wheat;
+}
+
 .evenementCarte {
     border: 1px solid;
     display: flex;
@@ -843,9 +857,12 @@ div .champSalle .required {
     padding: 10px;
     background-color: #a6447ac1;
     border-radius: 10px;
+    gap: 20px;
     border-color: #A6447A;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
+
+/* fin la page evenementParCategorie  */
 
 
 .iconFlech {
@@ -857,6 +874,21 @@ div .champSalle .required {
 
 }
 
+/*------------------- slider----------------- */
+
+.containerSlider {
+    width: 100%;
+    height: 60vh;
+    background-image: url('https://i.pinimg.com/originals/38/7f/77/387f773b755c6469e43c39e665b11c99.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 50px;
+
+
+}
 
 .imagesSlide {
     width: 80%;
@@ -864,10 +896,9 @@ div .champSalle .required {
     display: flex;
     padding: 20px;
     justify-content: center;
-    margin-top: 50px;
     border: 1px solid;
     border-radius: 10px;
-    border-color: #F2884B ;
+    border-color: #F2884B;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 
 }
@@ -900,10 +931,10 @@ div .champSalle .required {
 }
 
 
+/*-------------------fin slider----------------- */
 
 
 
-/* fin la page evenementParCategorie  */
 
 
 
