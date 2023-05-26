@@ -62,16 +62,16 @@
 
     <div class="espaceCommentaire">
 
-       
 
-       
+
+
+
         <strong>Laissez un commentaire :</strong>
-        {% set flashMessages = app.flashes('success') %}
-
-        {% if flashMessages is not empty %}
-        <div class="alert alert-success">
-            {{ flashMessages[0] }}
-            {% endif %}
+        
+        {% for message in app.flashes('success') %}
+        {{ message }}
+        {% endfor %}
+        
             <div class="commentaires">
 
                 {% for commentaire in commentaires %}
@@ -85,7 +85,7 @@
                 </div>
                 {% endfor %}
             </div>
-           
+
             <div class="ecrireUnCommentaire">
                 {{form_start( formAddCommentaire) }}
                 {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})

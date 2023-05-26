@@ -55,17 +55,23 @@
         </div>
 
         <div class="buttonsLieu">
+            {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
+           
+
             <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
+            {% endif %}
         </div>
 
-       
+
     </div>
 
 </div>
 
 
 {% endfor %}
+
+{% if formAddlieu %}
 <div class="formulaire-categorie">
 
     <h1>Ajouter/Modifier un lieu</h1>
@@ -76,9 +82,10 @@
     {{ form_end(formAddlieu) }}
 
 </div>
+{% endif %}
+
 
 
 </div>
 
 {% endblock %}
- 

@@ -18,8 +18,9 @@
 
 </head>
 
-
-
+{% for message in app.flashes('test') %}
+{{message}}
+{% endfor %}
 
 <body> 
       

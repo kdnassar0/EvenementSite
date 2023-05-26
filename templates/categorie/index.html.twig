@@ -6,6 +6,9 @@
 
 
 
+
+
+
 <div class="containerPage1">
   <div class="elementsNav">
     <div class="logo">LOGO</div>
@@ -50,6 +53,10 @@
     </div>
   </div>
 </div>
+
+
+
+
 
 
 
@@ -100,10 +107,10 @@
 
     <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
     <div class="action">
-    {% if evenementAvenir.createur.id == app.user.id %}
-    <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
-    {% endif %}
-      
+      {% if evenementAvenir.createur.id == app.user.id %}
+      <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
+      {% endif %}
+
       <a href="{{ path('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
     </div>
   </div>
