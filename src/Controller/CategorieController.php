@@ -104,7 +104,7 @@ class CategorieController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      */
 
-    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine, Filesystem $filesystem, Security $security)
+    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine, Filesystem $filesystem)
     {
      
             $entityManager = $doctrine->getManager();

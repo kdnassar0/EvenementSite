@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
-use App\Repository\CategorieRepository;
 use Symfony\Component\Form\FormError;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,11 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class EvenementController extends AbstractController
 {
@@ -59,7 +55,7 @@ class EvenementController extends AbstractController
    * @Route("/evenement/add",name="add_evenement")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session): Response
+  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
   {
 
     // Vérifier si l'utilisateur est connecté
@@ -139,20 +135,26 @@ class EvenementController extends AbstractController
 
 
   /**
-   *@Route("/evenement/{id}/suprimmer",name="supprimer_evenement")
+   *@Route("/evenement/{id}/supprimer",name="supprimer_evenement")
    */
 
-  public function supprimerEvenement(Evenement $evenement, ManagerRegistry $doctrine, Filesystem $filesystem)
+  public function supprimerEvenement(Evenement $evenement = null, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
-    $categorie = $evenement->getCategorie();
-    $entityManager = $doctrine->getManager();
-    $entityManager->remove($evenement);
-    // Récupérer le chemin du fichier image de la salle à supprimer
-    $imagePath = $this->getParameter('evenement_directory') . '/' . $evenement->getImage();
-    $filesystem->remove($imagePath);
-    $entityManager->flush();
+    // Vérifier si l'utilisateur actuel est l'auteur de l'événement
+   if($evenement) {
+    if ($evenement->getCreateur() == $this->getUser()) {
+      $categorie = $evenement->getCategorie();
+      $entityManager = $doctrine->getManager();
+      $entityManager->remove($evenement);
+      // Récupérer le chemin du fichier image de l'evenement à supprimer
+      $imagePath = $this->getParameter('evenement_directory') . '/' . $evenement->getImage();
+      $filesystem->remove($imagePath);
+      $entityManager->flush();
 
-    return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]);
+      return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]);
+    }
+  }
+    return $this->redirectToRoute('app_categorie') ;
   }
 
 

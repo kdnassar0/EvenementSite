@@ -61,8 +61,10 @@
 
 
     <div class="espaceCommentaire">
-        
-   
+
+       
+
+       
         <strong>Laissez un commentaire :</strong>
         {% set flashMessages = app.flashes('success') %}
 
@@ -70,28 +72,30 @@
         <div class="alert alert-success">
             {{ flashMessages[0] }}
             {% endif %}
-        <div class="commentaires">
+            <div class="commentaires">
 
-            {% for commentaire in commentaires %}
-            <span>{{ commentaire.utilisateur.pseudo }}</span>
-            <div class="cmmentaireEtSupprimer">
-                <span class="commentaire"> {{ commentaire }} </span>
-                {% if commentaire.utilisateur == app.user %}
-                <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i class="fa-solid fa-trash"></i></a>
-                {% endif %}
+                {% for commentaire in commentaires %}
+                <span>{{ commentaire.utilisateur.pseudo }}</span>
+                <div class="cmmentaireEtSupprimer">
+                    <span class="commentaire"> {{ commentaire }} </span>
+                    {% if commentaire.utilisateur == app.user %}
+                    <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i
+                            class="fa-solid fa-trash"></i></a>
+                    {% endif %}
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+           
+            <div class="ecrireUnCommentaire">
+                {{form_start( formAddCommentaire) }}
+                {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})
+                }}
+                <span>
+                    {{form_row( formAddCommentaire.submit) }}
+                </span>
+                {{form_end( formAddCommentaire) }}
+            </div>
         </div>
-
-        <div class="ecrireUnCommentaire">
-            {{form_start( formAddCommentaire) }}
-            {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}}) }}
-            <span>
-                {{form_row( formAddCommentaire.submit) }}
-            </span>
-            {{form_end( formAddCommentaire) }}
-        </div>
-    </div>
 
 
     </div>
