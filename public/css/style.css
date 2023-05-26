@@ -109,7 +109,7 @@ nav ul a {
 
 .containerCategorie {
     width: 100%;
-    height: 100vh;
+    height: auto;
     background-image: url('/images/home page-02.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -124,11 +124,10 @@ nav ul a {
 
 .presentationCategorie {
 
-    width: 40%;
+    width: 50%;
     height: 100vh;
-    background-image: url('https://th.bing.com/th?q=Background%20to%20Put%20On%20Text&pid=ImgDet&w=150&h=150&c=1&p=1&rs=1&t=1&dpr=1,3&mkt=fr-fr&adlt=strict');
-    background-repeat: repeat;
-    background-size: contain;
+
+   
 
 
 }
@@ -141,12 +140,14 @@ nav ul a {
 
 .categorie {
     display: flex;
-    width: 60%;
+    width: 35%;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin-top: 20px;
+    margin: 20px;
+    background-color: rgba(156, 103, 5, 0.17);
+    padding: 10px;
 
 
 
@@ -165,11 +166,25 @@ nav ul a {
 
 }
 
-.categorie img {
-    width: 225px;
-    height: 240px;
+.categorieElements h1 {
+  /* position: absolute; */
+  color: red ;
+  
+  
 
 }
+
+.categorie img {
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+    /* position:relative; */
+
+}
+
+
+
+
 
 .formulaire-categorie {
     margin: 80px;

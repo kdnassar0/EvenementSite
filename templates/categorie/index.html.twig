@@ -63,8 +63,12 @@
     <div class="categorieElements">
       <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img
           src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
+
       <h1> {{ categorie.nom }} </h1>
+      {% if is_granted('ROLE_ADMIN') %}
       <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}"><i class="fa-solid fa-trash"></i></a>
+      {% endif %}
+
     </div>
 
     {% endfor %}
@@ -96,7 +100,9 @@
 
     <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
     <div class="action">
+    
       <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
+      
       <a href="{{ path('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
     </div>
   </div>

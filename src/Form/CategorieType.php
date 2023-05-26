@@ -28,7 +28,8 @@ class CategorieType extends AbstractType
                             'mimeTypes' => [
                                 
                                 'image/png',
-                                'image/jpeg'
+                                'image/jpeg',
+                                'image/jpg'
                                            ],
                             'mimeTypesMessage' => 'Please upload a valid image',
                                 ])

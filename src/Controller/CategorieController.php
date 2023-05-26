@@ -101,20 +101,22 @@ class CategorieController extends AbstractController
 
     /**
      * @Route("/categorie/{id}/suprimmer", name="supprimer_categorie")
+     * @IsGranted("ROLE_ADMIN")
      */
 
-    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine, Filesystem $filesystem)
+    public function supprimerCategorie(Categorie $categorie, ManagerRegistry $doctrine, Filesystem $filesystem, Security $security)
     {
+     
+            $entityManager = $doctrine->getManager();
+            $entityManager->remove($categorie);
+            // Récupérer le chemin du fichier image de la categorie à supprimer
+            $imagePath = $this->getParameter('categorie_directory') . '/' . $categorie->getImage();
 
-        $entityManager = $doctrine->getManager();
-        $entityManager->remove($categorie);
-        // Récupérer le chemin du fichier image de la categorie à supprimer
-        $imagePath = $this->getParameter('categorie_directory') . '/' . $categorie->getImage();
-
-        $filesystem->remove($imagePath);
-        $entityManager->flush();
+            $filesystem->remove($imagePath);
+            $entityManager->flush();
 
 
-        return $this->redirectToRoute('app_categorie');
+            return $this->redirectToRoute('app_categorie');
+        
     }
 }
