@@ -107,9 +107,9 @@
 
     <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
     <div class="action">
-      {% if evenementAvenir.createur.id == app.user.id %}
+      
       <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
-      {% endif %}
+     
 
       <a href="{{ path('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
     </div>

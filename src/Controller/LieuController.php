@@ -95,13 +95,12 @@ class LieuController extends AbstractController
         'formAddlieu' => $form->createView()
 
       ]);
-    }   return $this->render('lieu/index.html.twig', [
+    }
+    return $this->render('lieu/index.html.twig', [
       'lieus' => $lieus,
-      'formAddlieu' => null 
+      'formAddlieu' => null
 
     ]);
-
-    
   }
 
   /**
@@ -109,18 +108,22 @@ class LieuController extends AbstractController
    *@IsGranted("ROLE_ADMIN")
    */
 
-  public function supprimerLieu(Lieu $lieu, ManagerRegistry $doctrine, Filesystem $filesystem)
+  public function supprimerLieu(Lieu $lieu = null, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
-    $entityManager = $doctrine->getManager();
-    $entityManager->remove($lieu);
-    // Récupérer le chemin du fichier image de la salle à supprimer
-    $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
+    if($lieu) {
+      $entityManager = $doctrine->getManager();
+      $entityManager->remove($lieu);
+      // Récupérer le chemin du fichier image de la salle à supprimer
+      $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
 
-    // Supprimer le fichier image du lieu
-    $filesystem->remove($imagePath);
+      // Supprimer le fichier image du lieu
+      $filesystem->remove($imagePath);
 
-    $entityManager->flush();
+      $entityManager->flush();
 
-    return $this->redirectToRoute('app_lieu');
+      return $this->redirectToRoute('app_lieu');
+    }
+
+    return $this->redirectToRoute('app_categorie');
   }
 }
