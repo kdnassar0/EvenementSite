@@ -142,9 +142,10 @@ class EvenementController extends AbstractController
   public function supprimerEvenement(Evenement $evenement = null, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
     // Vérifier si l'utilisateur actuel est l'auteur de l'événement
-    $categorie = $evenement->getCategorie();
+  
    if($evenement) {
     if ($evenement->getCreateur() == $this->getUser()) {
+      $categorie = $evenement->getCategorie();
       $entityManager = $doctrine->getManager();
       $entityManager->remove($evenement);
       // Récupérer le chemin du fichier image de l'evenement à supprimer
@@ -155,7 +156,7 @@ class EvenementController extends AbstractController
       return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]);
     }
   }
-    return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]) ;
+    return $this->redirectToRoute('app_categorie') ;
   }
 
 
