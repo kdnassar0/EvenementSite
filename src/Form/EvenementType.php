@@ -8,9 +8,9 @@ use App\Entity\Evenement;
 use App\Repository\SalleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -19,8 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class EvenementType extends AbstractType
 {
@@ -45,7 +45,19 @@ class EvenementType extends AbstractType
             ->add('nb_des_places',NumberType::class,['label'=>'Nombre des places :'])
             ->add('description',TextareaType::class,['label'=>'Déscription :'])
             ->add('prix',NumberType::class)
-            ->add('image',FileType::class)
+            ->add('image',FileType::class, [
+                'constraints' => [
+                    new File ([
+                        'maxSize'=>'1024k',
+                        'mimeTypes'=> [
+                            'image/png',
+                            'image/jpeg',
+                            'image/png'
+                        ],
+                        'mimeTypesMessage'=>'Please upload a valid image',
+                    ])
+                ]
+            ])
             ->add('categorie',EntityType::class,
             ['class'=>Categorie::class,'choice_label'=>'nom'])
           
