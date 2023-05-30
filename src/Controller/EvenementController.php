@@ -9,6 +9,7 @@ use App\Entity\Evenement;
 use App\Form\EvenementType;
 use Symfony\Component\Form\FormError;
 use App\Repository\EvenementRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -142,36 +143,44 @@ class EvenementController extends AbstractController
   public function supprimerEvenement(Evenement $evenement = null, ManagerRegistry $doctrine, Filesystem $filesystem)
   {
     // Vérifier si l'utilisateur actuel est l'auteur de l'événement
-  
-   if($evenement) {
-    if ($evenement->getCreateur() == $this->getUser()) {
-      $categorie = $evenement->getCategorie();
-      $entityManager = $doctrine->getManager();
-      $entityManager->remove($evenement);
-      // Récupérer le chemin du fichier image de l'evenement à supprimer
-      $imagePath = $this->getParameter('evenement_directory') . '/' . $evenement->getImage();
-      $filesystem->remove($imagePath);
-      $entityManager->flush();
 
-      return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]);
+    if ($evenement) {
+      if ($evenement->getCreateur() == $this->getUser()) {
+        $categorie = $evenement->getCategorie();
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($evenement);
+        // Récupérer le chemin du fichier image de l'evenement à supprimer
+        $imagePath = $this->getParameter('evenement_directory') . '/' . $evenement->getImage();
+        $filesystem->remove($imagePath);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('evenement_categorie', ['id' => $categorie->getId()]);
+      }
     }
-  }
-    return $this->redirectToRoute('app_categorie') ;
+    return $this->redirectToRoute('app_categorie');
   }
 
 
   /**
-   * @Route("evenement/{id}/add/",name="add_participant")
+   * @Route("/evenement/{id}/addParticipant",name="add_participant")
    */
 
-  public function addParticipant(Evenement $evenement, ManagerRegistry $doctrine)
+  public function addParticipant(Evenement $evenement = null, ManagerRegistry $doctrine)
   {
+    if (!$this->getUser()) {
+      $this->addFlash('warning', ' Veuillez vous connecter pour participer cet evenement.');
+      return $this->redirectToRoute('app_login');
+    }
+    if ($evenement) {
+      
+      $entityManager = $doctrine->getManager();
+      $evenement->addParticipant($this->getUser());
+      $entityManager->flush();
 
-    $entityManager = $doctrine->getManager();
-    $evenement->addParticipant($this->getUser());
-    $entityManager->flush();
 
-
+      return $this->redirectToRoute('app_categorie') ;
+    }
     return $this->redirectToRoute('app_categorie');
   }
+  
 }

@@ -95,6 +95,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/details/{id}",name="details_evenement")
+     * @Route("/add/commantaire/id",name="add_commantaire")
      */
     public function detailsEvenement(ManagerRegistry $doctrine, Evenement $evenement = null, $id, Request $request)
     {

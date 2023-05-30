@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json" )
      */
     private $roles = [];
 
@@ -57,6 +57,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaires;
 
+    // /**
+    //  * @ORM\ManyToMany(targetEntity=Evenement::class, inversedBy="utilisateur")
+    //  */
+    // private $participants;
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -67,6 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->evenements = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        // $this->participants = new ArrayCollection(); 
     }
 
 

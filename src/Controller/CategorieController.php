@@ -38,6 +38,8 @@ class CategorieController extends AbstractController
 
         $isAdmin = $security->isGranted('ROLE_ADMIN');
 
+    
+
         if ($isAdmin) {
             $form = $this->createForm(CategorieType::class, $categorie);
             $form->handleRequest($request);

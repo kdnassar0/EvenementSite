@@ -57,9 +57,14 @@
             <strong> au : {{ evenement.dateFin | date('y-m-d H:i') }} </strong>
         </div>
     </div>
-
-
-
+    {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
+    {% for participant in evenement.participant %}
+        {% if participant.id == app.user.id %}
+            {% set link = 'vous etes inscrits' %}
+        {% endif %}
+    {% endfor %}
+    
+    {{ link | raw}}
     <div class="espaceCommentaire">
 
 
@@ -67,37 +72,36 @@
 
 
         <strong>Laissez un commentaire :</strong>
-        
+
         {% for message in app.flashes('success') %}
         {{ message }}
         {% endfor %}
-        
-            <div class="commentaires">
 
-                {% for commentaire in commentaires %}
-                <span>{{ commentaire.utilisateur.pseudo }}</span>
-                <div class="cmmentaireEtSupprimer">
-                    <span class="commentaire"> {{ commentaire }} </span>
-                    {% if commentaire.utilisateur == app.user %}
-                    <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i
-                            class="fa-solid fa-trash"></i></a>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
+        <div class="commentaires">
 
-            <div class="ecrireUnCommentaire">
-                {{form_start( formAddCommentaire) }}
-                {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})
-                }}
-                <span>
-                    {{form_row( formAddCommentaire.submit) }}
-                </span>
-                {{form_end( formAddCommentaire) }}
+            {% for commentaire in commentaires %}
+            <span>{{ commentaire.utilisateur.pseudo }}</span>
+            <div class="cmmentaireEtSupprimer">
+                <span class="commentaire"> {{ commentaire }} </span>
+                {% if commentaire.utilisateur == app.user %}
+                <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i class="fa-solid fa-trash"></i></a>
+                {% endif %}
             </div>
+            {% endfor %}
         </div>
 
-
+        <div class="ecrireUnCommentaire">
+            {{form_start( formAddCommentaire) }}
+            {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})
+            }}
+            <span>
+                {{form_row( formAddCommentaire.submit) }}
+            </span>
+            {{form_end( formAddCommentaire) }}
+        </div>
     </div>
 
-    {% endblock %}
+
+</div>
+
+{% endblock %}
