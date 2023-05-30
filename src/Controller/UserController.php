@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
 
-    
+
     /**
      * @Route("/user", name="app_user")
      */
@@ -38,10 +38,9 @@ class UserController extends AbstractController
 
         $evenementsAvenir = $e->findEvenementsAvenir();
 
-            return $this->render('user/admin.html.twig', [
-                'evenementsAvenir' => $evenementsAvenir
-            ]);
-        
+        return $this->render('user/admin.html.twig', [
+            'evenementsAvenir' => $evenementsAvenir
+        ]);
     }
 
 
@@ -50,101 +49,96 @@ class UserController extends AbstractController
      * @Route("/organisateur",name="app_oragnisateur")
      */
 
-     public function Organisateur(EvenementRepository $ev)
-     {
+    public function Organisateur(EvenementRepository $ev)
+    {
         $user = $this->getUser();
-        $evenements=$ev->findBy(["createur"=>$user]);
-            return $this->render('user/organisateur.html.twig', [
-            'user'=>$user,
-            'evenements'=>$evenements
-            ]);
-    
-     }
+        $evenements = $ev->findBy(["createur" => $user]);
+        return $this->render('user/organisateur.html.twig', [
+            'user' => $user,
+            'evenements' => $evenements
+        ]);
+    }
 
 
-   
-        
-        /**
-         * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
-         * @IsGranted("ROLE_ADMIN")
-         */
-        public function validateEvent(Evenement $evenement = null,ManagerRegistry $doctrine)
-        {
-            {
-               if($evenement) {
+
+
+    /**
+     * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function validateEvent(Evenement $evenement = null, ManagerRegistry $doctrine)
+    { {
+            if ($evenement) {
                 $evenement->setStatut('validé');
-                $entityManager=$doctrine->getManager();
-                $entityManager->flush() ;
-        
+                $entityManager = $doctrine->getManager();
+                $entityManager->flush();
+
                 return $this->redirectToRoute('app_categorie');
-
-               }
-
             }
-          
-
         }
+    }
 
     /**
      * @Route("/admin/evenement/{id}/refuse", name="admin_event_refuse")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function refuseEvent(Evenement $evenement,ManagerRegistry $doctrine)
+    public function refuseEvent(Evenement $evenement, ManagerRegistry $doctrine)
     {
         $evenement->setStatut('refusé');
-        $entityManager=$doctrine->getManager();
-        $entityManager->flush() ;
+        $entityManager = $doctrine->getManager();
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_evenement');
     }
 
-      /**
-      * @Route("/details/{id}",name="details_evenement")
-      */
-      public function detailsEvenement(ManagerRegistry $doctrine,Evenement $evenement=null,$id,Request $request)
-      {
+    /**
+     * @Route("/details/{id}",name="details_evenement")
+     */
+    public function detailsEvenement(ManagerRegistry $doctrine, Evenement $evenement = null, $id, Request $request)
+    {
 
-        
-      
-        $commentaire = new Commentaire ();
+
+
+
+        $commentaire = new Commentaire();
         $createur = $evenement->getCreateur();
-        $evenement=$doctrine->getRepository(Evenement::class)->findOneBy(['id'=>$id]) ;
-        $commentaires =$evenement->getCommentaires();
+        $evenement = $doctrine->getRepository(Evenement::class)->findOneBy(['id' => $id]);
+        $commentaires = $evenement->getCommentaires();
 
-        
-          $form = $this->createForm(CommentaireType::class, $commentaire);
-          $form->handleRequest($request);
 
-      
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
 
-      
-          
-          if ($form->isSubmitted() && $form->isValid()) {
-          
-      
-              $commentaire->setEvenement($evenement);
-              $commentaire->setUtilisateur($this->getUser());
-              $entityManager = $doctrine->getManager();
-              $entityManager->persist($commentaire);
-              $entityManager->flush();
-      
-              return $this->redirectToRoute('details_evenement',['id'=> $evenement->getId()
+
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->getUser()) {
+                $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
+                return $this->redirectToRoute('app_login');
+            }
+
+            $commentaire->setEvenement($evenement);
+            $commentaire->setUtilisateur($this->getUser());
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('details_evenement', [
+                'id' => $evenement->getId()
             ]);
-      
-           
-          }
-           
-    
-       
-         
-          return $this->render('evenement/details.html.twig',[
-              "evenement"=>$evenement,
-              "createur" => $createur,
-              "commentaires" =>$commentaires,
-              'formAddCommentaire'=>$form->createView()
-           
+        }
+
+
+
+
+        return $this->render('evenement/details.html.twig', [
+            "evenement" => $evenement,
+            "createur" => $createur,
+            "commentaires" => $commentaires,
+            'formAddCommentaire' => $form->createView()
+
         ]);
-
-      }
-
+    }
 }
