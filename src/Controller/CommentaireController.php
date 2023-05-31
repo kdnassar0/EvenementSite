@@ -18,7 +18,7 @@ class CommentaireController extends AbstractController
 
 
     /**
-     * @Route("/commentaire/{id}", name="supprimer_commentaire")
+     * @Route("/commentaire/supprimer/{id}", name="supprimer_commentaire")
      */
     public function supprimerCommentaire(ManagerRegistry $doctrine, Commentaire $commentaire = null)
     {

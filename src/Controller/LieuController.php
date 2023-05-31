@@ -105,25 +105,29 @@ class LieuController extends AbstractController
 
   /**
    *@Route("/lieu/{id}/supprimer", name="supprimer_lieu")
-   *@IsGranted("ROLE_ADMIN")
    */
 
-  public function supprimerLieu(Lieu $lieu = null, ManagerRegistry $doctrine, Filesystem $filesystem)
+  public function supprimerLieu(Lieu $lieu = null, ManagerRegistry $doctrine, Filesystem $filesystem,Security $security)
   {
-    if($lieu) {
-      $entityManager = $doctrine->getManager();
-      $entityManager->remove($lieu);
-      // Récupérer le chemin du fichier image de la salle à supprimer
-      $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
+    $isAdmin = $security->isGranted('ROLE_ADMIN');
 
-      // Supprimer le fichier image du lieu
-      $filesystem->remove($imagePath);
+    if ($isAdmin) {
+      if ($lieu) {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($lieu);
+        // Récupérer le chemin du fichier image de la salle à supprimer
+        $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
 
-      $entityManager->flush();
+        // Supprimer le fichier image du lieu
+        $filesystem->remove($imagePath);
 
-      return $this->redirectToRoute('app_lieu');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_lieu');
+      }
+
+      return $this->redirectToRoute('app_categorie');
     }
-
     return $this->redirectToRoute('app_categorie');
   }
 }

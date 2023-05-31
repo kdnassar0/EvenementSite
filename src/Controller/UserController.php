@@ -9,6 +9,7 @@ use App\Form\CommentaireType;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -64,25 +65,33 @@ class UserController extends AbstractController
 
     /**
      * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
-     * @IsGranted("ROLE_ADMIN")
      */
-    public function validateEvent(Evenement $evenement = null, ManagerRegistry $doctrine)
+    public function validateEvent(Evenement $evenement = null, ManagerRegistry $doctrine, Security $security, Request $request)
     {
-        if ($evenement) {
-            $evenement->setStatut('validé');
-            $entityManager = $doctrine->getManager();
-            $entityManager->flush();
 
+        $isAdmin = $security->isGranted('ROLE_ADMIN');
+        if ($isAdmin) {
+            if ($evenement) {
+                $evenement->setStatut('validé');
+                $entityManager = $doctrine->getManager();
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_categorie');
+            }
             return $this->redirectToRoute('app_categorie');
         }
+        return $this->redirectToRoute('app_categorie');
     }
+
+    //il faut faire la redection vers app_categorie quand on tape un evenement qui n'existe pas dans la route validate et refuse 
 
     /**
      * @Route("/admin/evenement/{id}/refuse", name="admin_event_refuse")
-     * @IsGranted("ROLE_ADMIN")
      */
-    public function refuseEvent(Evenement $evenement = null, ManagerRegistry $doctrine)
-    { {
+    public function refuseEvent(Evenement $evenement = null, ManagerRegistry $doctrine,Security $security)
+    {
+        $isAdmin = $security->isGranted('ROLE_ADMIN');
+        if ($isAdmin) {
             if ($evenement) {
                 $evenement->setStatut('refusé');
                 $entityManager = $doctrine->getManager();
@@ -90,12 +99,14 @@ class UserController extends AbstractController
 
                 return $this->redirectToRoute('app_categorie');
             }
+            return $this->redirectToRoute('app_categorie');
         }
+        return $this->redirectToRoute('app_categorie');
     }
 
     /**
      * @Route("/details/{id}",name="details_evenement")
-     * @Route("/add/commantaire/id",name="add_commantaire")
+     * @Route("/add/commentaire/id",name="add_commantaire")
      */
     public function detailsEvenement(ManagerRegistry $doctrine, Evenement $evenement = null, $id, Request $request)
     {
@@ -147,6 +158,6 @@ class UserController extends AbstractController
 
             ]);
         }
-        return $this->redirectToRoute('app_categorie') ;
+        return $this->redirectToRoute('app_categorie');
     }
 }
