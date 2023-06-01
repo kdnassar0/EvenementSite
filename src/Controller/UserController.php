@@ -42,64 +42,61 @@ class UserController extends AbstractController
 
     public function detailsEvenement(
         ManagerRegistry $doctrine,
-        Evenement $evenement,
+        Evenement $evenement =null  ,
         Request $request,
-        Commentaire $commentaire =null,
-        CommentaireRepository $co
+        Commentaire $commentaire = null
     ) {
 
 
-  
-          
+        if ($evenement) {
+
             if (!$commentaire) {
                 $commentaire = new Commentaire();
             } else {
                 $commentaires = $commentaire;
             }
-        
-          
-        
+
+            $createur = $evenement->getCreateur();
+            $commentaires = $evenement->getCommentaires();
+
+            $form = $this->createForm(CommentaireType::class, $commentaire);
+            $form->handleRequest($request);
+
+            
+                if ($commentaire->getUtilisateur() == $this->getUser()) {
+                }
+
+                if ($form->isSubmitted() && $form->isValid()) {
+
+                    if (!$this->getUser()) {
+                        $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
+                        return $this->redirectToRoute('app_login');
+                    }
+
+                    $commentaire->setEvenement($evenement);
+                    $commentaire->setUtilisateur($this->getUser());
+                    $entityManager = $doctrine->getManager();
+                    $entityManager->persist($commentaire);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('details_evenement', [
+                        'idEvent' => $evenement->getId()
+                    ]);
+                }
 
 
 
 
-        $createur = $evenement->getCreateur();
-        $commentaires = $evenement->getCommentaires();
+                return $this->render('evenement/details.html.twig', [
+                    "evenement" => $evenement,
+                    "createur" => $createur,
+                    "commentaires" => $commentaires,
+                    'formAddCommentaire' => $form->createView(),
 
-        $form = $this->createForm(CommentaireType::class, $commentaire);
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            if (!$this->getUser()) {
-                $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
-                return $this->redirectToRoute('app_login');
+                ]);
             }
-
-            $commentaire->setEvenement($evenement);
-            $commentaire->setUtilisateur($this->getUser());
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($commentaire);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('details_evenement', [
-                'idEvent' => $evenement->getId()
-            ]);
-        }
-
+            return $this->redirectToRoute('app_categorie');
     
-
-
-
-
-        return $this->render('evenement/details.html.twig', [
-            "evenement" => $evenement,
-            "createur" => $createur,
-            "commentaires" => $commentaires,
-            'formAddCommentaire' => $form->createView(),
-
-        ]);
     }
 
     /**
