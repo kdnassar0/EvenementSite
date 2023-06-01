@@ -3,105 +3,75 @@
 
 {% block body %}
 
-<div class="containerPageDetails">
 
-    <div class="elementsNav">
-        <div class="logo">LOGO</div>
-        <nav>
-            <ul class="ul1">
-                <a href="{{ path ('app_categorie')}}">
-                    <li>Accueil</li>
-                </a>
 
-                <a href=" {{ path ('app_lieu') }}">
-                    <li>Lieu</li>
-                </a>
-                <a href="{{ path ('add_evenement') }}">
-                    <li>Organiser</li>
-                </a>
-                <a href="{{ path ('app_oragnisateur') }}">
-                    <li>Profil</li>
-                </a>
-                <a href="#">
-                    <li>contact</li>
-                </a>
-            </ul>
-        </nav>
 
-        <div class="search">
-            <a href="{{ path ('app_admin') }}">
-                <li>Admin</li>
-            </a>
-            <a href="{{ path('app_logout') }}">
-                <li>logout</li>
-            </a>
-        </div>
+
+
+<div class="containerEelmentsDetails">
+    <div class="titleEvenement">
+        <h1>{{ evenement.nom }}</h1>
+    </div>
+    <div class="disreption">
+        <img src="{{asset ('images/evenement/'~ evenement.image) }}" alt="">
+
+        <span>{{ evenement.description }} </span>
     </div>
 
-
-
-
-
-    <div class="containerEelmentsDetails">
-        <div class="titleEvenement">
-            <h1>{{ evenement.nom }}</h1>
-        </div>
-        <div class="disreption">
-            <img src="{{asset ('images/evenement/'~ evenement.image) }}" alt="">
-            
-            <span>{{ evenement.description }} </span>
-        </div>
-
-        <div class="info">
-            <strong>Référence : {{ createur.email }}</strong>
-            <strong> du : {{ evenement.dateDebut | date('y-m-d H:i') }}</strong>
-            <strong> au : {{ evenement.dateFin | date('y-m-d H:i') }} </strong>
-        </div>
+    <div class="info">
+        <strong>Référence : {{ createur.email }}</strong>
+        <strong> du : {{ evenement.dateDebut | date('y-m-d H:i') }}</strong>
+        <strong> au : {{ evenement.dateFin | date('y-m-d H:i') }} </strong>
     </div>
-    {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
+</div>
+
+
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+{% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
     {% for participant in evenement.participant %}
         {% if participant.id == app.user.id %}
-            {% set link = 'vous etes inscrits' %}
+        {% set link = 'vous etes inscrits' %}
         {% endif %}
     {% endfor %}
-    
-    {{ link | raw}}
-    <div class="espaceCommentaire">
+{% else %}
+{% set link =  'pour participer <a href="' ~ path('app_login') ~ '">Connectez-vous</a>' %}
+{% endif %}
+{{ link | raw}}
 
 
+<div class="espaceCommentaire">
+    <strong>Laissez un commentaire :</strong>
+    {% for message in app.flashes('success') %}
+    {{ message }}
+    {% endfor %}
 
+    <div class="commentaires">
 
-
-        <strong>Laissez un commentaire :</strong>
-
-        {% for message in app.flashes('success') %}
-        {{ message }}
+        {% for commentaire in commentaires %}
+        <span>{{ commentaire.utilisateur.pseudo }}</span>
+        <div class="cmmentaireEtSupprimer">
+            <span class="commentaire"> {{ commentaire }} </span>
+            {% if commentaire.utilisateur == app.user %}
+            <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i class="fa-solid fa-trash"></i></a>
+            <a
+                href="{{ path('edit_commentaire',{'idEvent':commentaire.evenement.id ,'idCommentaire':commentaire.id})}}"><i
+                    class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+            {% endif %}
+        </div>
         {% endfor %}
-
-        <div class="commentaires">
-
-            {% for commentaire in commentaires %}
-            <span>{{ commentaire.utilisateur.pseudo }}</span>
-            <div class="cmmentaireEtSupprimer">
-                <span class="commentaire"> {{ commentaire }} </span>
-                {% if commentaire.utilisateur == app.user %}
-                <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i class="fa-solid fa-trash"></i></a>
-                <a href="{{ path('edit_commentaire',{'idEvent':commentaire.evenement.id ,'idCommentaire':commentaire.id})}}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-
-        <div class="ecrireUnCommentaire">
-            {{form_start( formAddCommentaire) }}
-            {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})
-            }}
-            <span>
-                {{form_row( formAddCommentaire.submit) }}
-            </span>
-            {{form_end( formAddCommentaire) }}
-        </div>
     </div>
+
+    <div class="ecrireUnCommentaire">
+        {{form_start( formAddCommentaire) }}
+        {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})
+        }}
+        <span>
+            {{form_row( formAddCommentaire.submit) }}
+        </span>
+        {{form_end( formAddCommentaire) }}
+    </div>
+</div>
 
 
 </div>
