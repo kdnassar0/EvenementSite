@@ -66,7 +66,7 @@
             {{ evenementsEncours.nom }}
 
 
-            <a href=" {{ path('details_evenement',{'id':evenementsEncours.id}) }}"><img
+            <a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}"><img
                     src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
 
             {{evenementsEncours.dateDebut | date('y-m-d H:i') }}
@@ -92,7 +92,7 @@
 
         <div class="evenementCarte">
             {{ evenementPassee.nom }}
-            <a href=" {{ path('details_evenement',{'id':evenementPassee.id}) }}"><img
+            <a href=" {{ path('details_evenement',{'idEvent':evenementPassee.id}) }}"><img
                     src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
 
             {{evenementPassee.dateFin | date('y-m-d H:i') }}

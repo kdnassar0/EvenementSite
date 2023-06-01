@@ -107,7 +107,7 @@ class LieuController extends AbstractController
    *@Route("/lieu/{id}/supprimer", name="supprimer_lieu")
    */
 
-  public function supprimerLieu(Lieu $lieu = null, ManagerRegistry $doctrine, Filesystem $filesystem,Security $security)
+  public function supprimerLieu(Lieu $lieu = null, ManagerRegistry $doctrine, Filesystem $filesystem, Security $security)
   {
     $isAdmin = $security->isGranted('ROLE_ADMIN');
 

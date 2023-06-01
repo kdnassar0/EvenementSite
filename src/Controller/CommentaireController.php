@@ -32,7 +32,7 @@ class CommentaireController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Le commentaire a été supprimé avec succès.');
-                return $this->redirectToRoute('details_evenement', ['id' => $evenementId]);
+                return $this->redirectToRoute('details_evenement', ['idEvent' => $evenementId]);
             }
         }
         $this->addFlash(

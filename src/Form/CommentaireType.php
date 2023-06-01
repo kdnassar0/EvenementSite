@@ -17,7 +17,9 @@ class CommentaireType extends AbstractType
     {
         $builder
             ->add('text',TextareaType::class)
-            ->add('evenement',HiddenType::class)
+            ->add('evenement',HiddenType::class,[
+               'mapped'=>false
+            ])
             // ->add('utilisateur',TextType::class)
             ->add('submit',SubmitType::class)
         ;

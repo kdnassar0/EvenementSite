@@ -7,6 +7,7 @@ use App\Entity\Evenement;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\EvenementRepository;
+use App\Repository\CommentaireRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class UserController extends AbstractController
 {
@@ -29,6 +31,76 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', []);
     }
 
+
+
+    /**
+     * @Route("/details/{idEvent}", name="details_evenement")
+     * @Route("/edit/commentaire/{idEvent}/{idCommentaire}", name="edit_commentaire")
+     * @ParamConverter("evenement", options={"mapping": {"idEvent" : "id"}})
+     * @ParamConverter("commentaire",options={"mapping":{"idCommentaire" : "id"}})
+     */
+
+    public function detailsEvenement(
+        ManagerRegistry $doctrine,
+        Evenement $evenement,
+        Request $request,
+        Commentaire $commentaire =null,
+        CommentaireRepository $co
+    ) {
+
+
+  
+          
+            if (!$commentaire) {
+                $commentaire = new Commentaire();
+            } else {
+                $commentaires = $commentaire;
+            }
+        
+          
+        
+
+
+
+
+        $createur = $evenement->getCreateur();
+        $commentaires = $evenement->getCommentaires();
+
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!$this->getUser()) {
+                $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
+                return $this->redirectToRoute('app_login');
+            }
+
+            $commentaire->setEvenement($evenement);
+            $commentaire->setUtilisateur($this->getUser());
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('details_evenement', [
+                'idEvent' => $evenement->getId()
+            ]);
+        }
+
+    
+
+
+
+
+        return $this->render('evenement/details.html.twig', [
+            "evenement" => $evenement,
+            "createur" => $createur,
+            "commentaires" => $commentaires,
+            'formAddCommentaire' => $form->createView(),
+
+        ]);
+    }
 
     /**
      * @ROute("/Adminn", name = "app_admin")
@@ -66,7 +138,7 @@ class UserController extends AbstractController
     /**
      * @Route("/admin/evenement/{id}/validate", name="admin_event_validate")
      */
-    public function validateEvent(Evenement $evenement = null, ManagerRegistry $doctrine, Security $security, Request $request)
+    public function validateEvent(Evenement $evenement = null, ManagerRegistry $doctrine, Security $security)
     {
 
         $isAdmin = $security->isGranted('ROLE_ADMIN');
@@ -83,12 +155,11 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_categorie');
     }
 
-    //il faut faire la redection vers app_categorie quand on tape un evenement qui n'existe pas dans la route validate et refuse 
 
     /**
      * @Route("/admin/evenement/{id}/refuse", name="admin_event_refuse")
      */
-    public function refuseEvent(Evenement $evenement = null, ManagerRegistry $doctrine,Security $security)
+    public function refuseEvent(Evenement $evenement = null, ManagerRegistry $doctrine, Security $security)
     {
         $isAdmin = $security->isGranted('ROLE_ADMIN');
         if ($isAdmin) {
@@ -100,63 +171,6 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('app_categorie');
             }
             return $this->redirectToRoute('app_categorie');
-        }
-        return $this->redirectToRoute('app_categorie');
-    }
-
-    /**
-     * @Route("/details/{id}",name="details_evenement")
-     * @Route("/add/commentaire/id",name="add_commantaire")
-     */
-    public function detailsEvenement(ManagerRegistry $doctrine, Evenement $evenement = null, $id, Request $request)
-    {
-
-
-
-        if ($evenement) {
-
-
-            $commentaire = new Commentaire();
-            $createur = $evenement->getCreateur();
-            $evenement = $doctrine->getRepository(Evenement::class)->findOneBy(['id' => $id]);
-            $commentaires = $evenement->getCommentaires();
-
-
-            $form = $this->createForm(CommentaireType::class, $commentaire);
-            $form->handleRequest($request);
-
-
-
-
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                if (!$this->getUser()) {
-                    $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
-                    return $this->redirectToRoute('app_login');
-                }
-
-                $commentaire->setEvenement($evenement);
-                $commentaire->setUtilisateur($this->getUser());
-                $entityManager = $doctrine->getManager();
-                $entityManager->persist($commentaire);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('details_evenement', [
-                    'id' => $evenement->getId()
-                ]);
-            }
-
-
-
-
-
-            return $this->render('evenement/details.html.twig', [
-                "evenement" => $evenement,
-                "createur" => $createur,
-                "commentaires" => $commentaires,
-                'formAddCommentaire' => $form->createView()
-
-            ]);
         }
         return $this->redirectToRoute('app_categorie');
     }

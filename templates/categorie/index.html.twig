@@ -100,7 +100,7 @@
   {% for evenementAvenir in evenementsAvenir %}
   {% if evenementAvenir.statut == 'validé' %}
   <div class="evenement">
-    <a href="{{ path('details_evenement',{'id':evenementAvenir.id}) }}">
+    <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
       <img src="{{ asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
     </a>
     <h1>{{ evenementAvenir.nom }}</h1>
@@ -113,7 +113,7 @@
 
       
    
-      <a href="{{ path('details_evenement',{'id':evenementAvenir.id}) }}">participer</a>
+      <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">participer</a>
      
       
   

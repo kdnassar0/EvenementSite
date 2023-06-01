@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
-use App\Entity\Evenement;
-use App\Entity\Commentaire;
 use App\Form\CategorieType;
-use App\Form\CommentaireType;
 use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -101,7 +98,7 @@ class CategorieController extends AbstractController
 
 
     /**
-     * @Route("/categorie/{id}/suprimmer", name="supprimer_categorie")
+     * @Route("/categorie/{id}/supprimer", name="supprimer_categorie")
      * @IsGranted("ROLE_ADMIN")
      */
 
