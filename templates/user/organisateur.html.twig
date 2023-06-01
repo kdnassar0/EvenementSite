@@ -7,12 +7,16 @@
 {{ user }}
 
 {% for evenement in evenements %}
-    {{ evenement.nom }}
-   <a href="{{ path ('details_evenement',{'id':evenement.id}) }}"><img src="{{ evenement.image }}" alt=""></a>
+{{ evenement.nom }}
 
-
-   
+<a href="{{ path ('details_evenement',{'idEvent':evenement.id}) }}"><img
+        src="{{asset ('images/evenement/'~ evenement.image) }}" alt=""></a>
+{% for participant in evenement.participant %}
+{{ participant.pseudo }}
+{{ participant.email }}
 {% endfor %}
+{% endfor %}
+
 
 
 

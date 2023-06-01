@@ -125,7 +125,7 @@ class UserController extends AbstractController
         $evenements = $ev->findBy(["createur" => $user]);
         return $this->render('user/organisateur.html.twig', [
             'user' => $user,
-            'evenements' => $evenements
+            'evenements' => $evenements,
         ]);
     }
 
