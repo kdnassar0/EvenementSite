@@ -3,13 +3,15 @@
 namespace App\Controller;
 
 
+use App\Entity\Lieu;
 use App\Entity\User;
 use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\LieuRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Form\FormError;
 use App\Repository\EvenementRepository;
-use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +68,9 @@ class EvenementController extends AbstractController
       return $this->redirectToRoute('app_login');
     }
 
-
+    $lieu = $doctrine->getRepository(Lieu::class)->findAll();
+   
+    $lieu[0]->getCapacity();
 
     $form = $this->createForm(EvenementType::class, $evenement);
 
@@ -87,9 +91,21 @@ class EvenementController extends AbstractController
           $file = $form->get('image')->getData();
           $dateDebut = $form->get('date_debut')->getData();
           $dateAujourdhui = new \DateTime();
+
+          $nbDesPlaces = $form->get('nb_des_places')->getData();
+         
+       
+
+          // var_dump($capacity);die;
+     
+
           if ($dateDebut < $dateAujourdhui) {
             $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
-          } else {
+          }elseif($nbDesPlaces > $lieu[0]->getCapacity()){
+            $form->get('nb_des_places')->addError(new FormError('Le nombre de places est supérieur à la capacité de notre lieu.'));
+             
+          }
+           else {
             if ($file) {
               $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
               // this is needed to safely include the file name as part of the URL

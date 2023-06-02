@@ -85,14 +85,15 @@ class Evenement
     private $commentaires;
 
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-
      /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="evenement")
+     */
+    private $lieu;
 
 
 
@@ -307,6 +308,18 @@ class Evenement
     {
       return  $this->nom ." ".$this->date_fin ." ".$this->date_debut." ".$this->nb_des_places ." ".$this->prix ." ".$this->description ." ".
         $this->image ; 
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
     }
 
  

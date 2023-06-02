@@ -56,6 +56,16 @@ class Lieu
      */
     private $imageSalle;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="lieu")
+     */
+    private $evenement;
+
+    public function __construct()
+    {
+        $this->evenement = new ArrayCollection();
+    }
+
     
 
  
@@ -160,6 +170,36 @@ class Lieu
     public function setImageSalle(string $imageSalle): self
     {
         $this->imageSalle = $imageSalle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evenement>
+     */
+    public function getEvenement(): Collection
+    {
+        return $this->evenement;
+    }
+
+    public function addEvenement(Evenement $evenement): self
+    {
+        if (!$this->evenement->contains($evenement)) {
+            $this->evenement[] = $evenement;
+            $evenement->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        if ($this->evenement->removeElement($evenement)) {
+            // set the owning side to null (unless already changed)
+            if ($evenement->getLieu() === $this) {
+                $evenement->setLieu(null);
+            }
+        }
 
         return $this;
     }
