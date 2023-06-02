@@ -84,10 +84,6 @@ class Evenement
      */
     private $commentaires;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="evenements")
-     */
-    private $salles;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -104,7 +100,7 @@ class Evenement
     {
         $this->participants = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
-        $this->salles = new ArrayCollection();
+       
     
     }
 
@@ -313,34 +309,7 @@ class Evenement
         $this->image ; 
     }
 
-    /**
-     * @return Collection<int, Salle>
-     */
-    public function getSalles(): Collection
-    {
-        return $this->salles;
-    }
-
-    public function addSalle(Salle $salle): self
-    {
-        if (!$this->salles->contains($salle)) {
-            $this->salles[] = $salle;
-            $salle->addEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        if ($this->salles->removeElement($salle)) {
-            $salle->removeEvenement($this);
-        }
-
-        return $this;
-    }
-
-
+ 
 
 
 }
