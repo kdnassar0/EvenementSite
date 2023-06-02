@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Security;
 
+
 class LieuController extends AbstractController
 {
 
@@ -56,23 +57,17 @@ class LieuController extends AbstractController
       if ($form->isSubmitted() && $form->isValid()) {
 
         $file = $form->get('image')->getData();
+        $imageSalle = $form->get('imageSalle')->getData();
         if ($file) {
           $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
           // this is needed to safely include the file name as part of the URL
           $safeFilename = $slugger->slug($originalFilename);
           $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
           //si les condition sont juste il va recuperer la data 
-
           $lieu = $form->getData();
           $lieu->setImage($newFilename);
 
-
-
-          //on a basoin doctrine pour communiquer avec la base donnees
-
-          $entityManager = $doctrine->getManager();
-          $entityManager->persist($lieu);
-          $entityManager->flush();
+      
           try {
             $file->move(
               $this->getParameter('lieu_directory'),
@@ -80,10 +75,34 @@ class LieuController extends AbstractController
             );
           } catch (FileException $e) {
           }
+        }
+        if ($imageSalle) {
+          $originalFilename = pathinfo($imageSalle->getClientOriginalName(), PATHINFO_FILENAME);
+          // this is needed to safely include the file name as part of the URL
+          $safeFilename = $slugger->slug($originalFilename);
+          $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageSalle->guessExtension();
+          //si les condition sont juste il va recuperer la data 
+          $lieu = $form->getData();
+          $lieu->setImageSalle($newFilename);
+
+          //on a basoin doctrine pour communiquer avec la base donnees
+
+         
+          try {
+            $imageSalle->move(
+              $this->getParameter('lieu_directory'),
+              $newFilename
+            );
+          } catch (FileException $e) {
+          }
+        }
+          $entityManager = $doctrine->getManager();
+          $entityManager->persist($lieu);
+          $entityManager->flush();
 
 
           return $this->redirectToRoute('app_lieu');
-        }
+        
       }
 
 
@@ -117,6 +136,7 @@ class LieuController extends AbstractController
         $entityManager->remove($lieu);
         // Récupérer le chemin du fichier image de la salle à supprimer
         $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImage();
+        $imagePath = $this->getParameter('lieu_directory') . '/' . $lieu->getImageSalle();
 
         // Supprimer le fichier image du lieu
         $filesystem->remove($imagePath);

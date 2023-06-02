@@ -30,11 +30,6 @@ class Lieu
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_creation;
-
-    /**
      * @ORM\Column(type="string", length=50)
      */
     private $ville;
@@ -50,6 +45,16 @@ class Lieu
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capacity;
+
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $imageSalle;
 
     
 
@@ -83,17 +88,6 @@ class Lieu
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->date_creation;
-    }
-
-    public function setDateCreation(\DateTimeInterface $date_creation): self
-    {
-        $this->date_creation = $date_creation;
-
-        return $this;
-    }
 
     public function getVille(): ?string
     {
@@ -144,6 +138,30 @@ class Lieu
     public function __toString()
     {
       return  $this->adress ." ".$this->nom ." ".$this->description ." ".$this->ville ;
+    }
+
+    public function getCapacity(): ?int
+    {
+        return $this->capacity;
+    }
+
+    public function setCapacity(int $capacity): self
+    {
+        $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    public function getImageSalle(): ?string
+    {
+        return $this->imageSalle;
+    }
+
+    public function setImageSalle(string $imageSalle): self
+    {
+        $this->imageSalle = $imageSalle;
+
+        return $this;
     }
 
 }
