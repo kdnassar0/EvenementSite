@@ -4,17 +4,6 @@
 
 {% block body %}
 
-
-
-
-
-
-
-
-
-
-
-
     <div class="containerCategorie">
       <div class="presentationCategorie">
 
@@ -65,12 +54,7 @@
           {% if evenementAvenir.createur == app.user %}
           <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}"><i class="fa-solid fa-trash"></i></a>
           {% endif %}
-
-
-
-<a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">participer</a>
-
-
+          <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">participer</a>
         </div>
 
       </div>

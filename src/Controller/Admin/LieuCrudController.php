@@ -21,10 +21,13 @@ class LieuCrudController extends AbstractCrudController
         return [
             yield Field::new('nom'),
             yield Field::new('description'),
-            yield Field::new ('date_creation'),
             yield Field::new ('ville'),
             yield Field::new ('adress'),
             yield ImageField::new('image')
+            ->setBasePath('public/images/lieu')
+        ->setUploadDir('public/images/lieu'),
+
+            yield ImageField::new('imageSalle')
             ->setBasePath('public/images/lieu')
         ->setUploadDir('public/images/lieu')];
 

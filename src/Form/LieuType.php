@@ -33,9 +33,12 @@ class LieuType extends AbstractType
                         ],
                         'mimeTypesMessage'=>'Please upload a valid image',
                     ])
-                ]
+                    ],
+                'required' => false,
+                'data_class' => null,
             ])
             ->add('imageSalle',FileType::class, [
+                'data_class'=>null,
                 'constraints' => [
                     new File ([
                         'maxSize'=>'1024k',
@@ -45,8 +48,12 @@ class LieuType extends AbstractType
                             'image/png'
                         ],
                         'mimeTypesMessage'=>'Please upload a valid image',
+                        
                     ])
-                ]
+                    
+                    ],
+                'required' => false,
+                'data_class' => null,
             ])
 
             ->add('submit',SubmitType::class,['label'=>'Ajouter'])
