@@ -11,12 +11,13 @@
         {% for lieu in lieus %}
 
         <h1>{{ lieu.nom }}</h1>
-        Date de creation : {{ lieu.dateCreation | date('d/m/y') }} <br>
         Ville : {{ lieu.ville }}
         <h2> Adresse : {{ lieu.adress}} </h2>
+        <h2> capacity: {{ lieu.capacity}} </h2>
         <div class="textEtImage">
             <div class="description"> {{ lieu.description }} </div>
             <img src=" {{asset('images/lieu/'~ lieu.image) }}" alt="">
+            <img src=" {{asset('images/lieu/'~ lieu.imageSalle) }}" alt="">
 
         </div>
 
