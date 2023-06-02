@@ -25,20 +25,23 @@
     </div>
 </div>
 
-
-{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-
+{% if evenement.participant |length == evenement.nbDesPlaces %}
+    
+ {% set link = 'complete' %} 
+ 
+{% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
     {% for participant in evenement.participant %}
         {% if participant.id == app.user.id %}
-        {% set link = 'vous etes inscrits' %}
+          {% set link = 'vous etes inscrits' %}
         {% endif %}
     {% endfor %}
 {% else %}
-{% set link =  'pour participer <a href="' ~ path('app_login') ~ '">Connectez-vous</a>' %}
+  {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
 {% endif %}
-{{ link | raw}}
 
+
+{{ link | raw}}
 
 <div class="espaceCommentaire">
     <strong>Laissez un commentaire :</strong>
