@@ -64,13 +64,16 @@ class EvenementRepository extends ServiceEntityRepository
     {
 
         // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
-        $now = new \DateTime() ; 
+        $now = new DateTime('Europe/paris');
+        $statut ='validé';
         // on fait createquerybuilder
         return $this->createQueryBuilder('e')
         // on fait une condition 
         ->andWhere('e.date_debut > :val')
+        ->andWhere('e.statut =:statut')
         // on met les paramettre
         ->setParameter('val',$now)
+        ->setParameter('statut',$statut)
         ->orderBy('e.date_debut','ASC')
         ->getQuery()
         ->getResult() ;

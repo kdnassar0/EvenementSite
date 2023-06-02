@@ -37,19 +37,15 @@ class EvenementController extends AbstractController
 
     $evenementsPassees = $e->findEvenementsPasseesParCategorie($categorie->getId());
     $evenementsEncours = $e->findEvenementsEncoursParCategorie($categorie->getId());
-    $evenemetImges = $e->findAll();
 
-    $images = [];
-    foreach ($evenemetImges as $image) {
-      $images[] = $image->getImage();
-    }
 
+ 
 
 
     return $this->render('evenement/index.html.twig', [
       'evenementsPassees' => $evenementsPassees,
-      'evenementsEncours' => $evenementsEncours,
-      'images' => $images
+      'evenementsEncours' => $evenementsEncours
+    
     ]);
   }
 

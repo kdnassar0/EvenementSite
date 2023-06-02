@@ -9,7 +9,14 @@ function showSlide(slideIndex) {
     slideIndex = 0;
   }
 
-  slider.style.transform = 'translateX(-' + slideIndex * (100 / 3) + '%)'; /* Ajustement de la valeur du décalage */
+  slider.style.transform = 'translateX(-' + slideIndex * 100 + '%)';
+  currentSlide = slideIndex;
+  // Ajoute la classe 'active' à la diapositive actuelle et supprime la classe 'active' des autres diapositives
+  slides.forEach(function(slide) {
+    slide.classList.remove('active');
+  });
+  slides[slideIndex].classList.add('active');
+
   currentSlide = slideIndex;
 }
 
@@ -24,11 +31,10 @@ function nextSlide() {
 function startSlider() {
   setInterval(function() {
     nextSlide();
-  }, 3000); // Défilement automatique toutes les 3 secondes (ajustez la valeur selon vos besoins)
+  }, 5000); // Défilement automatique toutes les 3 secondes (ajustez la valeur selon vos besoins)
 }
 
-// Exécute startSlider() après le chargement du document
 document.addEventListener('DOMContentLoaded', function() {
   showSlide(0); // Affiche la première image dès le chargement
-  startSlider();
+  startSlider(); // Démarre le défilement automatique
 });

@@ -24,9 +24,9 @@
 
 
 
-<div class="containerPage1">
+<div class="logo">LOGO</div>
     <div class="elementsNav">
-      <div class="logo">LOGO</div>
+      
       <nav>
         <ul class="ul1">
           <a href="{{ path ('app_categorie')}}">
@@ -47,7 +47,7 @@
       </nav>
   
       <div class="search">
-  
+
         {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_admin') }}">
           <li>Admin</li>
@@ -64,23 +64,6 @@
   
       </div>
     </div>
-    {% if app.user %}
-    <div class="text1">Partageons nos événements <br> et ouvrons les murs
-      <div class="elementText1">
-        {% else %}
-        <div class="text1">Partageons nos événements <br> et ouvrons les murs
-          <div class="elementText1">
-            <a href="{{ path('app_register') }}">
-              <li>s'inscrire - </li>
-            </a>
-            <a href="{{ path('app_login') }}">
-              <li> se connecter</li>
-            </a>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-
 <body> 
       
     {% block body %}

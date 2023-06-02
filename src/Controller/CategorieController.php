@@ -31,6 +31,12 @@ class CategorieController extends AbstractController
 
         $evenementsAvenir = $e->findEvenementsAvenir();
         $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
+        $evenemetImges = $e->findEvenements();
+        $images = [];
+        foreach ($evenemetImges as $image) {
+          $images[] = $image->getImage();
+        }
+    
 
         $isAdmin = $security->isGranted('ROLE_ADMIN');
 
@@ -88,6 +94,7 @@ class CategorieController extends AbstractController
             'categories' => $categories,
             'evenementsAvenir' => $evenementsAvenir,
             'formAddCategorie' => null,
+            'images' => $images
         ]);
     }
 

@@ -4,6 +4,47 @@
 
 {% block body %}
 
+
+
+{# {% if app.user %}
+<div class="text1">Partageons nos événements <br> et ouvrons les murs
+  <div class="elementText1">
+    {% else %}
+    <div class="text1">Partageons nos événements <br> et ouvrons les murs
+      <div class="elementText1">
+        <a href="{{ path('app_register') }}">
+          <li>s'inscrire - </li>
+        </a>
+        <a href="{{ path('app_login') }}">
+          <li> se connecter</li>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div> #}
+
+<div class="containerSlider">
+  <div class="imagesSlide">
+      <div class="slider">
+          <div class="slide active">
+              <img src="{{asset('images/evenement/'~ images[0]) }}" alt="">
+          </div>
+          {% for image in images[1:] %}
+          <div class="slide">
+              <img src="{{asset('images/evenement/'~ image) }}" alt="">
+          </div>
+          {% endfor %}
+        </div>
+       
+        <div class="sliderButtons">
+          <button class="prevButton" onclick="previousSlide()">&#10094;</button>
+          <button class="nextButton" onclick="nextSlide()">&#10095;</button>
+        </div>
+  </div>
+
+</div>
+
     <div class="containerCategorie">
       <div class="presentationCategorie">
 

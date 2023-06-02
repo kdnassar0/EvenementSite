@@ -16,24 +16,7 @@ body {
 
 
 
-/*---------page1---------*/
 
-.containerPage1 {
-    width: 100%;
-    height: 100vh;
-    background-image: url('/images/home page-01.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-
-
-
-
-
-}
 
 
 
@@ -41,15 +24,11 @@ body {
 
 .elementsNav {
     display: flex;
-    gap: 200px;
     flex-direction: row;
-    width: 100%;
+    width: 80%;
     text-align: center;
-    justify-content: center;
-    margin-top: 50px;
-
-
-
+    justify-content: space-between;
+    margin-top: 100px;
 }
 
 
@@ -58,15 +37,16 @@ nav ul {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 50px;
+    gap: 40px;
 
 }
 
 
 nav li {
-    list-style: none;
+    /* list-style: none; */
     color: white;
-    font-size: 24px;
+    font-size: 22px;
+    color: #212121;
 }
 
 nav ul a {
@@ -893,57 +873,75 @@ div .champSalle .required {
 
 .containerSlider {
     width: 100%;
-    height: 60vh;
-    background-image: url('https://i.pinimg.com/originals/38/7f/77/387f773b755c6469e43c39e665b11c99.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 50px;
-
-
-}
-
-.imagesSlide {
-    width: 80%;
+    position: relative;
+ 
+   
+  }
+  
+  .imagesSlide {
+    width: 75%;
     overflow: hidden;
     display: flex;
-    padding: 20px;
-    justify-content: center;
-    border: 1px solid;
-    border-radius: 10px;
-    border-color: #F2884B;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-
-}
-
-
-
-.slider {
+    align-items: flex-start;
+    
+  }
+  
+  .slider {
     display: flex;
     transition: transform 0.3s ease-in-out;
     margin-left: 0;
-    /* Ajout d'une marge pour l'espacement entre les images */
+    
 }
 
 .slide {
-    flex: 0 0 calc(100% / 3);
-    /* Ajustement de la largeur des slides pour afficher 3 images */
-
-
-
+    flex: 0 0 100%;
+    
 }
-
-
 
 .slide img {
-    width: 100%;
-    height: auto;
+   
+    width: 80%;
+    height: 500px;
     border-radius: 10px;
     padding: 20px;
+    display: block;
+    margin: 0 auto;
+    filter: grayscale(100%);
+  
+  }
 
-}
+  .slide img:hover {
+  filter: none;
+
+  }
+
+
+  .sliderButtons {
+ top: 30px;
+ left: 140px;
+  
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .sliderButtons button {
+    background-color: #1c110abd;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    font-size: 20px;
+    cursor: pointer;
+   
+  }
+  
+  .sliderButtons button:hover {
+    background-color: #e07d406e;
+  }
+  
+  
 
 
 /*-------------------fin slider----------------- */
