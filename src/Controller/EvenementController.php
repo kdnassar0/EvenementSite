@@ -129,7 +129,7 @@ class EvenementController extends AbstractController
             } catch (FileException $e) {
             }
 
-
+          
             return $this->redirectToRoute('app_categorie');
           }
         }
