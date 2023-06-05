@@ -2,7 +2,7 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family:Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
 }
 
 body {
@@ -38,35 +38,35 @@ nav ul {
     justify-content: center;
     flex-direction: row;
     gap: 70px;
- 
+
 
 }
 
 
 nav li {
-    
-   
-   
     color: #212121;
-    font-family: Martian Mono SemiExpanded Light ;
+    font-family: Martian Mono SemiExpanded Light;
     font-size: 24px;
 }
-.search li{
-     
-   
+
+.search li {
+
+
     color: #212121;
-    font-family: Martian Mono SemiExpanded Light ;
+    font-family: Martian Mono SemiExpanded Light;
     font-size: 24px;
     list-style: none;
 
 }
+
 .search {
-     display: flex;
-     gap: 10px;
-     flex-direction: column;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 
 
 }
+
 .search a {
     text-decoration: none;
 }
@@ -74,58 +74,6 @@ nav li {
 nav ul a {
     text-decoration: none;
 }
-
-
-.text1 {
-    background-color: #092C4C;
-    width: 225px;
-    height: 320px;
-    position: absolute;
-   right: 270px;
-   top: 80px;
-   border-radius: 220px;
-
-
-}
-.text1 span {
-position: absolute;
- top: 90px;
- padding: 5px;
- left: 30px;
- font-size: 18px;
- font-family: Helvetica;
- color: #F6F9FC;
-}
-.text1 .elementText1  {
-position: absolute;
- top: 170px;
- padding: 5px;
- left: 18px;
- 
-}
-.elementText1 {
-    display: flex;
-    flex-direction: row;
-}
-.elementText1 li {
-    font-size: 18px;
-    font-family: Martian Mono SemiExpanded Light ;
-    list-style: none;
-  
-
-}
-.elementText1 i {
-    color: #F6F9FC;
-    font-size: 18px;
-    padding: 5px;
-}
-.elementText1 a {
-    /* text-decoration: none; */
-    color: #F6F9FC;
-}
-
-
-
 
 
 
@@ -139,43 +87,26 @@ position: absolute;
 /* --------categorie-------- */
 
 .containerCategorie {
-    width: 100%;
+    width: 88%;
     height: auto;
     display: flex;
     flex-direction: row;
-  
-
-
-
-
+    justify-content: center;
 }
 
-.presentationCategorie {
 
-    width: 50%;
-    height: 100vh;
-
-   
-
-
-}
-
-.presentationCategorie h1 {
-    font-size: 40px;
-
-
-}
 
 .categorie {
     display: flex;
-    width: 35%;
+    width: 100%;
+    height: 100vh;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
     gap: 20px;
     margin: 20px;
-    background-color: rgba(156, 103, 5, 0.17);
+    background-color: #D6E0E7;
     padding: 10px;
+    border-radius: 50px;
 
 
 
@@ -186,8 +117,9 @@ position: absolute;
 
 .categorieElements {
     display: flex;
-    align-items: center;
-    justify-content: center;
+ flex-wrap: wrap;
+align-items: center;
+padding: 20px;
     flex-direction: column;
     gap: 5px;
 
@@ -195,18 +127,17 @@ position: absolute;
 }
 
 .categorieElements h1 {
-  /* position: absolute; */
-  color: red ;
-  
-  
+    color: red;
+
+
 
 }
 
 .categorie img {
-    width: 200px;
-    height: 150px;
-    border-radius: 10px;
-    /* position:relative; */
+    width: 300px;
+    height: 250px;
+    border-radius: 50px;
+
 
 }
 
@@ -921,38 +852,52 @@ div .champSalle .required {
 
 .containerSlider {
     width: 100%;
-    height: 100vh;
+    height: 78vh;
     display: flex;
     position: relative;
-    
- 
-   
-  }
-  
-  .imagesSlide {
-    width: 75%;
+    justify-content: flex-start;
+
+
+
+
+
+}
+
+.imagesSlide {
+    width: 90%;
     overflow: hidden;
     display: flex;
-    align-items: flex-start;
     
-  }
-  
-  .slider {
+
+}
+
+.slider {
     display: flex;
     transition: transform 0.3s ease-in-out;
     margin-left: 0;
-    
+
+
 }
 
 .slide {
     flex: 0 0 100%;
 
-    
+
+
+
+
 }
 
+.active {
+    height: fit-content;
+
+
+}
+
+
 .slide img {
-   
-    width: 90%;
+
+    width: 75%;
     height: 500px;
     border-radius: 400px;
     padding: 20px;
@@ -961,24 +906,24 @@ div .champSalle .required {
     filter: brightness(45%);
 
 
-    
-  }
 
-  .slide img:hover {
-  filter: none;
-  transition: 3s;
+}
 
-  }
+.slide img:hover {
+    filter: none;
+    transition: 3s;
+
+}
 
 
-  .sliderButtons {
-    top: 60px;
-    left: 165px;
+.sliderButtons {
+    bottom: 120px;
+    left: 40%;
     position: absolute;
     z-index: 2;
-  }
-  
-  .sliderButtons button {
+}
+
+.sliderButtons button {
     background-color: #1c110abd;
     color: white;
     border: none;
@@ -986,25 +931,28 @@ div .champSalle .required {
     margin: 5px;
     font-size: 20px;
     cursor: pointer;
-   
-  }
-  
-  .sliderButtons button:hover {
-    background-color: #e07d406e;
-  }
+    border-radius: 50%;
 
-.containerInfoEvenement{
-display: flex;
-flex-direction: column;
-position: relative;
-bottom: 400px;
-left: 260px;
-gap: 20px;
-width: 40%;
 }
+
+.sliderButtons button:hover {
+    background-color: #e07d406e;
+}
+
+.containerInfoEvenement {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    bottom: 400px;
+    left: 280px;
+    gap: 20px;
+    width: 40%;
+    
+}
+
 .containerInfoEvenement .nomEvenement {
     font-size: 48px;
-    font-family: Helvetica Bold ;
+    font-family: Helvetica Bold;
     color: #F6F9FC;
 }
 
@@ -1013,13 +961,73 @@ width: 40%;
     color: #F6F9FC;
     font-family: Martian Mono SemiExpanded Light;
 }
- 
- .containerInfoEvenement .descriptionEvenementSlide {
+
+.containerInfoEvenement .descriptionEvenementSlide {
     font-size: 18px;
     color: #F6F9FC;
-    font-family : Helvetica Regular ;
- }
-  
+    font-family: Helvetica Regular;
+}
+.text1 {
+    background-color: #092C4C;
+    width: 225px;
+    height: 320px;
+    position: absolute;
+    right: 180px;
+    top: 80px;
+    border-radius: 220px;
+   
+
+
+}
+
+.text1 span {
+    position: absolute;
+    top: 90px;
+    padding: 5px;
+    left: 30px;
+    font-size: 18px;
+    font-family: Helvetica;
+    color: #F6F9FC;
+}
+
+.text1 .elementText1 {
+    position: absolute;
+    top: 170px;
+    padding: 5px;
+    left: 18px;
+
+}
+
+.elementText1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.elementText1 li {
+    font-size: 18px;
+    font-family: Martian Mono SemiExpanded Light;
+    list-style: none;
+
+
+}
+
+.elementText1 i {
+    color: #F6F9FC;
+    font-size: 18px;
+    padding: 1px;
+}
+
+.elementText1 a {
+    /* text-decoration: none; */
+    color: #F6F9FC;
+}
+
+
+
+
+
+
+
 
 
 /*-------------------fin slider----------------- */
@@ -1126,6 +1134,8 @@ width: 40%;
     width: 350px;
     height: 150px;
 }
+
+
 
 
 

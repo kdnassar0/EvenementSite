@@ -34,8 +34,8 @@
       <button class="prevButton" onclick="previousSlide()">&#10094;</button>
       <button class="nextButton" onclick="nextSlide()">&#10095;</button>
     </div>
+    {% endif %}
   </div>
-  {% endif %}
   
   {% if app.user %}
   <div class="text1">
@@ -58,10 +58,6 @@
 </div>
 
 <div class="containerCategorie">
-  <div class="presentationCategorie">
-
-  </div>
-
   <div class="categorie">
     {% for categorie in categories %}
     <div class="categorieElements">
