@@ -32,6 +32,7 @@ class CategorieController extends AbstractController
         $evenementsAvenir = $e->findEvenementsAvenir();
         $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
         $evenemetInfo = $e->findEvenements();
+        $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C","#1C85E8"];
       
      
        
@@ -87,7 +88,8 @@ class CategorieController extends AbstractController
                 'categories' => $categories,
                 'formAddCategorie' => $form->createView(),
                 'evenementsAvenir' => $evenementsAvenir,
-                'evenemetInfo'=>$evenemetInfo
+                'evenemetInfo'=>$evenemetInfo,
+                'couleurs'=>$couleurs
 
             ]);
         }
@@ -96,7 +98,8 @@ class CategorieController extends AbstractController
             'categories' => $categories,
             'evenementsAvenir' => $evenementsAvenir,
             'formAddCategorie' => null,
-            'evenemetInfo'=>$evenemetInfo
+            'evenemetInfo'=>$evenemetInfo,
+            'couleurs'=>$couleurs
            
         ]);
     }
