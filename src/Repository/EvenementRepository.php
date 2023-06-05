@@ -47,7 +47,7 @@ class EvenementRepository extends ServiceEntityRepository
     {
 
         // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
-        $now = new \DateTime() ; 
+        $now = new DateTime('Europe/paris');
         // on fait createquerybuilder
         return $this->createQueryBuilder('e')
         // on fait une condition 
