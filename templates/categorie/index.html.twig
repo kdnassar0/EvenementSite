@@ -6,14 +6,47 @@
 
 
 
-{# {% if app.user %}
-<div class="text1">Partageons nos événements <br> et ouvrons les murs
-  <div class="elementText1">
+
+
+
+
+
+
+<div class="containerSlider">
+  <div class="imagesSlide">
+
+    {% if evenemetInfo %}
+    <div class="slider">
+      {% for event in evenemetInfo %}
+        <div class="slide active">
+        <img src="{{asset('images/evenement/'~ event.image) }}" alt="">
+        <div class="containerInfoEvenement">
+        <div class="nomEvenement">{{ event.nom }}</div>
+        <div class="dateEvenementSlide">Du : {{ event.dateDebut |date('Y-M-D') }}
+        Au : {{ event.dateFin |date('Y-M-D') }}</div>
+        <div class="descriptionEvenementSlide">{{ event.description }}</div>
+      </div>
+      </div>
+
+      {% endfor %}
+    </div>
+    <div class="sliderButtons">
+      <button class="prevButton" onclick="previousSlide()">&#10094;</button>
+      <button class="nextButton" onclick="nextSlide()">&#10095;</button>
+    </div>
+  </div>
+  {% endif %}
+  
+  {% if app.user %}
+  <div class="text1">
+    <span>Partageons nos événements et ouvrons les murs</span>
     {% else %}
-    <div class="text1">Partageons nos événements <br> et ouvrons les murs
+    <div class="text1">
+      <span>Partageons nos événements et ouvrons les murs</span>
       <div class="elementText1">
+        <i class="fa-solid fa-share-from-square"> </i>
         <a href="{{ path('app_register') }}">
-          <li>s'inscrire - </li>
+          <li>s'inscrire- </li>
         </a>
         <a href="{{ path('app_login') }}">
           <li> se connecter</li>
@@ -22,87 +55,66 @@
       </div>
     </div>
   </div>
-</div> #}
+</div>
 
-<div class="containerSlider">
-  <div class="imagesSlide">
-      <div class="slider">
-          <div class="slide active">
-              <img src="{{asset('images/evenement/'~ images[0]) }}" alt="">
-          </div>
-          {% for image in images[1:] %}
-          <div class="slide">
-              <img src="{{asset('images/evenement/'~ image) }}" alt="">
-          </div>
-          {% endfor %}
-        </div>
-       
-        <div class="sliderButtons">
-          <button class="prevButton" onclick="previousSlide()">&#10094;</button>
-          <button class="nextButton" onclick="nextSlide()">&#10095;</button>
-        </div>
+<div class="containerCategorie">
+  <div class="presentationCategorie">
+
   </div>
+
+  <div class="categorie">
+    {% for categorie in categories %}
+    <div class="categorieElements">
+      <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img
+          src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
+
+      <h1> {{ categorie.nom }} </h1>
+      {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}"><i class="fa-solid fa-trash"></i></a>
+      {% endif %}
+
+    </div>
+
+    {% endfor %}
+  </div>
+
+
+  {# if pour verfier si le formaddcategorie n'est pas null #}
+  {% if formAddCategorie %}
+  <div class="formulaire-categorie">
+    {{ form_start(formAddCategorie) }}
+    <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }} </div>
+    <div class="chmpsImage">{{ form_row(formAddCategorie.image) }} </div>
+    {{ form_row(formAddCategorie.submit) }}
+    {{ form_end(formAddCategorie) }}
+  </div>
+  {% endif %}
 
 </div>
 
-    <div class="containerCategorie">
-      <div class="presentationCategorie">
 
-      </div>
+<div class="container-evenements">
+  {% for evenementAvenir in evenementsAvenir %}
+  {% if evenementAvenir.statut == 'validé' %}
+  <div class="evenement">
+    <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
+      <img src="{{ asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+    </a>
+    <h1>{{ evenementAvenir.nom }}</h1>
 
-      <div class="categorie">
-        {% for categorie in categories %}
-        <div class="categorieElements">
-          <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img
-              src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
-
-          <h1> {{ categorie.nom }} </h1>
-          {% if is_granted('ROLE_ADMIN') %}
-          <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}"><i class="fa-solid fa-trash"></i></a>
-          {% endif %}
-
-        </div>
-
-        {% endfor %}
-      </div>
-
-
-      {# if pour verfier si le formaddcategorie n'est pas null #}
-      {% if formAddCategorie %}
-      <div class="formulaire-categorie">
-        {{ form_start(formAddCategorie) }}
-        <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }} </div>
-        <div class="chmpsImage">{{ form_row(formAddCategorie.image) }} </div>
-        {{ form_row(formAddCategorie.submit) }}
-        {{ form_end(formAddCategorie) }}
-      </div>
+    <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
+    <div class="action">
+      {% if evenementAvenir.createur == app.user %}
+      <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}"><i class="fa-solid fa-trash"></i></a>
       {% endif %}
-
+      <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">participer</a>
     </div>
 
-
-    <div class="container-evenements">
-      {% for evenementAvenir in evenementsAvenir %}
-      {% if evenementAvenir.statut == 'validé' %}
-      <div class="evenement">
-        <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
-          <img src="{{ asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
-        </a>
-        <h1>{{ evenementAvenir.nom }}</h1>
-
-        <p class="date">{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
-        <div class="action">
-          {% if evenementAvenir.createur == app.user %}
-          <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}"><i class="fa-solid fa-trash"></i></a>
-          {% endif %}
-          <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">participer</a>
-        </div>
-
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
 
 
 
-    {% endblock %}
+{% endblock %}
