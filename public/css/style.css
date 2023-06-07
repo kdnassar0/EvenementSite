@@ -38,6 +38,7 @@ nav ul {
     justify-content: center;
     flex-direction: row;
     gap: 70px;
+    list-style: none;
 
 
 }
@@ -1130,16 +1131,33 @@ div .champSalle .required {
 
 /* ------------lieu--------------------- */
 
-
-.elementLieu {
+.containerPageLieu{
     display: flex;
-    align-items: center;
+    width: 60%;
+    height: auto;
+    flex-direction: row;
     justify-content: center;
+    gap: 20px;
+    margin: 50px;
+}
+.containerElementsLieu {
+    display: flex;
     flex-direction: column;
     gap: 40px;
+    width: 50%;
+  
+  
 
 
 }
+.containerElementsLieu h1 {
+    font-size: 42px ; 
+
+}
+.containerElementsLieu h2 {
+    font-size: 36px;
+}
+
 
 .buttonsLieu {
     display: flex;
@@ -1153,73 +1171,67 @@ div .champSalle .required {
 .textEtImage {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     gap: 40px;
-    width: 100%;
+    width: 50%;
 
 }
 
-.textEtImage .description {
+.containerElementsLieu .description {
+  color: #092C4C;
+    font-size: 15px;
+}
+.containerElementsLieu img {
 
-    width: 40%
+    width: 400px;
+    height:200px;
 }
 
 .textEtImage img {
-    width: 500px;
-    height: 330px;
-    border-radius: 10px;
-
-
-
+    width: 450px;
+    height: 60vh;
+  
 }
 
-
-.containersalle {
-    width: 100%;
-    height: auto;
-    background-image: url('/images/home page-02.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-top: 10px solid;
+.infoLieu {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
-
-
-}
-
-
-
-
-.elemantsSalle {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-direction: column;
-    width: 49%;
-    gap: 20px;
-    margin: 50px 0px 50px 0px;
-
-
-
-}
-
-.numeroEtCapacite {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: row;
-    background-color: #3e8e41;
-
+    flex-direction: column;
+    gap: 20px;
+}
+.infoLieu :first-child {
+    font-size: 48px;
+    color: #092C4C;
+}
+.infoLieu .villeEtAdress {
+    font-size: 36px;
+    color: #092C4C;
 }
 
-
-.elemantsSalle img {
-    width: 350px;
-    height: 150px;
+.infoLieu .capacity {
+    font-size: 36px;
+    color: red;
 }
 
+.evenementsPasseesLieu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px;
+    
+    
+
+}
+.evenementsPasseesLieu img{
+width: 200px;
+height: 200px;
+border-radius: 10px;
+display: block;
+
+}
+.titreEvenementPasses {
+    font-size: 36px;
+    color: #092C4C;
+}
 
 
 

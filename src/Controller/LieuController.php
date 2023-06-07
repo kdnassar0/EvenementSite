@@ -6,6 +6,7 @@ use App\Entity\Lieu;
 use App\Entity\Salle;
 use App\Form\LieuType;
 use App\Entity\Evenement;
+use App\Repository\EvenementRepository;
 use App\Repository\LieuRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Filesystem\Filesystem;
@@ -30,9 +31,10 @@ class LieuController extends AbstractController
    * @Route("/add/lieu", name="add_lieu")
    * @Route("/lieu/edit/{id}",name="edit_lieu")
    */
-  public function index(LieuRepository $li, ManagerRegistry $doctrine, Lieu $lieu = null, Request $request, SluggerInterface $slugger, Security $security): Response
+  public function index(LieuRepository $li, ManagerRegistry $doctrine, Lieu $lieu = null, Request $request, SluggerInterface $slugger, Security $security,EvenementRepository $ev ): Response
   {
     $lieus = $li->findBy([], ['nom' => 'ASC']);
+    $evenemntsPassees=$ev->findEvenementsPassees();
 
     // pour le formulaire d'Edition
     // si le lieu ne existe pas->il va faire un neuveau 
@@ -111,13 +113,15 @@ class LieuController extends AbstractController
 
       return $this->render('lieu/index.html.twig', [
         'lieus' => $lieus,
-        'formAddlieu' => $form->createView()
+        'formAddlieu' => $form->createView(),
+        'evenemntsPassees'=>$evenemntsPassees
 
       ]);
     }
     return $this->render('lieu/index.html.twig', [
       'lieus' => $lieus,
-      'formAddlieu' => null
+      'formAddlieu' => null,
+      'evenemntsPassees'=>$evenemntsPassees
 
     ]);
   }

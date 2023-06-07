@@ -45,7 +45,6 @@ class EvenementRepository extends ServiceEntityRepository
 
     public function findEvenementsAvenir()
     {
-
         // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
         $now = new DateTime('Europe/paris');
         // on fait createquerybuilder
@@ -57,12 +56,10 @@ class EvenementRepository extends ServiceEntityRepository
         ->orderBy('e.date_debut','ASC')
         ->getQuery()
         ->getResult() ;
-
     }
 
     public function findEvenements()
     {
-
         // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
         $now = new DateTime('Europe/paris');
         $statut ='validé';
@@ -77,7 +74,6 @@ class EvenementRepository extends ServiceEntityRepository
         ->orderBy('e.date_debut','ASC')
         ->getQuery()
         ->getResult() ;
-
     }
 
     public function findEvenementsPasseesParCategorie($categorieId)
@@ -90,6 +86,18 @@ class EvenementRepository extends ServiceEntityRepository
             ->setParameter('categorie_id', $categorieId)
             ->setParameter('date_now', $now)
             ->orderBy('e.date_debut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findEvenementsPassees()
+    {
+        $now = new DateTime('Europe/paris');
+        
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date_fin < :date_now')
+            ->setParameter('date_now', $now)
+            ->orderBy('e.date_debut', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }

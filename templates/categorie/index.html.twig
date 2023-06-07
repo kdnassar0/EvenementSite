@@ -59,7 +59,7 @@
 <div class="containerCategorie">
   <div class="categorie">
     {% for categorie in categories %}
-    <div class="categorieElements" style="background-color: {{ couleurs[loop.index0 % couleurs|length] }}">
+    <div class="categorieElements" style="background-color: {{  couleurs[loop.index0 % couleurs|length] }}">
       <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img
           src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
 

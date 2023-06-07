@@ -6,35 +6,38 @@
 
 
 
-<div class="containerPage1">
-    <div class="elementLieu">
+<div class="containerPageLieu">
+    <div class="containerElementsLieu">
         {% for lieu in lieus %}
-
-        <h1>{{ lieu.nom }}</h1>
-        Ville : {{ lieu.ville }}
-        <h2> Adresse : {{ lieu.adress}} </h2>
-        <h2> capacity: {{ lieu.capacity}} </h2>
-        <div class="textEtImage">
-            <div class="description"> {{ lieu.description }} </div>
-            <img src=" {{asset('images/lieu/'~ lieu.image) }}" alt="">
-            <img src=" {{asset('images/lieu/'~ lieu.imageSalle) }}" alt="">
-
+        <div class="infoLieu">
+            <span>{{ lieu.nom }}</span>
+           <span class="villeEtAdress"> {{ lieu.ville }} / {{ lieu.adress}} </span>
+           <span class="capacity"> capacity: {{ lieu.capacity}} </span>
         </div>
-
-        <div class="buttonsLieu">
-            {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}">supprimer</a>
-            <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}">Edit</a>
-            {% endif %}
-        </div>
-
-
+        <div class="description"> {{ lieu.description }} </div>
+        <img src=" {{asset('images/lieu/'~ lieu.imageSalle) }}" alt="">
+    </div>
+    <div class="textEtImage">
+        <img src=" {{asset('images/lieu/'~ lieu.image) }}" alt="">
+      
     </div>
 
+  
+</div>
+<div class="buttonsLieu">
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path ('supprimer_lieu',{'id':lieu.id}) }}"><i class="fa-sharp fa-solid fa-trash"></i></a>
+    <a href="{{ path ('edit_lieu',{'id':lieu.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+    {% endif %}
 </div>
 
-
 {% endfor %}
+<span class="titreEvenementPasses">Evénéments faites dans notre lieu :</span>
+<div class="evenementsPasseesLieu">
+{% for evenementPassee in evenemntsPassees %}
+<a href=" {{ path('details_evenement',{'idEvent':evenementPassee.id}) }} "><img src=" {{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
+{% endfor %}
+</div>
 
 {% if formAddlieu %}
 <div class="formulaire-categorie">
@@ -51,6 +54,5 @@
 
 
 
-</div>
 
 {% endblock %}
