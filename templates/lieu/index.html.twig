@@ -32,7 +32,7 @@
 </div>
 
 {% endfor %}
-<span class="titreEvenementPasses">Evénéments faites dans notre lieu :</span>
+<span class="titreEvenementPasses">Événements réalisés dans notre lieu </span>
 <div class="evenementsPasseesLieu">
 {% for evenementPassee in evenemntsPassees %}
 <a href=" {{ path('details_evenement',{'idEvent':evenementPassee.id}) }} "><img src=" {{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>

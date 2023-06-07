@@ -8,9 +8,9 @@
 
 
 
-<div class="elemantPageOganiser">
+<div class="PageOganiser">
 
-   
+
     <div class="formulaireOrganiser">
         <h2 class="textExplique">Bienvenue sur la page d'organisation d'événements ! <br> Si vous cherchez à organiser
             un événement, vous êtes au bon endroit. <br> Ici, vous pouvez créer votre propre événement en quelques
@@ -19,35 +19,37 @@
             détails pour que les invités puissent se faire une idée de ce à quoi ils peuvent s'attendre. <br> Enfin,
             n'oubliez pas de sauvegarder votre événement une fois que vous avez terminé, et on vous remercie pour votre
             patient pendant que l'admin confirme votre événement. <br> Nous sommes impatients de voir ce que vous avez
-            en tête pour votre prochain événement !</h2>
-        {{ form_start(formAddEvenement) }}
+            en tête pour votre prochain événement !
+        
+        </h2>
+        <form class="formSection">
+            {{ form_start(formAddEvenement) }}
+            <label class="titre">Organiser votre événement</label>
+            <div class="champsFormumlaireOrganiser">
 
-        <label class="titre">Organiser un événement</label>
-        <div class="champsFormumlaireOrganiser">
-           
-            <p> {{ form_row(formAddEvenement.nom) }} </p>
+                <p> {{ form_row(formAddEvenement.nom) }} </p>
 
-            <spam>{{ form_row(formAddEvenement.date_debut) }} </spam>
+                <p>{{ form_row(formAddEvenement.categorie) }} </p>
 
-            <spam>{{ form_row(formAddEvenement.date_fin) }} </spam>
+                <spam>{{ form_row(formAddEvenement.date_debut) }} </spam>
 
-            <spam>{{ form_row(formAddEvenement.nb_des_places) }} </spam>
+                <spam>{{ form_row(formAddEvenement.date_fin) }} </spam>
 
-            <p>{{ form_row(formAddEvenement.description) }} </p>
+                <spam>{{ form_row(formAddEvenement.nb_des_places) }} </spam>
 
-            <spam>{{ form_row(formAddEvenement.prix) }} </spam>
+                <p>{{ form_row(formAddEvenement.description) }} </p>
 
-            <spam>{{ form_row(formAddEvenement.image) }} </spam>
+                <spam>{{ form_row(formAddEvenement.prix) }} </spam>
 
-            <p>{{ form_row(formAddEvenement.categorie) }} </p>
+                <spam>{{ form_row(formAddEvenement.image) }} </spam>
 
-          
-            <spam class="button"> {{ form_row(formAddEvenement.submit) }} </spam>
-        </div>
+                <spam class="button"> {{ form_row(formAddEvenement.submit) }} </spam>
+            </div>
+
+        </form>
     </div>
+    {{ form_end(formAddEvenement) }}
 </div>
-
-{{ form_end(formAddEvenement) }}
 
 
 

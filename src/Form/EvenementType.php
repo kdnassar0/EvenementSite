@@ -44,19 +44,20 @@ class EvenementType extends AbstractType
             ])
             ->add('nb_des_places',NumberType::class,['label'=>'Nombre des places :'])
             ->add('description',TextareaType::class,['label'=>'Déscription :'])
-            ->add('prix',NumberType::class)
+            ->add('prix',NumberType::class,['label'=>'Prix :'])
             ->add('image',FileType::class, [
                 'constraints' => [
                     new File ([
                         'maxSize'=>'1024k',
                         'mimeTypes'=> [
                             'image/png',
-                            'image/jpeg',
-                            'image/png'
+                            'image/jpeg'
                         ],
                         'mimeTypesMessage'=>'Please upload a valid image',
-                    ])
-                ]
+                    ]),
+                ],
+                    'label'=>'Ajoutez une image de votre événement :'
+                
             ])
             ->add('categorie',EntityType::class,
             ['class'=>Categorie::class,'choice_label'=>'nom'])
