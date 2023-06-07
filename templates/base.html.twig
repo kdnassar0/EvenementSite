@@ -2,18 +2,21 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
-   
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css"
+    integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+  {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+  {% block stylesheets %}
+  {{ encore_entry_link_tags('app') }}
+  {% endblock %}
 
 
 </head>
@@ -25,151 +28,153 @@
 
 
 <div class="logo">LOGO</div>
-    <div class="elementsNav">
-      
-      <nav>
-        <ul class="ul1">
-          <a href="{{ path ('app_categorie')}}">
-            <li>Accueil</li>
-          </a>
-  
-          <a href=" {{ path ('app_lieu') }}">
-            <li>Lieu</li>
-          </a>
-          <a href="{{ path ('add_evenement') }}">
-            <li>Organiser</li>
-          </a>
-         
-          <a href="#">
-            <li>contact</li>
-          </a>
-        </ul>
-      </nav>
-  
-      <div class="search">
+<div class="elementsNav">
 
-        {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('app_admin') }}">
-          <li>Admin</li>
-        </a>
-        {% endif %}
-        {% if app.user %}
-        <a href="{{ path ('app_oragnisateur') }}">
-          <li>Profil</li>
-        </a>
-        <a href="{{ path('app_logout') }}">
-          <li>logout</li>
-        </a>
-        {% endif %}
-  
+  <nav>
+    <ul class="ul1">
+      <a href="{{ path ('app_categorie')}}">
+        <li>Accueil</li>
+      </a>
+
+      <a href=" {{ path ('app_lieu') }}">
+        <li>Lieu</li>
+      </a>
+      <a href="{{ path ('add_evenement') }}">
+        <li>Organiser</li>
+      </a>
+
+      <a href="#">
+        <li>contact</li>
+      </a>
+    </ul>
+  </nav>
+
+  <div class="search">
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_admin') }}">
+      <li>Admin</li>
+    </a>
+    {% endif %}
+    {% if app.user %}
+    <a href="{{ path ('app_oragnisateur') }}">
+      <li>Profil</li>
+    </a>
+    <a href="{{ path('app_logout') }}">
+      <li>logout</li>
+    </a>
+    {% endif %}
+
+  </div>
+</div>
+
+<body>
+
+  {% block body %}
+  {% endblock %}
+
+
+  <footer>
+    <div>
+      <span class="logo">iTechnology</span>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <div class="link-cat" onclick="footerToggle(this)">
+          <span class="footer-toggle"></span>
+          <span class="footer-cat">Solution</span>
+        </div>
+        <ul class="footer-cat-links">
+          <li><a href=""><span>Interprise App Development</span></a></li>
+          <li><a href=""><span>Android App Development</span></a></li>
+          <li><a href=""><span>ios App Development</span></a></li>
+        </ul>
+      </div>
+      <div class="col-3">
+        <div class="link-cat" onclick="footerToggle(this)">
+          <span class="footer-toggle"></span>
+          <span class="footer-cat">Industries</span>
+        </div>
+        <ul class="footer-cat-links">
+          <li><a href=""><span>Healthcare</span></a></li>
+          <li><a href=""><span>Sports</span></a></li>
+          <li><a href=""><span>ECommerce</span></a></li>
+          <li><a href=""><span>Construction</span></a></li>
+          <li><a href=""><span>Club</span></a></li>
+        </ul>
+      </div>
+      <div class="col-3">
+        <div class="link-cat" onclick="footerToggle(this)">
+          <span class="footer-toggle"></span>
+          <span class="footer-cat">Quick Links</span>
+        </div>
+        <ul class="footer-cat-links">
+          <li><a href=""><span>Reviews</span></a></li>
+          <li><a href=""><span>Terms & Condition</span></a></li>
+          <li><a href=""><span>Disclaimer</span></a></li>
+          <li><a href=""><span>Site Map</span></a></li>
+        </ul>
+      </div>
+      <div class="col-3" id="newsletter">
+        <span>Stay Connected</span>
+        <form id="subscribe">
+          <input type="email" id="subscriber-email" placeholder="Enter Email Address" />
+          <input type="submit" value="Subscribe" id="btn-scribe" />
+        </form>
+
+        <div class="social-links social-2">
+          <a href=""><i class="fab fa-facebook-f"></i></a>
+          <a href=""><i class="fab fa-twitter"></i></a>
+          <a href=""><i class="fab fa-linkedin-in"></i></a>
+          <a href=""><i class="fab fa-instagram"></i></a>
+          <a href=""><i class="fab fa-tumblr"></i></a>
+          <a href=""><i class="fab fa-reddit-alien"></i></a>
+        </div>
+
+        <div id="address">
+          <span>Office Location</span>
+          <ul>
+            <li>
+              <i class="far fa-building"></i>
+              <div>Los Angeles<br />
+                Office 9B, Sky High Tower, New A Ring Road, Los Angeles</div>
+            </li>
+            <li>
+              <i class="fas fa-gopuram"></i>
+              <div>Delhi<br />
+                Office 150B, Behind Sana Gate Char Bhuja Tower, Station Road, Delhi</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="social-links social-1 col-6">
+        <a href=""><i class="fab fa-facebook-f"></i></a>
+        <a href=""><i class="fab fa-twitter"></i></a>
+        <a href=""><i class="fab fa-linkedin-in"></i></a>
+        <a href=""><i class="fab fa-instagram"></i></a>
+        <a href=""><i class="fab fa-tumblr"></i></a>
+        <a href=""><i class="fab fa-reddit-alien"></i></a>
       </div>
     </div>
-<body> 
-      
-    {% block body %}
-    {% endblock %}
+    <div id="copyright">
+      &copy; All Rights Reserved 2019-2020
+    </div>
+    <div id="owner">
+      <span>
+        Designed by <a href="https://www.codingtuting.com">CodingTuting.Com</a>
+      </span>
+    </div>
+  </footer>
 
-    
-    <footer>
-        <div>
-             <span class="logo">iTechnology</span>
-        </div>
-      
-        <div class="row">
-             <div class="col-3">                
-                 <div class="link-cat" onclick="footerToggle(this)">
-                     <span class="footer-toggle"></span>
-                     <span class="footer-cat">Solution</span>
-                 </div>
-                 <ul class="footer-cat-links">
-                     <li><a href=""><span>Interprise App Development</span></a></li>
-                     <li><a href=""><span>Android App Development</span></a></li>
-                     <li><a href=""><span>ios App Development</span></a></li>
-                 </ul>
-             </div>
-             <div class="col-3">
-                 <div class="link-cat" onclick="footerToggle(this)">
-                     <span class="footer-toggle"></span>
-                     <span class="footer-cat">Industries</span>
-                 </div>
-                 <ul class="footer-cat-links">
-                     <li><a href=""><span>Healthcare</span></a></li>
-                     <li><a href=""><span>Sports</span></a></li>
-                     <li><a href=""><span>ECommerce</span></a></li>
-                     <li><a href=""><span>Construction</span></a></li>
-                     <li><a href=""><span>Club</span></a></li>
-                 </ul>
-             </div>
-             <div class="col-3">
-                 <div class="link-cat" onclick="footerToggle(this)">
-                     <span class="footer-toggle"></span>
-                     <span class="footer-cat">Quick Links</span>
-                 </div>
-                 <ul class="footer-cat-links">
-                     <li><a href=""><span>Reviews</span></a></li>
-                     <li><a href=""><span>Terms & Condition</span></a></li>
-                     <li><a href=""><span>Disclaimer</span></a></li>
-                     <li><a href=""><span>Site Map</span></a></li>
-                 </ul>
-             </div>
-             <div class="col-3" id="newsletter">
-                 <span>Stay Connected</span>
-                 <form id="subscribe">
-                     <input type="email" id="subscriber-email" placeholder="Enter Email Address"/>
-                     <input type="submit" value="Subscribe" id="btn-scribe"/>
-                 </form>
-                 
-                 <div class="social-links social-2">
-                     <a href=""><i class="fab fa-facebook-f"></i></a>
-                     <a href=""><i class="fab fa-twitter"></i></a>
-                     <a href=""><i class="fab fa-linkedin-in"></i></a>
-                     <a href=""><i class="fab fa-instagram"></i></a>
-                     <a href=""><i class="fab fa-tumblr"></i></a>
-                     <a href=""><i class="fab fa-reddit-alien"></i></a>
-                 </div>
-      
-                 <div id="address">
-                     <span>Office Location</span>
-                     <ul>
-                         <li>
-                             <i class="far fa-building"></i>
-                             <div>Los Angeles<br/>
-                             Office 9B, Sky High Tower, New A Ring Road, Los Angeles</div>
-                         </li>
-                         <li>
-                             <i class="fas fa-gopuram"></i>
-                             <div>Delhi<br/>
-                             Office 150B, Behind Sana Gate Char Bhuja Tower, Station Road, Delhi</div>
-                         </li>
-                     </ul>
-                 </div>
-                 
-             </div>
-             <div class="social-links social-1 col-6">
-                 <a href=""><i class="fab fa-facebook-f"></i></a>
-                 <a href=""><i class="fab fa-twitter"></i></a>
-                 <a href=""><i class="fab fa-linkedin-in"></i></a>
-                 <a href=""><i class="fab fa-instagram"></i></a>
-                 <a href=""><i class="fab fa-tumblr"></i></a>
-                 <a href=""><i class="fab fa-reddit-alien"></i></a>
-             </div>
-        </div>
-        <div id="copyright">
-            &copy; All Rights Reserved 2019-2020
-        </div>
-        <div id="owner">
-            <span>
-                Designed by <a href="https://www.codingtuting.com">CodingTuting.Com</a>
-            </span>
-        </div>
-      </footer>  
-  
-      <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js" integrity="sha256-l/Q/fg7VLyQWHGXpOMURmGwE3FDMtEPcaGTJtcOqLR8=" crossorigin="anonymous"></script>
-      {% block javascripts %}
-      <script src="{{ asset('js/test.js') }}"></script>
-   
-      {% endblock javascripts %}
-  
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"
+    integrity="sha256-l/Q/fg7VLyQWHGXpOMURmGwE3FDMtEPcaGTJtcOqLR8=" crossorigin="anonymous"></script>
+  {% block javascripts %}
+
+
+  {% endblock javascripts %}
+
 
 </body>
 
