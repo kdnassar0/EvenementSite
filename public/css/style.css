@@ -11,6 +11,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #F6F9FC;
 
 }
 
@@ -126,6 +127,7 @@ nav ul a {
     gap: 60px;
     position: relative;
     overflow: hidden;
+    border: 1px solid;
 
 
 }
@@ -866,8 +868,8 @@ input {
 
 
 .sliderButtons {
-    bottom: 120px;
-    left: 42%;
+    bottom: 60px;
+    left: 40%;
     position: absolute;
     z-index: 2;
 }
@@ -1407,3 +1409,70 @@ input {
 
 
 /*---------------------fin details evenement--------------------*/
+
+
+
+
+/* //////////// page organisateur ///////////////// */
+
+
+.containerProfile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    flex-direction: column;
+    height: 100vh;
+    gap: 50px;
+}
+.profile{
+    width: 60%;
+    height: 150px;
+    background-color: red;
+
+}
+.evenementProfile {
+    display: flex;
+    width: 100%;
+   flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: #D6E0E7;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    height: auto;
+    padding: 20px;
+   
+    
+    
+
+
+}
+
+.nomEvenementProfile{
+   position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 18px;
+ 
+
+}
+
+.evenementProfile img{
+ 
+    width: 208px;
+    height: 140px;
+
+}
+
+.elementsEvenementProfile {
+    display: flex;
+    position: relative;
+ 
+    
+}
+
+
+
+/* ////////////fin page organisateur ///////////////// */
