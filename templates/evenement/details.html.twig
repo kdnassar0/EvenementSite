@@ -7,7 +7,6 @@
 
 
 
-
 <div class="containerEelmentsDetails">
     <div class="titleEvenement">
         <h1>{{ evenement.nom }}</h1>
@@ -23,25 +22,32 @@
         <strong> du : {{ evenement.dateDebut | date('y-m-d H:i') }}</strong>
         <strong> au : {{ evenement.dateFin | date('y-m-d H:i') }} </strong>
     </div>
-</div>
-
-{% if evenement.participant |length == evenement.nbDesPlaces %}
     
- {% set link = 'complete' %} 
- 
-{% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-{% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
-    {% for participant in evenement.participant %}
-        {% if participant.id == app.user.id %}
-          {% set link = 'vous etes inscrits' %}
-        {% endif %}
-    {% endfor %}
-{% else %}
-  {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
+</div>
+{% if evenement.createur == app.user %}
+<a href="{{ path('supprimer_evenement',{'id':evenement.id}) }}"><i class="fa-solid fa-trash"></i></a>
 {% endif %}
 
 
+{# condition pour pas pouvoir participer un evenementPasses #}
+{% if evenement.dateDebut | date('m/d/y') > "now"|date("m/d/Y") %}
+    
+
+{% if evenement.participant |length == evenement.nbDesPlaces %}
+{% set link = 'complete' %}
+{% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+{% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
+{% for participant in evenement.participant %}
+{% if participant.id == app.user.id %}
+{% set link = 'vous etes inscrits' %}
+{% endif %}
+{% endfor %}
+{% else %}
+{% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
+{% endif %}
+
 {{ link | raw}}
+{% endif %}
 
 <div class="espaceCommentaire">
     <strong>Laissez un commentaire :</strong>
@@ -75,6 +81,30 @@
         {{form_end( formAddCommentaire) }}
     </div>
 </div>
+
+
+{% if evenement.createur == app.user %}
+    
+<table>
+    <tr>
+        <th>Participants :</th>
+    </tr>
+    <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Date d'événement</th>
+    </tr>
+    {% for participant in evenement.participant %}
+    <tr style="color: {{  couleurs[loop.index0 % couleurs|length]}}">
+        <td>{{ participant.pseudo }}</td>
+        <td><a href="mailto:{{ participant.email }}">{{ participant.email }}</a></td>
+        <td>{{ evenement.dateDebut |date('Y-m-d') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
 
 
 </div>

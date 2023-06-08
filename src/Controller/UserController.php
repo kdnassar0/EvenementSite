@@ -47,6 +47,7 @@ class UserController extends AbstractController
         Commentaire $commentaire = null
     ) {
 
+        $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C","#1C85E8"];
 
         if ($evenement) {
 
@@ -55,7 +56,7 @@ class UserController extends AbstractController
             } else {
                 $commentaires = $commentaire;
             }
-
+           
             $createur = $evenement->getCreateur();
             $commentaires = $evenement->getCommentaires();
 
@@ -92,6 +93,7 @@ class UserController extends AbstractController
                     "createur" => $createur,
                     "commentaires" => $commentaires,
                     'formAddCommentaire' => $form->createView(),
+                    'couleurs'=>$couleurs
 
                 ]);
             }

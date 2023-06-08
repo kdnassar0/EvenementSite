@@ -1244,7 +1244,7 @@ input {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    opacity: 0;
+    /* opacity: 0; */
     transform: translateX(-1%);
 
 
@@ -1476,3 +1476,33 @@ input {
 
 
 /* ////////////fin page organisateur ///////////////// */
+
+
+
+/* /////////////////tableau participant/////////////////////////// */
+
+table{
+    width: 50%;
+  margin: 50px;
+    background-color: #D6E0E7;
+    border-radius: 10px;
+}
+table tr   {
+  text-align: center;
+}
+
+th{
+    font-size: 26px;
+    padding: 10px;
+
+}
+td {
+
+    font-size: 18px;
+    padding: 20px;
+    
+}
+
+
+
+/* /////////////////fin tableau participant/////////////////////////// */

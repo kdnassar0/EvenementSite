@@ -26,10 +26,7 @@
                     src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
 
             {{evenementsEncours.dateDebut | date('y-m-d H:i') }}
-            {% if evenementsEncours.createur == app.user %}
-            <a href="{{ path ('supprimer_evenement',{'id':evenementsEncours.id}) }}"><i
-                    class="fa-solid fa-trash"></i></a>
-            {% endif %}
+          
         </div>
         {% endfor %}
 
@@ -51,11 +48,7 @@
             <a href=" {{ path('details_evenement',{'idEvent':evenementPassee.id}) }}"><img
                     src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
 
-            {{evenementPassee.dateFin | date('y-m-d H:i') }}
-            {% if evenementPassee.createur == app.user %}
-            <a href="{{ path('supprimer_evenement', {'id': evenementPassee.id}) }}"><i
-                    class="fa-solid fa-trash"></i></a>
-            {% endif %}
+        
         </div>
         {% endfor %}
 

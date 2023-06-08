@@ -64,7 +64,8 @@ class EvenementType extends AbstractType
           
           
 
-            ->add('submit',SubmitType::class,['label'=>'Envoyer'])
+            ->add('submit',SubmitType::class,['label'=>'<i class="fa-regular fa-paper-plane"></i>',
+            'label_html' => true])
         ;   
     }
 

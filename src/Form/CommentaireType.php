@@ -21,7 +21,8 @@ class CommentaireType extends AbstractType
                'mapped'=>false
             ])
             // ->add('utilisateur',TextType::class)
-            ->add('submit',SubmitType::class)
+            ->add('submit',SubmitType::class,['label'=>'<i class="fa-regular fa-paper-plane"></i>',
+            'label_html' => true])
         ;
     }
 

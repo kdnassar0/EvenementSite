@@ -103,9 +103,9 @@
         <h1>{{ evenementAvenir.nom }}</h1>
         <p>{{ evenementAvenir.dateDebut | date('d/m/Y') }}</p>
         <div>
-          {% if evenementAvenir.createur == app.user %}
+          {# {% if evenementAvenir.createur == app.user %}
           <a href="{{ path('supprimer_evenement',{'id':evenementAvenir.id}) }}"><i class="fa-solid fa-trash"></i></a>
-          {% endif %}
+          {% endif %} #}
           <a href="{{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">participer</a>
         </div>
       </div>
