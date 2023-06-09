@@ -22,7 +22,7 @@
             en tête pour votre prochain événement !
         
         </h2>
-        <form class="formSection">
+        <div class="formSection">
             {{ form_start(formAddEvenement) }}
             <label class="titre">Organiser votre événement</label>
             <div class="champsFormumlaireOrganiser">
@@ -46,7 +46,7 @@
                 <spam class="button"> {{ form_row(formAddEvenement.submit) }} </spam>
             </div>
 
-        </form>
+        </div>
     </div>
     {{ form_end(formAddEvenement) }}
 </div>

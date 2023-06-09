@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class EvenementType extends AbstractType
 {
@@ -46,12 +47,14 @@ class EvenementType extends AbstractType
             ->add('description',TextareaType::class,['label'=>'Déscription :'])
             ->add('prix',NumberType::class,['label'=>'Prix :'])
             ->add('image',FileType::class, [
+                'data_class' =>null,
                 'constraints' => [
                     new File ([
                         'maxSize'=>'1024k',
                         'mimeTypes'=> [
                             'image/png',
-                            'image/jpeg'
+                            'image/jpeg',
+                            'image/jpg'
                         ],
                         'mimeTypesMessage'=>'Please upload a valid image',
                     ]),

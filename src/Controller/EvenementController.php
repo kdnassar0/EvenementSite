@@ -53,6 +53,7 @@ class EvenementController extends AbstractController
 
   /**
    * @Route("/evenement/add",name="add_evenement")
+   * @Route("/evenement/{id}/Edit",name ="edit_evenement")
    */
 
   public function add(Evenement $evenement = null, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
@@ -67,7 +68,11 @@ class EvenementController extends AbstractController
     $lieu = $doctrine->getRepository(Lieu::class)->findAll();
     $lieu[0]->getCapacity();
 
-    
+    if (!$evenement) {
+      $evenement = new Evenement();
+  } else {
+      $evenement = $evenement;
+  }
 
 
 
@@ -75,6 +80,7 @@ class EvenementController extends AbstractController
     $form = $this->createForm(EvenementType::class, $evenement);
     $form->handleRequest($request); 
       if ($form->isSubmitted() && $form->isValid()) {
+
         $dateDebut = $form->get('date_debut')->getData();
 
         // Vérifier si un événement existe déjà à la même date
@@ -86,6 +92,7 @@ class EvenementController extends AbstractController
           // Le code pour créer et enregistrer l'événement ici
 
           $file = $form->get('image')->getData();
+      
           $dateDebut = $form->get('date_debut')->getData();
           $dateAujourdhui = new \DateTime();
 
