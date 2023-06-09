@@ -53,10 +53,9 @@ class EvenementController extends AbstractController
 
   /**
    * @Route("/evenement/add",name="add_evenement")
-   * @Route("/evenement/Edit/id",name ="edit_evenement")
    */
 
-  public function add(Evenement $evenement = null, Request $requeste, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+  public function add(Evenement $evenement = null, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
   {
 
     // Vérifier si l'utilisateur est connecté
@@ -69,17 +68,12 @@ class EvenementController extends AbstractController
     $lieu[0]->getCapacity();
 
     
-    if (!$evenement) {
-      $evenement = new Evenement();
-  } else {
-      $evenement = $evenement;
-  }
- 
+
 
 
 
     $form = $this->createForm(EvenementType::class, $evenement);
-    $form->handleRequest($requeste); {
+    $form->handleRequest($request); 
       if ($form->isSubmitted() && $form->isValid()) {
         $dateDebut = $form->get('date_debut')->getData();
 
@@ -99,7 +93,7 @@ class EvenementController extends AbstractController
          
        
 
-          // var_dump($capacity);die;
+        
      
 
           if ($dateDebut < $dateAujourdhui) {
@@ -141,7 +135,7 @@ class EvenementController extends AbstractController
           }
         }
       }
-    }
+    
 
 
     return $this->render('evenement/add.html.twig', [
