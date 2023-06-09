@@ -64,6 +64,24 @@ class EvenementType extends AbstractType
 
                 
             ])
+            ->add('imageAffiche',FileType::class, [
+                'data_class' =>null,
+                'constraints' => [
+                    new File ([
+                        'maxSize'=>'1024k',
+                        'mimeTypes'=> [
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg'
+                        ],
+                        'mimeTypesMessage'=>'Please upload a valid image',
+                    ]),
+                ],
+                'label'=>'Ajoutez une image de votre Affiche (facultative) :',
+              
+
+                
+            ])
             ->add('categorie',EntityType::class,
             ['class'=>Categorie::class,'choice_label'=>'nom'])
           

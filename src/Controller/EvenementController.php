@@ -92,7 +92,8 @@ class EvenementController extends AbstractController
           // Le code pour créer et enregistrer l'événement ici
 
           $file = $form->get('image')->getData();
-      
+          $imageAffiche = $form->get('imageAffiche')->getData();
+         
           $dateDebut = $form->get('date_debut')->getData();
           $dateAujourdhui = new \DateTime();
 
@@ -110,6 +111,26 @@ class EvenementController extends AbstractController
              
           }
            else {
+            if ($imageAffiche) {
+              $originalFilename = pathinfo($imageAffiche->getClientOriginalName(), PATHINFO_FILENAME);
+              // this is needed to safely include the file name as part of the URL
+              $safeFilename = $slugger->slug($originalFilename);
+              $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageAffiche->guessExtension();
+              //si les condition sont juste il va recuperer la data 
+              $evenement = $form->getData();
+              $evenement->setImageAffiche($newFilename);
+    
+              //on a basoin doctrine pour communiquer avec la base donnees
+    
+             
+              try {
+                $imageAffiche->move(
+                  $this->getParameter('evenement_directory'),
+                  $newFilename
+                );
+              } catch (FileException $e) {
+              }
+            }
             if ($file) {
               $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
               // this is needed to safely include the file name as part of the URL

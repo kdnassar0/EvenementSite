@@ -95,6 +95,11 @@ class Evenement
      */
     private $lieu;
 
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=true)
+     */
+    private $imageAffiche;
+
 
 
     public function __construct()
@@ -318,6 +323,18 @@ class Evenement
     public function setLieu(?Lieu $lieu): self
     {
         $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getImageAffiche(): ?string
+    {
+        return $this->imageAffiche;
+    }
+
+    public function setImageAffiche(?string $imageAffiche): self
+    {
+        $this->imageAffiche = $imageAffiche;
 
         return $this;
     }
