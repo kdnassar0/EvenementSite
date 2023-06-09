@@ -23,6 +23,7 @@ class CategorieController extends AbstractController
     /**
      * @Route("/categorie", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
+     * @Route("/categorie/{id}/Edit",name ="edit_categorie")
      */
     public function index(CategorieRepository $ca, ManagerRegistry $doctrine, Categorie $categorie = null, Request $request, SluggerInterface $slugger, EvenementRepository $e, Security $security): Response
 
@@ -38,6 +39,14 @@ class CategorieController extends AbstractController
     
 
         if ($isAdmin) {
+
+
+            if (!$categorie) {
+                $categorie = new Categorie();
+            } else {
+                $categorie = $categorie;
+            }
+          
             $form = $this->createForm(CategorieType::class, $categorie);
             $form->handleRequest($request);
 

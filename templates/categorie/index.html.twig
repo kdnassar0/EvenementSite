@@ -64,11 +64,13 @@
           src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
 
 
-          {% if is_granted('ROLE_ADMIN') %}
-          <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}"><i class="fa-solid fa-trash"></i></a>
-          {% endif %}
           <h1> {{ categorie.nom }} </h1>
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}"><i class="fa-solid fa-trash"></i></a>
+        <a href="{{ path ('edit_categorie',{'id':categorie.id}) }}"><i
+          class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+        {% endif %}
     {% endfor %}
   </div>
 

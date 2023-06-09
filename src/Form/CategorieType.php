@@ -20,27 +20,29 @@ class CategorieType extends AbstractType
         $builder
             ->add('nom',TextType::class)
             
-            ->add('image',FileType::class,
-            [
-            'constraints' => [
-                        new File([
-                            'maxSize' => '1024k',
-                            'mimeTypes' => [
-                                
-                                'image/png',
-                                'image/jpeg',
-                                'image/jpg'
-                                           ],
-                            'mimeTypesMessage' => 'Please upload a valid image',
-                                ])
-                            ]
-        
+            ->add('image',FileType::class, [
+                'data_class' =>null,
+                'constraints' => [
+                    new File ([
+                        'maxSize'=>'1024k',
+                        'mimeTypes'=> [
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg'
+                        ],
+                        'mimeTypesMessage'=>'Please upload a valid image',
+                    ]),
+                ],
+                'label'=>'Ajoutez une image de votre événement :',
+              
             ])
             
-            ->add('submit',SubmitType::class);
+            ->add('submit',SubmitType::class,['label'=>'<i class="fa-regular fa-paper-plane"></i>',
+            'label_html' => true]);
+
+            }  
             
-        
-    }
+    
 
     public function configureOptions(OptionsResolver $resolver): void
     {
