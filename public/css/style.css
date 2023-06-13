@@ -986,9 +986,13 @@ input {
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
-    width:100%;
+    margin: 50px;
+    width:70%;
     overflow-x: auto;
-    height: 70vh;
+    height: 100vh;
+    border: 1px solid  ;
+    gap: 5px;
+    padding: 20px;
 
    
 
@@ -997,8 +1001,9 @@ input {
 .slide2{
     display: flex;
     flex-direction: column;
+    border: 1px solid;
 
-   /* background-color: #212121; */
+
   
 }
 
@@ -1007,7 +1012,7 @@ input {
     background-color: #092c4c
 }
 .containerElementSlide2 img {
-    width:200px;
+    width:250px;
    
 }
 
@@ -1027,7 +1032,7 @@ input {
     font-size: 14px;
     color: #F6F9FC;
     font-family: Helvetica Regular 2px;
-   width: 300px;
+   width: 250px;
  
 }
 
