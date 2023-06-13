@@ -978,6 +978,65 @@ input {
 /*-------------------fin slider----------------- */
 
 
+ 
+/*------------------- slider2----------------- */
+
+
+.containerElementSlide2 {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    width:100%;
+    overflow-x: auto;
+    height: 70vh;
+
+   
+
+}
+
+.slide2{
+    display: flex;
+    flex-direction: column;
+
+   /* background-color: #212121; */
+  
+}
+
+.infoSlider2{
+    width: auto;
+    background-color: #092c4c
+}
+.containerElementSlide2 img {
+    width:200px;
+   
+}
+
+.infoSlider2 .nomEvenement {
+    font-size: 48px;
+    font-family: Helvetica Bold 2px;
+    color: #F6F9FC;
+}
+
+.infoSlider2 .dateEvenementSlide {
+    font-size: 24px;
+    color: #F6F9FC;
+    font-family: Martian Mono SemiExpanded Light;
+}
+
+.infoSlider2 .descriptionEvenementSlide {
+    font-size: 14px;
+    color: #F6F9FC;
+    font-family: Helvetica Regular 2px;
+   width: 300px;
+ 
+}
+
+
+
+
+/*-------------------fin slider2----------------- */
+
+
 
 
 
