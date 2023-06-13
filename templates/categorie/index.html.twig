@@ -86,23 +86,25 @@
   {% endif %}
 </div>
 
+<div class="sectionPageAccueil">
+  <h1> Agenda : </h1>
+  <div class="containerSlide2">
+    <div class="containerElementSlide2">
+      {% for evenementAvenir in evenementsAvenir %}
+      <div class="slide2">
+        <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+        <div class="infoSlider2">
+          <a href=" {{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}"><div class="nomEvenement">{{ evenementAvenir.nom }}</div></a>
+          <div class="dateEvenementSlide">  {{ evenementAvenir.dateDebut |date('d-m-Y H:m') }}
+            <br>{{ evenementAvenir.dateFin |date('d-m-Y H:m') }}</div>
+          </div>
+          <div class="descriptionEvenementSlide">{{ evenementAvenir.description }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 
-
-<div class="containerElementSlide2">
-{% for evenementAvenir in evenementsAvenir %}
-  <div class="slide2">
-  <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
-  <div class="infoSlider2">
-    <div class="nomEvenement">{{ evenementAvenir.nom }}</div>
-    <div class="dateEvenementSlide"> Du : {{ evenementAvenir.dateDebut |date('Y-M-D') }}
-  Au : {{ evenementAvenir.dateFin |date('Y-M-D') }}</div>
-  <div class="descriptionEvenementSlide">{{ evenementAvenir.description }}</div>
- </div>
 </div>
- {% endfor %}
-</div>
-
-
 
 
 
