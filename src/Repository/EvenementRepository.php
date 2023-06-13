@@ -50,7 +50,7 @@ class EvenementRepository extends ServiceEntityRepository
         // on fait createquerybuilder
         return $this->createQueryBuilder('e')
         // on fait une condition 
-        ->andWhere('e.date_debut > :val')
+        ->andWhere('e.date_debut >= :val')
         // on met les paramettre
         ->setParameter('val',$now)
         ->orderBy('e.date_debut','ASC')
@@ -76,19 +76,7 @@ class EvenementRepository extends ServiceEntityRepository
         ->getResult() ;
     }
 
-    public function findEvenementsPasseesParCategorie($categorieId)
-    {
-        $now = new DateTime('Europe/paris');
-        return $this->createQueryBuilder('e')
-            ->innerJoin('e.categorie', 'c')
-            ->andWhere('c.id = :categorie_id')
-            ->andWhere('e.date_fin < :date_now')
-            ->setParameter('categorie_id', $categorieId)
-            ->setParameter('date_now', $now)
-            ->orderBy('e.date_debut', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
+ 
     public function findEvenementsPassees()
     {
         $now = new DateTime('Europe/paris');

@@ -8,6 +8,7 @@ use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\EvenementRepository;
 use App\Repository\CommentaireRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -109,6 +110,7 @@ class UserController extends AbstractController
     {
 
         $evenementsAvenir = $e->findEvenementsAvenir();
+       
 
         return $this->render('user/admin.html.twig', [
             'evenementsAvenir' => $evenementsAvenir
@@ -118,12 +120,11 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/organisateur",name="app_oragnisateur")
+     * @Route("/organisateur/{id}",name="app_oragnisateur")
      */
 
     public function Organisateur(EvenementRepository $ev)
     {
-       
         $user = $this->getUser();
         $evenements = $ev->findBy(["createur" => $user]);
         return $this->render('user/organisateur.html.twig', [
@@ -131,6 +132,21 @@ class UserController extends AbstractController
             'evenements' => $evenements,
         ]);
     }
+    /**
+     * @Route("/infoCreateur/{id}",name="app_createur")
+     */
+
+    public function Createur(UserRepository $user,$id)
+    {
+     
+        $Createursevenements = $user->findBy(['id'=>$id]);
+ 
+
+        return $this->render('user/createurInfo.html.twig', [
+         'Createursevenements'=>$Createursevenements
+        ]);
+    }
+
 
 
 

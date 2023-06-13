@@ -16,9 +16,15 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('text',TextareaType::class)
+            ->add('text',TextareaType::class,[
+                'required' =>true,
+                'attr'=>[
+                    'maxlength'=>255
+                ]
+            ])
             ->add('evenement',HiddenType::class,[
                'mapped'=>false
+            
             ])
             // ->add('utilisateur',TextType::class)
             ->add('submit',SubmitType::class,['label'=>'<i class="fa-regular fa-paper-plane"></i>',

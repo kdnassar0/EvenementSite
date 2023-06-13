@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="containerProfile">
+
+    {% for CreateurEvenement in Createursevenements %}
+    <h1><a>{{CreateurEvenement.pseudo }}</a></h1>
+    <div class="evenementProfile">
+        {% for evenement in CreateurEvenement.evenements %}
+        <div class="elementsEvenementProfile">
+            <a href="{{ path ('details_evenement',{'idEvent':evenement.id}) }}"><img
+                    src="{{asset ('images/evenement/'~ evenement.image) }}" alt=""></a>
+            <span class="nomEvenementProfile"> {{ evenement.nom }} </span>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+   
+</div>
+{% endblock %}
+
+

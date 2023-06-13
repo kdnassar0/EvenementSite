@@ -35,7 +35,7 @@ class EvenementController extends AbstractController
   public function evenementsParCategorie(EvenementRepository $e, Categorie $categorie): Response
   {
 
-    $evenementsPassees = $e->findEvenementsPasseesParCategorie($categorie->getId());
+   
     $evenementsEncours = $e->findEvenementsEncoursParCategorie($categorie->getId());
 
 
@@ -43,7 +43,7 @@ class EvenementController extends AbstractController
 
 
     return $this->render('evenement/index.html.twig', [
-      'evenementsPassees' => $evenementsPassees,
+      
       'evenementsEncours' => $evenementsEncours
     
     ]);
@@ -81,37 +81,44 @@ class EvenementController extends AbstractController
     $form->handleRequest($request); 
       if ($form->isSubmitted() && $form->isValid()) {
 
-        $dateDebut = $form->get('date_debut')->getData();
-
-        // Vérifier si un événement existe déjà à la même date
-        $existingEvent = $doctrine->getRepository(Evenement::class)->findOneBy(['date_debut' => $dateDebut]);
-
-        if ($existingEvent) {
-          $form->get('date_debut')->addError(new FormError('Un événement existe déjà à cette date.'));
-        } else {
-          // Le code pour créer et enregistrer l'événement ici
-
-          $file = $form->get('image')->getData();
-          $imageAffiche = $form->get('imageAffiche')->getData();
-         
-          $dateDebut = $form->get('date_debut')->getData();
-          $dateAujourdhui = new \DateTime();
-
-          $nbDesPlaces = $form->get('nb_des_places')->getData();
-         
-       
-
+        $dateDebut = $form->get('date_debut')->getData('Y-m-d H:m');
+        $datefin = $form->get('date_fin')->getData('Y-m-d H:m');
         
-     
-
-          if ($dateDebut < $dateAujourdhui) {
-            $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
-          }elseif($nbDesPlaces > $lieu[0]->getCapacity()){
-            $form->get('nb_des_places')->addError(new FormError('Le nombre de places est supérieur à la capacité de notre lieu.'));
-             
-          }
-           else {
-            if ($imageAffiche) {
+       
+        if($dateDebut == $datefin OR $dateDebut > $datefin){
+      
+          $form->get('date_debut')->addError(new FormError('vous ne pouvez pas ajouter un evenement '));
+          }else{
+          
+          // Vérifier si un événement existe déjà à la même date
+          $existingEvent = $doctrine->getRepository(Evenement::class)->findOneBy(['date_debut' => $dateDebut]);
+          
+          if ($existingEvent) {
+            $form->get('date_debut')->addError(new FormError('Un événement existe déjà à cette date.'));
+          } else {
+            // Le code pour créer et enregistrer l'événement ici
+            
+            $file = $form->get('image')->getData();
+            $imageAffiche = $form->get('imageAffiche')->getData();
+            
+            $dateDebut = $form->get('date_debut')->getData();
+            $dateAujourdhui = new \DateTime('Europe/Paris');
+            
+            $nbDesPlaces = $form->get('nb_des_places')->getData();
+            
+            
+            
+            
+            
+            
+            if ($dateDebut < $dateAujourdhui) {
+              $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
+            }elseif($nbDesPlaces > $lieu[0]->getCapacity()){
+              $form->get('nb_des_places')->addError(new FormError('Le nombre de places est supérieur à la capacité de notre lieu.'));
+              
+            }
+            else {
+              if ($imageAffiche) {
               $originalFilename = pathinfo($imageAffiche->getClientOriginalName(), PATHINFO_FILENAME);
               // this is needed to safely include the file name as part of the URL
               $safeFilename = $slugger->slug($originalFilename);
@@ -121,8 +128,8 @@ class EvenementController extends AbstractController
               $evenement->setImageAffiche($newFilename);
     
               //on a basoin doctrine pour communiquer avec la base donnees
-    
-             
+              
+              
               try {
                 $imageAffiche->move(
                   $this->getParameter('evenement_directory'),
@@ -138,18 +145,18 @@ class EvenementController extends AbstractController
               $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
               $evenement = $form->getData();
               $evenement->setImage($newFilename);
-
-
-
+              
+              
+              
               $evenement->setCreateur($this->getUser());
               $evenement->setStatut('en attente');
               $entityManager = $doctrine->getManager();
               $entityManager->persist($evenement);
               $entityManager->flush();
             }
-
-
-
+            
+            
+            
             try {
               $file->move(
                 $this->getParameter('evenement_directory'),
@@ -157,11 +164,11 @@ class EvenementController extends AbstractController
               );
             } catch (FileException $e) {
             }
-
-          
+            
             return $this->redirectToRoute('app_categorie');
           }
         }
+      }
       }
     
 
@@ -195,7 +202,8 @@ class EvenementController extends AbstractController
         $filesystem->remove($imagePath);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_categorie');
+        return $this->redirectToRoute('app_categorie'
+      ) ;
       }
     }
     return $this->redirectToRoute('app_categorie');
@@ -219,9 +227,40 @@ class EvenementController extends AbstractController
       $entityManager->flush();
 
 
-      return $this->redirectToRoute('app_categorie') ;
+      return $this->redirectToRoute('details_evenement', [
+        'idEvent' => $evenement->getId()
+    ]) ;
     }
     return $this->redirectToRoute('app_categorie');
+  }
+
+  /**
+   * @Route("/evenement/{id}/supprimerParticipant/{idParticipant}",name="supprimer_participant")
+   */
+
+  public function supprimerParticipant(Evenement $evenement = null, ManagerRegistry $doctrine,$idParticipant)
+  {
+   
+    if (!$this->getUser()) {
+      $this->addFlash('warning', ' Veuillez vous connecter pour participer cet événement .');
+      return $this->redirectToRoute('app_login');
+    }
+    if ($evenement) {
+      $userRepository = $doctrine->getRepository(User::class);
+      $participant = $userRepository->find($idParticipant);
+      $entityManager = $doctrine->getManager();
+      $evenement->removeParticipant($participant);
+      $entityManager->flush();
+
+
+      return $this->redirectToRoute('details_evenement', [
+        'idEvent' => $evenement->getId()
+    ]) ;
+    
+    return $this->redirectToRoute('app_categorie');
+  }
+
+return $this->redirectToRoute('app_categorie');
   }
   
 }

@@ -19,7 +19,7 @@ class CategorieCrudController extends AbstractCrudController
         return [
             yield Field::new('nom'),
             yield ImageField::new('image')
-        ->setBasePath('public/images/categorie')
+        ->setBasePath('/')
     ->setUploadDir('public/images/categorie')];
             
         

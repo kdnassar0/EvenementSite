@@ -714,55 +714,50 @@ input {
 
 .containerPageEvenements {
     width: 100%;
-    height: auto;
-    background-repeat: no-repeat;
-    background-size: cover;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     position: relative;
-    background-color: #F2884B;
-
-
-
+    background-color: #F6F9FC;
 }
 
 
 
-.containerPageEvenements .elementsNav nav ul li {
-    color: #333333;
-}
+
 
 .containerPageEvenements h1 {
-    color: #333333;
+    color: #092C4C;
     margin-top: 50px;
+    font-size: 36px;
 }
 
-.containerPageEvenements .elementsNav .logo {
-    color: #333333;
-}
+
 
 
 
 .evenementsListes {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: row;
-    width: 80%;
+    width: 50%;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
-    background-color: #c55d96dc;
+    gap: 5px;
     margin: 20px;
     padding: 20px;
-    width: 80%;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 12px 20px 4px;
+
+}
+.evenementsListes h3 a {
+    background-color: #092C4C;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .evenementsListes img {
-    width: 300px;
-    border-radius: 10px;
+    width: 180px;
+  
 }
 
 .evenementsListes a i {
@@ -775,25 +770,19 @@ input {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 10px;
-    background-color: #a6447ac1;
-    border-radius: 10px;
+    padding: 20px;
+    background-color: #1C85E8;
+   
     gap: 20px;
-    border-color: #A6447A;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    border: 1px #1C85E8;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
+
 
 /* fin la page evenementParCategorie  */
 
 
-.iconFlech {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    font-size: 30px;
-    margin-top: 50px;
 
-}
 
 /*------------------- slider----------------- */
 
@@ -812,6 +801,7 @@ input {
 
 .imagesSlide {
     width: 90%;
+    
     overflow: hidden;
     display: flex;
 
@@ -868,7 +858,7 @@ input {
 
 
 .sliderButtons {
-    bottom: 60px;
+    bottom: 50px;
     left: 40%;
     position: absolute;
     z-index: 2;
@@ -915,9 +905,11 @@ input {
 }
 
 .containerInfoEvenement .descriptionEvenementSlide {
-    font-size: 18px;
+    font-size: 14px;
     color: #F6F9FC;
     font-family: Helvetica Regular 2px;
+    width: 140%;
+ 
 }
 
 .text1 {
@@ -1126,13 +1118,23 @@ input {
 .containerEelmentsDetails{
     width: 100%;
     height: auto;
-    background-color: #D6E0E7;
     align-items: center;
     justify-content: center;
     display: flex;
     margin: 50px;
+    position: relative;
+   
+}
 
-
+#video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    /* border-radius: 20px; */
+    filter: hue-rotate(-34deg);
+    mix-blend-mode: difference;
 }
 .containerEelments {
     width: 80%;
@@ -1160,7 +1162,7 @@ input {
 
 }
 .discreption img{
-    height: 45vh;
+  
     width: 50%;
     border-radius: 2%;
  
@@ -1170,16 +1172,19 @@ input {
 
 .discreption {
 
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    box-shadow:  rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     width: 50%;
     height: auto;
     color: #092C4C;
     display: flex;
     gap: 10px;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
     border-radius: 2%;
     margin: 30px;
+    background-color: #d6e0e700 ;
+    backdrop-filter: blur(40px);
+    
   
  
 

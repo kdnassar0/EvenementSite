@@ -96,7 +96,7 @@ class Evenement
     private $lieu;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @ORM\Column(type="string", length=1000, nullable=true,,options={"default" : "'chemin/vers/image_par_defaut.jpg'"})
      */
     private $imageAffiche;
 
@@ -106,6 +106,7 @@ class Evenement
     {
         $this->participants = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+       
        
     
     }

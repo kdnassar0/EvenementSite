@@ -43,7 +43,7 @@
         <li>Organiser</li>
       </a>
       {% if app.user %}
-      <a href="{{ path ('app_oragnisateur') }}">
+      <a href="{{ path ('app_oragnisateur',{'id':app.user.id}) }}">
         <li>Profil</li>
       </a>
       {% endif %}

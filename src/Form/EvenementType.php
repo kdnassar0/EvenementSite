@@ -78,6 +78,7 @@ class EvenementType extends AbstractType
                     ]),
                 ],
                 'label'=>'Ajoutez une image de votre Affiche (facultative) :',
+                'required' => false,
               
 
                 

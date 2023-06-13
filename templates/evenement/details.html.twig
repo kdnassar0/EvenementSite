@@ -4,39 +4,45 @@
 {% block body %}
 
 
-
-
 <div class="containerEelmentsDetails">
+    <video autoplay muted loop id="video">
+        <source src="/videos/_import_61b32b9a6213b2.04453187.mp4" type="video/mp4">
+    </video>
     <div class="containerEelments">
         <div class="imagesEtButtons">
         <img src="{{asset ('images/evenement/'~ evenement.image) }}" alt="">
                 {# condition pour pas pouvoir participer un evenementPasses #}
-                {% if evenement.dateDebut | date('m/d/y') > "now"|date("m/d/Y") %}
-                {% if evenement.participant |length == evenement.nbDesPlaces %}
-                {% set link = 'complete' %}
-                {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
+                {% if evenement.dateDebut | date('d/m/Y') > "now"|date("d/m/Y") %}
+                 {% if evenement.participant |length == evenement.nbDesPlaces %}
+                    {% set link = 'complete' %}
+                    {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
                 {% for participant in evenement.participant %}
-                {% if participant.id == app.user.id %}
-                {% set link = 'vous etes inscrits' %}
-                {% endif %}
-                {% endfor %}
+                    {% if participant.id == app.user.id %}
+                    {% set link = 'vous etes inscrits' %}
+                    {% endif %}
+                    {% endfor %}
                 {% else %}
-                {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
+                     {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
                 {% endif %}
         
                 {{ link | raw}}
                 {% endif %}
             {% if evenement.createur == app.user %}
             <a href="{{ path('supprimer_evenement',{'id':evenement.id}) }}"><i class="fa-solid fa-trash"></i></a>
+            <a href="{{ path('edit_evenement',{'id':evenement.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
             {% endif %}
         </div>
     
         <div class="discreption">
-            <strong>Référence : {{ createur.email }}</strong>
+   {% if app.user in evenement.participant %}
+    
+   <a href="{{ path('app_createur',{'id':evenement.createur.id}) }}"><strong>Référence : {{ createur.email }}</strong></a>
+   {% endif %}
+   
             <h1>{{ evenement.nom }}</h1>
-            <span class="dateEvenements"> du : {{ evenement.dateDebut | date('y-m-d H:i') }} au : {{ evenement.dateFin |
-                date('y-m-d H:i') }} </span><br>
+            <span class="dateEvenements"> du : {{ evenement.dateDebut | date('d-m-y H:i') }} au : {{ evenement.dateFin |
+                date('d-m-y H:i') }} </span><br>
             <span>{{ evenement.description }} </span>
            
             <img src="{{asset ('images/evenement/'~ evenement.imageAffiche) }}" alt="">
@@ -91,13 +97,14 @@
     <tr>
         <th>Nom</th>
         <th>Email</th>
-        <th>Date d'événement</th>
+        <th>Date d'événement</th>   
     </tr>
     {% for participant in evenement.participant %}
     <tr style="color: {{  couleurs[loop.index0 % couleurs|length]}}">
         <td>{{ participant.pseudo }}</td>
         <td><a href="mailto:{{ participant.email }}">{{ participant.email }}</a></td>
         <td>{{ evenement.dateDebut |date('Y-m-d') }}</td>
+        <td><a href="{{ path('supprimer_participant',{'id':evenement.id,'idParticipant':participant.id}) }}"><i class="fa-solid fa-trash"></i></a> </td>
     </tr>
     {% endfor %}
 </table>

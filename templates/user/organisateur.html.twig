@@ -10,14 +10,13 @@
         </div>
 
         
-      <div class="evenementProfile">
+       <div class="evenementProfile">
         {% for evenement in evenements %}
         <div class="elementsEvenementProfile">
         <a href="{{ path ('details_evenement',{'idEvent':evenement.id}) }}"><img
                 src="{{asset ('images/evenement/'~ evenement.image) }}" alt=""></a>
                 <span class="nomEvenementProfile"> {{ evenement.nom }} </span>
         </div>
-        
                 {% endfor %}
         </div>
 

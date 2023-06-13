@@ -5,53 +5,18 @@
 {% block body %}
 
 <div class="containerPageEvenements">
-
-    
-
-    <div class="iconFlech">
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-    </div>
     <h1>Evenements Encours</h1>
-
     <div class="evenementsListes">
         {% for evenementsEncours in evenementsEncours %}
         <div class="evenementCarte">
-            {{ evenementsEncours.nom }}
-
-
+           <h2> {{ evenementsEncours.nom }} </h2>
             <a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}"><img
                     src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
+            <strong>{{evenementsEncours.dateDebut | date('d-m-y H:i') }} </strong>
 
-            {{evenementsEncours.dateDebut | date('y-m-d H:i') }}
-          
+                <h3><a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}">  En savoir plus</a></h3>
         </div>
         {% endfor %}
-
-    </div>
-    <div class="iconFlech">
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-        <i class="fa-solid fa-turn-down fa-bounce"></i>
-    </div>
-    <h1>Evenements passses</h1>
-
-
-    <div class="evenementsListes">
-        {% for evenementPassee in evenementsPassees %}
-
-        <div class="evenementCarte">
-            {{ evenementPassee.nom }}
-            <a href=" {{ path('details_evenement',{'idEvent':evenementPassee.id}) }}"><img
-                    src="{{asset('images/evenement/'~ evenementPassee.image) }}" alt=""></a>
-
-        
-        </div>
-        {% endfor %}
-
     </div>
 </div>
 
