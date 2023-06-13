@@ -96,7 +96,7 @@ class Evenement
     private $lieu;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true,,options={"default" : "'chemin/vers/image_par_defaut.jpg'"})
+     * @ORM\Column(type="string", length=1000, nullable=true, options={"default": "affiche-de-l-evenement-1.png"})
      */
     private $imageAffiche;
 
