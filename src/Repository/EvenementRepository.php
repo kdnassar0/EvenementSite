@@ -58,7 +58,7 @@ class EvenementRepository extends ServiceEntityRepository
         ->getResult() ;
     }
 
-    public function findEvenements()
+    public function findEvenementsSlides()
     {
         // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
         $now = new DateTime('Europe/paris');
@@ -72,6 +72,7 @@ class EvenementRepository extends ServiceEntityRepository
         ->setParameter('val',$now)
         ->setParameter('statut',$statut)
         ->orderBy('e.date_debut','ASC')
+        ->setMaxResults(5)
         ->getQuery()
         ->getResult() ;
     }

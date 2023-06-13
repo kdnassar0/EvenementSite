@@ -32,7 +32,7 @@ class CategorieController extends AbstractController
 
         $evenementsAvenir = $e->findEvenementsAvenir();
         $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
-        $evenemetInfo = $e->findEvenements();
+        $evenemetInfo = $e->findEvenementsSlides();
         $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C","#1C85E8"];
         $isAdmin = $security->isGranted('ROLE_ADMIN');
 

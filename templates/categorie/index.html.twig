@@ -13,7 +13,6 @@
 
 <div class="containerSlider">
   <div class="imagesSlide">
-
     <div class="slider">
       {% for event in evenemetInfo %}
       <div class="slide active">
@@ -89,6 +88,19 @@
 
 
 
+<div class="containerElementSlide2">
+{% for evenementAvenir in evenementsAvenir %}
+  <div class="slide2">
+  <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+  <div class="infoSlider2">
+    <div class="nomEvenement">{{ evenementAvenir.nom }}</div>
+    <div class="dateEvenementSlide"> Du : {{ evenementAvenir.dateDebut |date('Y-M-D') }}
+  Au : {{ evenementAvenir.dateFin |date('Y-M-D') }}</div>
+  <div class="descriptionEvenementSlide">{{ evenementAvenir.description }}</div>
+ </div>
+</div>
+ {% endfor %}
+</div>
 
 
 
