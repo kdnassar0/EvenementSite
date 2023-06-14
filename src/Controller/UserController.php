@@ -110,10 +110,24 @@ class UserController extends AbstractController
     {
 
         $evenementsAvenir = $e->findEvenementsAvenir();
+
+        $rdvs = [] ; 
+    
+        foreach($evenementsAvenir as $evenement){
+          $rdvs [] =[
+            'id' => $evenement->getId(),
+            'start'=>$evenement->getDateDebut()->format('Y-m-d H:i:s'),
+            'end' =>$evenement->getDateFin()->format('Y-m-d H:i:s' ),
+            'title'=>$evenement->getNom(),
+          ] ;
+        }
+    
+        $rdvs =json_encode($rdvs);
        
 
         return $this->render('user/admin.html.twig', [
-            'evenementsAvenir' => $evenementsAvenir
+            'evenementsAvenir' => $evenementsAvenir,
+            'data' => $rdvs
         ]);
     }
 

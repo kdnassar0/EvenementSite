@@ -33,7 +33,7 @@ class CategorieType extends AbstractType
                         'mimeTypesMessage'=>'Please upload a valid image',
                     ]),
                 ],
-                'label'=>'Ajoutez une image de votre événement :',
+                'label'=>'Ajoutez une image de catégorie :',
               
             ])
             

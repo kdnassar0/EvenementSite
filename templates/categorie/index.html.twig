@@ -56,50 +56,60 @@
 </div>
 
 <div class="containerCategorie">
-  <div class="categorie">
-    {% for categorie in categories %}
-    <div class="categorieElements" style="background-color: {{  couleurs[loop.index0 % couleurs|length] }}">
-      <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img
-          src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
-
-
-          <h1> {{ categorie.nom }} </h1>
-        </div>
-        {% if is_granted('ROLE_ADMIN') %}
+  <div class="espaceCategorie">
+  {% for categorie in categories %}
+    <div class="categorie">
+      <div class="categorieElements" style="background-color: {{  couleurs[loop.index0 % couleurs|length] }}">
+        <a href="{{ path ('evenement_categorie',{'id':categorie.id}) }}"> <img
+            src=" {{asset('images/categorie/'~ categorie.image) }}" alt=""> </a>
+        <h1> {{ categorie.nom }} </h1>
+      </div>
+      <div class="buttonsCategorie">
+        {% if is_granted ('ROLE_ADMIN') %}
         <a href="{{ path ('supprimer_categorie',{'id':categorie.id}) }}"><i class="fa-solid fa-trash"></i></a>
         <a href="{{ path ('edit_categorie',{'id':categorie.id}) }}"><i
-          class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+            class="fa-sharp fa-solid fa-pen-to-square"></i></a>
         {% endif %}
+      </div>
+    </div>
     {% endfor %}
   </div>
-
-
   {# if pour verfier si le formaddcategorie n'est pas null #}
   {% if formAddCategorie %}
   <div class="formulaire-categorie">
     {{ form_start(formAddCategorie) }}
     <div class="chmpsNom"> {{ form_row(formAddCategorie.nom) }} </div>
     <div class="chmpsImage">{{ form_row(formAddCategorie.image) }} </div>
-    {{ form_row(formAddCategorie.submit) }}
+    <span>{{ form_row(formAddCategorie.submit) }}</span>
     {{ form_end(formAddCategorie) }}
   </div>
   {% endif %}
 </div>
+
+
+
 
 <div class="sectionPageAccueil">
   <h1> Agenda : </h1>
   <div class="containerSlide2">
     <div class="containerElementSlide2">
       {% for evenementAvenir in evenementsAvenir %}
+      {% if evenementAvenir.statut == 'validé' %}
+        
+   
       <div class="slide2">
         <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
         <div class="infoSlider2">
-          <a href=" {{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}"><div class="nomEvenement">{{ evenementAvenir.nom }}</div></a>
-          <div class="dateEvenementSlide">  {{ evenementAvenir.dateDebut |date('d-m-Y H:m') }}
-            <br>{{ evenementAvenir.dateFin |date('d-m-Y H:m') }}</div>
+          <a href=" {{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
+            <div class="nomEvenement">{{ evenementAvenir.nom }}</div>
+          </a>
+          <div class="dateEvenementSlide"> {{ evenementAvenir.dateDebut |date('d-m-Y H:m') }}
+            <br>{{ evenementAvenir.dateFin |date('d-m-Y H:m') }}
           </div>
-          <div class="descriptionEvenementSlide">{{ evenementAvenir.description }}</div>
         </div>
+        <div class="descriptionEvenementSlide">{{ evenementAvenir.description }}</div>
+      </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
