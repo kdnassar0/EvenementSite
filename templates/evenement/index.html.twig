@@ -13,7 +13,6 @@
             <a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}"><img
                     src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
             <strong>{{evenementsEncours.dateDebut | date('d-m-y H:i') }} </strong>
-
                 <h3><a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}">  En savoir plus</a></h3>
         </div>
         {% endfor %}

@@ -15,6 +15,7 @@ use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -188,12 +189,13 @@ class EvenementController extends AbstractController
    *@Route("/evenement/{id}/supprimer",name="supprimer_evenement")
    */
 
-  public function supprimerEvenement(Evenement $evenement = null, ManagerRegistry $doctrine, Filesystem $filesystem)
+  public function supprimerEvenement(Evenement $evenement = null, ManagerRegistry $doctrine, Filesystem $filesystem,Security $security)
   {
     // Vérifier si l'utilisateur actuel est l'auteur de l'événement
 
     if ($evenement) {
-      if ($evenement->getCreateur() == $this->getUser()) {
+      $isAdmin = $security->isGranted('ROLE_ADMIN');
+      if ($evenement->getCreateur() == $this->getUser() or  $isAdmin  ) {
         $categorie = $evenement->getCategorie();
         $entityManager = $doctrine->getManager();
         $entityManager->remove($evenement);

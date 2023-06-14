@@ -164,7 +164,7 @@ class UserController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_categorie');
+                return $this->redirectToRoute('app_admin');
             }
             return $this->redirectToRoute('app_categorie');
         }
@@ -184,9 +184,9 @@ class UserController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_categorie');
+                return $this->redirectToRoute('app_admin');
             }
-            return $this->redirectToRoute('app_categorie');
+            return $this->redirectToRoute('app_admin');
         }
         return $this->redirectToRoute('app_categorie');
     }

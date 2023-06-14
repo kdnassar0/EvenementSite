@@ -5,24 +5,45 @@
 {% block body %}
 
 
+<div class="containerPageAdmin">
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Statut</th>
+        <th>Image</th>
+        <th>Date de début</th>
+        <th>Date de fin</th>
+        <th>Déscription</th>
+     
+        <th>participer</th>
+        <th>valider</th>
+        <th>refuser</th>
+    </tr>
+    {% for evenementAvenir in evenementsAvenir %}
 
-{% for evenementAvenir in evenementsAvenir %}
+    {% if evenementAvenir.statut == 'en attente' or evenementAvenir.statut == 'refusé'%}
+    <tr>
+        <td>{{ evenementAvenir.nom }}</td>
+        <td>{{ evenementAvenir.statut }}</td>
+        <td> <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt=""></td>
+        <td>{{ evenementAvenir.dateDebut | date('d-m-Y H:m') }}</td>
+        <td>{{ evenementAvenir.dateFin | date('d-m-Y H:m') }}</td>
+        <td class="descriptionTablePageAdmin"> {{ evenementAvenir.description }}</td>
+        
+        <td> <a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}"><i class="fa-regular fa-share-from-square"></i></a></td>
+        <td class="iconValide"><a href="{{ path('admin_event_validate', {'id': evenementAvenir.id}) }}"><i class="fa-solid fa-check"></i></a></td>
+        <td class="iconRefuse"><a href="{{ path('admin_event_refuse', {'id': evenementAvenir.id}) }}"><i class="fa-solid fa-xmark"></i></a></td>
+        {% if evenementAvenir.statut == 'refusé' %}
+        <td><a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}"><i class="fa-regular fa-trash-can"></i></a></td>
+        {% endif %}
+    </tr>
 
-{% if evenementAvenir.statut == 'en attente' %}
-{{ evenementAvenir.nom }} <br>
-{{ evenementAvenir.description }}
- <img src=" {{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
-{{ evenementAvenir.dateDebut | date('y-m-d') }}
-<a href="{{ path ('supprimer_evenement',{'id':evenementAvenir.id}) }}">supprimer</a>
-<a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}">participer</a>
-
-<a href="{{ path('admin_event_validate', {'id': evenementAvenir.id}) }}">Valider</a>
-<a href="{{ path('admin_event_refuse', {'id': evenementAvenir.id}) }}">Refuser</a>
-
-{% endif %}
-{% endfor %}
+    {% endif %}
+    {% endfor %} 
+</table>
 
 
 
+</div>
 
-{% endblock %}  
+{% endblock %}
