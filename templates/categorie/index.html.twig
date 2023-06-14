@@ -19,9 +19,9 @@
         <img src="{{asset('images/evenement/'~ event.image) }}" alt="">
         <div class="containerInfoEvenement">
           <div class="nomEvenement">{{ event.nom }}</div>
+          <div class="descriptionEvenementSlide1">{{ event.description }} </div>
           <div class="dateEvenementSlide">Du : {{ event.dateDebut |date('Y-M-D') }}
             Au : {{ event.dateFin |date('Y-M-D') }}</div>
-          <div class="descriptionEvenementSlide">{{ event.description }} </div>
         </div>
       </div>
 
