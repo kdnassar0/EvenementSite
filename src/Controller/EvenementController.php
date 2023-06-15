@@ -204,7 +204,7 @@ class EvenementController extends AbstractController
         $filesystem->remove($imagePath);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_categorie'
+        return $this->redirectToRoute('app_admin'
       ) ;
       }
     }

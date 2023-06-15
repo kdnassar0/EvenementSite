@@ -9,9 +9,6 @@
 
 {% set hasEventsToValidate = false %}
 <div class="containerPageAdmin">
-    {% for evenementAvenir in evenementsAvenir %}
-    {% if evenementAvenir.statut == 'en attente' or evenementAvenir.statut == 'refusé'%}
-    {% set hasEventsToValidate = true %}
     <table>
         <tr>
             <th>Nom</th>
@@ -24,6 +21,9 @@
             <th>valider</th>
             <th>refuser</th>
         </tr>
+        {% for evenementAvenir in evenementsAvenir %}
+        {% if evenementAvenir.statut == 'en attente' or evenementAvenir.statut == 'refusé'%}
+        {% set hasEventsToValidate = true %}
         <tr>
             <td>{{ evenementAvenir.nom }}</td>
             <td>{{ evenementAvenir.statut }}</td>
@@ -85,8 +85,13 @@
                 
                 
             },    
-            events : data
+            events : data,
+            editable:true,
+            eventResizableFromStart :true
             
+        })
+        Calendar.on('eventChange',(e) => {
+           console.log(e)
         })
         
         
