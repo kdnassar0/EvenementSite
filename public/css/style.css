@@ -1592,29 +1592,42 @@ input {
 
 /* /////////////////tableau participant/////////////////////////// */
 
-/* table {
+.tableParticipants{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tableParticipants table {
     width: 50%;
-    margin: 50px;
+    margin-bottom: 50px;
     background-color: #D6E0E7;
     border-radius: 10px;
 }
 
-table tr {
+.tableParticipants table tr {
     text-align: center;
+
+   
 }
 
 
-th {
+.tableParticipants table th {
     font-size: 24px;
     padding: 10px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 700;
+    font-size: 24px;
 
 }
 
-td {
+.tableParticipants td {
 
+    font-family: 'Roboto',sans-serif;
+    font-weight: 300;
     font-size: 18px;
     padding: 20px;
-} */
+} 
 
 
 
@@ -1640,7 +1653,8 @@ td {
 
 .containerPageAdmin table {
     width: 90%;
-    padding: 20px;
+    padding: 30px;
+    background-color: #D6E0E7;
 
 }
 .containerPageAdmin table tr .descriptionTablePageAdmin {
@@ -1650,23 +1664,27 @@ td {
 
 }
 
+
 .containerPageAdmin table tr th  {
     width: 13%;
-    font-size: 1.1em;
-    padding: 8px;
+    font-size: 20px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 700;
     border-bottom: 3px solid;
     color: #092C4C;
-
-  
+padding-left: 5px;
 
 }
 
 .containerPageAdmin table tr td {
     width: 13%;
-    font-size: 1.1em;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 500;
     border-bottom: 3px solid;
+    font-size: 16px;
     color: #546477;
-    
+    text-align: center;
+   
 
 }
 

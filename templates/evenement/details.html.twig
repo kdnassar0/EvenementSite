@@ -94,11 +94,10 @@
 
 
 
-
+<div class="tableParticipants">
 {% if evenement.createur == app.user %}
 
 <table>
-
     <tr>
         <th>Nom</th>
         <th>Email</th>
@@ -115,9 +114,6 @@
     {% endfor %}
 </table>
 {% endif %}
-
-
-
 
 </div>
 
