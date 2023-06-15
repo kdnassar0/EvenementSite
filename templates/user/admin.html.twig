@@ -6,9 +6,12 @@
 {% block body %}
 
 
-    
-  
+
+{% set hasEventsToValidate = false %}
 <div class="containerPageAdmin">
+    {% for evenementAvenir in evenementsAvenir %}
+    {% if evenementAvenir.statut == 'en attente' or evenementAvenir.statut == 'refusé'%}
+    {% set hasEventsToValidate = true %}
     <table>
         <tr>
             <th>Nom</th>
@@ -17,14 +20,10 @@
             <th>Date de début</th>
             <th>Date de fin</th>
             <th>Déscription</th>
-
             <th>participer</th>
             <th>valider</th>
             <th>refuser</th>
         </tr>
-        {% for evenementAvenir in evenementsAvenir %}
-
-        {% if evenementAvenir.statut == 'en attente' or evenementAvenir.statut == 'refusé'%}
         <tr>
             <td>{{ evenementAvenir.nom }}</td>
             <td>{{ evenementAvenir.statut }}</td>
@@ -44,35 +43,32 @@
                         class="fa-regular fa-trash-can"></i></a></td>
             {% endif %}
         </tr>
-
         {% endif %}
         {% endfor %}
     </table>
+    {% if not hasEventsToValidate %}
+       <p>Vous n'avez pas d'événements à valider.</p>
+    {% endif %}
+</div>
 
-    
+
+
+<div id="Calendrier">
 </div>
 
 
 {% block stylesheets %}
 <style>
-    #Calendrier {
+    #Calendrier 
+    {
         width: 80%;
-        margin: auto;
-       
-        
-        
+        margin: auto;      
     }
-  
 </style>
 {% endblock %}
 
-<div id="Calendrier">
 
-</div>
-    
-    
 
-    
     <script>
         
     window.onload = () => {
