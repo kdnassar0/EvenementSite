@@ -50,7 +50,7 @@ nav ul {
 
 
 nav li {
-    color: #212121;
+    color: #092C4C;
     font-family: 'Martian Mono', monospace ;
     font-size: 24px;
  
@@ -60,7 +60,7 @@ nav li {
 .search li {
 
 
-    color: #212121;
+    color: #092C4C;
     font-family: 'Martian Mono', monospace ;
     font-size: 24px;
  
@@ -260,6 +260,7 @@ footer {
     background-color: #092C4C;
     padding: 3em 4em 2em;
     width: 100%;
+    height:auto;
     border-top: 5px solid;
 
 
@@ -336,7 +337,7 @@ footer .footer-cat,
     left: 0;
 }
 
-footer #subscribe {
+/* footer #subscribe {
     margin: 20px 0px 30px;
 }
 
@@ -363,11 +364,11 @@ input#subscriber-email::-ms-input-placeholder {
 
 input#subscriber-email::placeholder {
     color: #cecece;
-}
+} */
 
 .col-3 {
     display: inline-table;
-    width: 25%;
+    width: 37%;
 }
 
 .col-3#newsletter {
@@ -682,7 +683,7 @@ input#subscriber-email::placeholder {
     font-size: 48px;
     font-family: 'Roboto',sans-serif;
     font-weight: 900;
-    color: #F6F9FC;
+    color: #FF8083;
     padding: 40px 0px 20px 0px;
 
 
@@ -750,6 +751,11 @@ input {
     width: 70px;
 
 }
+    .evenement_image{
+        font-family: 'Roboto',sans-serif;
+        font-weight: 700;
+
+    }
 
 
 
@@ -1319,6 +1325,8 @@ input {
 .titreEvenementPasses {
     font-size: 36px;
     color: #092C4C;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 700;
 }
 
 
