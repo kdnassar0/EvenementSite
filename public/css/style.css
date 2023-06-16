@@ -1738,7 +1738,19 @@ padding-left: 5px;
 
 
 
+/* /////////////page politique/////////////////// */
 
+
+
+.containerPagePolitique{
+    width: 70%;
+    min-height: 100vh;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+/* /////////////fin page politique/////////////////// */
 
 
 

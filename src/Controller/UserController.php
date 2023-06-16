@@ -31,6 +31,16 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', []);
     }
+    
+    /**
+     * @Route("/conditions", name="app_conditions")
+     */
+    public function condition(): Response
+    {
+
+
+        return $this->render('user/conditions.html.twig', []);
+    }
 
 
 
