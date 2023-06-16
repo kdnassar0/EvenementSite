@@ -12,20 +12,20 @@
         <div class="imagesEtButtons">
             <img src="{{asset ('images/evenement/'~ evenement.image) }}" alt="">
             {# condition pour pas pouvoir participer un evenementPasses #}
-            {% if evenement.dateDebut | date('d/m/Y') > "now"|date("d/m/Y") %}
-            {% if evenement.participant |length == evenement.nbDesPlaces %}
-            {% set link = 'complete' %}
-            {% elseif is_granted ('IS_AUTHENTICATED_REMEMBERED') %}
-            {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
-            {% for participant in evenement.participant %}
-            {% if participant.id == app.user.id %}
-            {% set link = 'vous etes inscrits' %}
-            {% endif %}
-            {% endfor %}
-            {% else %}
-            {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
-            {% endif %}
-            {{ link | raw}}
+            {% if evenement.dateDebut | date('d/m/Y H:m') > "now"|date("d/m/Y H:m") %}
+                {% if evenement.participant |length == evenement.nbDesPlaces %}
+                    {% set link = 'complete' %}
+                {% elseif is_granted ('IS_AUTHENTICATED_REMEMBERED') %}
+                       {% set link = '<a href="' ~ path('add_participant', {'id': evenement.id}) ~ '">participer</a>' %}
+                        {% for participant in evenement.participant %}
+                            {% if participant.id == app.user.id %}
+                              {% set link = 'vous etes inscrits' %}
+                            {% endif %}
+                        {% endfor %}
+                {% else %}
+                    {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
+                {% endif %}
+                {{ link | raw}}
             {% endif %}
             {% if evenement.createur == app.user or is_granted ("ROLE_ADMIN") %}
             <a href="{{ path('supprimer_evenement',{'id':evenement.id}) }}"><i class="fa-solid fa-trash"></i></a>

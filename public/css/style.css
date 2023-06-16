@@ -1097,7 +1097,8 @@ input {
     opacity: 0%;
     background-color: #54647761;
     backdrop-filter: blur(25px);
-
+    font-family: 'Roboto',sans-serif;
+    font-weight: 700;
     transition: .6s;
     overflow-y: auto;
     color: #fff;
