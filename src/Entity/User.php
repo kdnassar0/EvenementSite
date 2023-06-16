@@ -57,10 +57,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaires;
 
-    // /**
-    //  * @ORM\ManyToMany(targetEntity=Evenement::class, inversedBy="utilisateur")
-    //  */
-    // private $participants;
+    /**
+     * @ORM\ManyToMany(targetEntity=Evenement::class, mappedBy="participants")
+     */
+    private $participants;
 
     /**
      * @ORM\Column(type="boolean")
@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->evenements = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
-        // $this->participants = new ArrayCollection(); 
+        $this->participants = new ArrayCollection(); 
     }
 
 

@@ -17,7 +17,7 @@
             <th>Date de début</th>
             <th>Date de fin</th>
             <th>Déscription</th>
-            {# <th>participer</th> #}
+            
             <th>valider</th>
             <th>refuser</th>
         </tr>
@@ -32,8 +32,7 @@
             <td>{{ evenementAvenir.dateFin | date('d-m-Y H:m') }}</td>
             <td class="descriptionTablePageAdmin"> {{ evenementAvenir.description }}</td>
 
-            {# <td> <a href="{{ path ('add_participant',{'id':evenementAvenir.id}) }}"><i
-                        class="fa-regular fa-share-from-square"></i></a></td> #}
+            
             <td class="iconValide"><a href="{{ path('admin_event_validate', {'id': evenementAvenir.id}) }}"><i
                         class="fa-solid fa-check"></i></a></td>
             <td class="iconRefuse"><a href="{{ path('admin_event_refuse', {'id': evenementAvenir.id}) }}"><i

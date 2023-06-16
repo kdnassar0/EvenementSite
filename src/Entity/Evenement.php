@@ -75,7 +75,7 @@ class Evenement
     private $createur; 
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="evenements")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="participants")
      */
     private $participants;
 
