@@ -25,7 +25,7 @@ class LieuType extends AbstractType
             ->add('image',FileType::class, [
                 'constraints' => [
                     new File ([
-                        'maxSize'=>'1024k',
+                        'maxSize'=>'10024k',
                         'mimeTypes'=> [
                             'image/png',
                             'image/jpeg',

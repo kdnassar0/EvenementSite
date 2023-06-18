@@ -1276,7 +1276,7 @@ input {
     width: 400px;
     height: 200px;
     border-radius: 5px;
-    object-fit: fill;
+    object-fit:cover;
 }
 
 .textEtImage img {
@@ -1772,6 +1772,87 @@ padding-left: 5px;
 }
 
 /* /////////////fin page politique/////////////////// */
+
+
+
+/* /////////////formulaire connection/////////////////// */
+
+.formulaireConncextion{
+  
+    width: 50%;
+    height: 80vh;
+    margin-top: 50px;
+
+   
+
+ 
+    
+}
+.imageFormulaireConnection {
+    width: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 179px;
+    left: 188px;
+    border-radius: 0px 10px 10px 0;
+}
+
+.imageWrapper {
+    
+    background-color: #092C4C;
+    width: 50%; /* La largeur doit être le double de la largeur du conteneur parent */
+    transform: translateX(150%); /* Décalage de 25% vers la gauche pour afficher la moitié de l'image */
+    
+}
+
+.halfImage {
+    width: 100%;
+    height: auto;   
+    display: block;
+}
+
+
+.formulaireConncextion form {
+    width: 50%;
+    padding: 20px;
+    height: 64vh;
+    background-color: #1C85E8;
+    z-index: 1;
+
+   display: flex;
+   gap: 5px;
+   justify-content: center;
+    flex-direction: column;
+    border-radius: 10px 0 0 10px;
+   
+}
+.formulaireConncextion h1{
+font-size: 20px;
+font-family: 'Roboto',sans-serif;
+font-weight: 900;
+
+
+
+}
+.formulaireConncextion label{
+font-size: 18px;
+font-family: 'Roboto',sans-serif;
+font-weight: 500px;
+
+ 
+}
+
+.formulaireConncextion form .btn-primary{
+    width: 70px;
+    padding: 5px;
+    border-radius: 5px;
+
+ 
+
+
+
+}
+/* /////////////fin formulaire connection/////////////////// */
 
 
 
