@@ -21,7 +21,7 @@ class CategorieController extends AbstractController
 {
 
     /**
-     * @Route("/categorie", name="app_categorie")
+     * @Route("/Home", name="app_categorie")
      * @Route("/add/categorie" , name="add_categorie")
      * @Route("/categorie/{id}/Edit",name ="edit_categorie")
      */
