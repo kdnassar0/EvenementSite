@@ -56,6 +56,7 @@
 </div>
 
 <div class="containerCategorie">
+
   <div class="espaceCategorie">
   {% for categorie in categories %}
     <div class="categorie">
@@ -92,6 +93,9 @@
 <div class="sectionPageAccueil">
   <h1> Agenda : </h1>
   <div class="containerSlide2">
+    <video autoplay muted loop id="video2">
+      <source src="/videos/354432577_6256783571025403_256348927289396645_n.mp4" type="video/mp4">
+  </video>
     <div class="containerElementSlide2">
       {% for evenementAvenir in evenementsAvenir %}
       {% if evenementAvenir.statut == 'validé' %}
