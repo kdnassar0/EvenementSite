@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Welcome!{% endblock %}</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🤡</text></svg>">
+  {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🤡</text></svg>"> #}
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -110,8 +110,7 @@
           <li><a href="{{ path('add_lieu') }}"><span>Lieu</span></a></li>
           <li><a href="{{ path('add_evenement') }}"><span>Organiser</span></a></li>
           <li><a href="{{path('app_conditions')}}"><span>Politique de confidentialité</span></a></li>
-          <li><a href="{{path('app_conditions')}}"><span>Politique de confidentialité</span></a></li>
-          <li><a href="{{path('app_conditions')}}"><span>Mentions légales</span></a></li>
+          <li><a href=""><span>Mentions légales</span></a></li>
         </ul>
       </div>
       <div class="col-3" id="newsletter">
@@ -127,17 +126,17 @@
         </div>
 
         <div id="address">
-          <span>Office Location</span>
+          <span>Adresse</span>
           <ul>
             <li>
-              <i class="far fa-building"></i>
-              <div>Los Angeles<br />
-                Office 9B, Sky High Tower, New A Ring Road, Los Angeles</div>
+              <i class="fa-solid fa-map-location"></i>
+              <div>Strasbourg<br />
+               </div>
             </li>
             <li>
               <i class="fas fa-gopuram"></i>
-              <div>Delhi<br />
-                Office 150B, Behind Sana Gate Char Bhuja Tower, Station Road, Delhi</div>
+              <div>Paris<br />
+             </div>
             </li>
           </ul>
         </div>
