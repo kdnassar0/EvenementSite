@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -46,13 +47,13 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'Votre mot de passe doit avoir au moins 6 caractères.',
+                        // pour la security on indique le maxLenght
                         'max' => 4096,
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\d).+$/',
-                        'message' => 'Your password must contain at least one lowercase letter, one uppercase letter, and one number',
+                        'message' => 'Votre mot de passe doit contenir au moins un numéro, une lettre minuscule, une lettre majuscule et un chiffre.',
                     ]),
                 ],
             ])

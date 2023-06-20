@@ -75,9 +75,6 @@ class EvenementController extends AbstractController
       $evenement = $evenement;
   }
 
-
-
-
     $form = $this->createForm(EvenementType::class, $evenement);
     $form->handleRequest($request); 
       if ($form->isSubmitted() && $form->isValid()) {
@@ -106,17 +103,10 @@ class EvenementController extends AbstractController
             $dateAujourdhui = new \DateTime('Europe/Paris');
             
             $nbDesPlaces = $form->get('nb_des_places')->getData();
-            
-            
-            
-            
-            
-            
             if ($dateDebut < $dateAujourdhui) {
               $form->get('date_debut')->addError(new FormError('La date de début ne peut pas être antérieure à aujourd\'hui.'));
             }elseif($nbDesPlaces > $lieu[0]->getCapacity()){
               $form->get('nb_des_places')->addError(new FormError('Le nombre de places est supérieur à la capacité de notre lieu.'));
-              
             }
             else {
               if ($imageAffiche) {
@@ -127,10 +117,7 @@ class EvenementController extends AbstractController
               //si les condition sont juste il va recuperer la data 
               $evenement = $form->getData();
               $evenement->setImageAffiche($newFilename);
-    
               //on a basoin doctrine pour communiquer avec la base donnees
-              
-              
               try {
                 $imageAffiche->move(
                   $this->getParameter('evenement_directory'),
@@ -145,10 +132,7 @@ class EvenementController extends AbstractController
               $safeFilename = $slugger->slug($originalFilename);
               $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
               $evenement = $form->getData();
-              $evenement->setImage($newFilename);
-              
-              
-              
+              $evenement->setImage($newFilename);-
               $evenement->setCreateur($this->getUser());
               $evenement->setStatut('en attente');
               $entityManager = $doctrine->getManager();

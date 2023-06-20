@@ -17,7 +17,7 @@
             <th>Date de début</th>
             <th>Date de fin</th>
             <th>Déscription</th>
-            
+
             <th>valider</th>
             <th>refuser</th>
         </tr>
@@ -32,7 +32,7 @@
             <td>{{ evenementAvenir.dateFin | date('d-m-Y H:m') }}</td>
             <td class="descriptionTablePageAdmin"> {{ evenementAvenir.description }}</td>
 
-            
+
             <td class="iconValide"><a href="{{ path('admin_event_validate', {'id': evenementAvenir.id}) }}"><i
                         class="fa-solid fa-check"></i></a></td>
             <td class="iconRefuse"><a href="{{ path('admin_event_refuse', {'id': evenementAvenir.id}) }}"><i
@@ -46,7 +46,7 @@
         {% endfor %}
     </table>
     {% if not hasEventsToValidate %}
-       <p>Vous n'avez pas d'événements à valider.</p>
+    <p>Vous n'avez pas d'événements à valider.</p>
     {% endif %}
 </div>
 
@@ -58,21 +58,22 @@
 
 {% block stylesheets %}
 <style>
-    #Calendrier 
-    {
+    #Calendrier {
         width: 80%;
-        margin: auto;      
+        margin: auto;
     }
 </style>
 {% endblock %}
 
 
 
-    <script>
-        
+<script>
+
     window.onload = () => {
         let CalendarElt = document.querySelector('#Calendrier')
-        let data = JSON.parse('{{ data|raw }}');
+        var data = JSON.parse('{{ data|raw }}');
+     
+
         let Calendar = new FullCalendar.Calendar(CalendarElt, {
             initialView: 'timeGridWeek',
             locale: 'fr',
@@ -81,24 +82,35 @@
                 start: 'prev,next today',
                 center: 'title',
                 end: 'dayGridMonth,timeGridWeek',
-                
-                
-            },    
-            events : data,
-            editable:true,
-            eventResizableFromStart :true
-            
+
+
+            },
+            events: data,
+            editable: true,
+            eventResizableFromStart: true
+
         })
-        Calendar.on('eventChange',(e) => {
-           console.log(e)
+        Calendar.on('eventChange', (e) => {
+            let url = '/api/' + e.event.id + '/edit';
+           
+        
+            let donnees = {
+                'title' : e.event.title,
+                'end' : e.event.end,
+                'start' : e.event.start,
+            }
+        console.log(JSON.stringify(donnees))
+        let xhr = new XMLHttpRequest
+            xhr.open("PUT", url)
+            xhr.send(JSON.stringify(donnees))
         })
-        
-        
+       
+
         Calendar.render();
-        
-   console.log(data)
-   
-}
+    
+    
+
+    }
 
 </script>
 

@@ -46,6 +46,7 @@ class EvenementType extends AbstractType
             ->add('nb_des_places',NumberType::class,['label'=>'Nombre des places :'])
             ->add('description',TextareaType::class,['label'=>'Déscription :'])
             ->add('prix',NumberType::class,['label'=>'Prix :'])
+
             ->add('image',FileType::class, [
                 'data_class' =>null,
                 'constraints' => [
@@ -60,10 +61,10 @@ class EvenementType extends AbstractType
                     ]),
                 ],
                 'label'=>'Ajoutez une image de votre événement :',
-              
-
-                
             ])
+
+            
+
             ->add('imageAffiche',FileType::class, [
                 'data_class' =>null,
                 'constraints' => [
