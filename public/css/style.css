@@ -650,7 +650,7 @@ input#subscriber-email::placeholder {
     width: 100%;
     justify-content: center;
     align-items: center;
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     margin-top: 50px;
 
 }
@@ -1353,6 +1353,20 @@ input {
 
 
 
+#lieu_submit:hover {
+    background-color: #092C4C;
+    transition: 0.5s;
+}
+#lieu_submit{
+    background-color: black;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 70px;
+  
+}
 
 
 
@@ -1590,7 +1604,8 @@ input {
 .profile {
     width: 60%;
     height: 150px;
-    background-color: red;
+    background-color:#092C4C;
+    border-radius: 20px;
 
 }
 
@@ -1615,17 +1630,21 @@ input {
 
 .nomEvenementProfile {
     position: absolute;
-    left: 10px;
+    left: 50px;
     top: 10px;
-    font-size: 18px;
+    color: #fff;
+    font-size: 24px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 700 ;
 
 
 }
 
 .evenementProfile img {
 
-    width: 208px;
-    height: 140px;
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
 
 }
 

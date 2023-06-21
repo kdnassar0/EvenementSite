@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Entity\Evenement;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
-use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
+use App\Repository\EvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -212,4 +213,28 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('app_categorie');
     }
+    /**
+     * @Route("/user/{id}/supprimer", name="supprimer_user")
+     */
+    public function suppimerCompte(ManagerRegistry $doctrine,User $compte = null)
+    {
+        if ($compte) {
+        $entityManager =$doctrine->getManager();
+        $entityManager->remove($compte);
+        $entityManager->flush();
+
+    
+        return $this->redirectToRoute('app_categorie');
+    }
+
+  
+    return $this->redirectToRoute('app_categorie');
+
+
+    }
+  
+
+
+ 
+
 }
