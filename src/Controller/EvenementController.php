@@ -200,7 +200,7 @@ class EvenementController extends AbstractController
    * @Route("/evenement/{id}/addParticipant",name="add_participant")
    */
 
-  public function addParticipant(Evenement $evenement = null, ManagerRegistry $doctrine)
+  public function addParticipant(Evenement $evenement = null, ManagerRegistry $doctrine,Request $request)
   {
     if (!$this->getUser()) {
       $this->addFlash('warning', ' Veuillez vous connecter pour participer cet evenement.');
@@ -211,6 +211,8 @@ class EvenementController extends AbstractController
       $entityManager = $doctrine->getManager();
       $evenement->addParticipant($this->getUser());
       $entityManager->flush();
+
+    
 
 
       return $this->redirectToRoute('details_evenement', [

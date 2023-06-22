@@ -1814,7 +1814,7 @@ padding-left: 5px;
 .imageFormulaireConnection {
     width: 50%;
     overflow: hidden;
-    position: absolute;
+    /* position: absolute; */
     top: 179px;
     left: 188px;
     border-radius: 0px 10px 10px 0;
