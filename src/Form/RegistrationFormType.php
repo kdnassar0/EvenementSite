@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use PhpParser\Node\Stmt\Label;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -38,7 +39,7 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'invalid_message' => 'Les mots de passe doivent correspondre.',
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmation du mot de passe'],
+                'second_options' => ['label' => 'Confirmer votre mot de passe'],
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [

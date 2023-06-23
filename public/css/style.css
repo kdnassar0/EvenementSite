@@ -1124,6 +1124,20 @@ input {
     padding: 30px;
 }
 
+@keyframes slideAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .slide2 {
     width: 309px;
     height: 400px;
@@ -1132,30 +1146,17 @@ input {
     position: relative;
     display: flex;
     justify-content: center;
+    animation: slideAnimation 3s infinite;
 
 }
 
 .slide2 img {
     object-fit: contain;
+
 }
 
-.descriptionEvenementSlide {
-    margin: 5px;
-    padding: 10px;
-    height: 77%;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    opacity: 0%;
-    background-color: #54647761;
-    backdrop-filter: blur(25px);
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    transition: .6s;
-    overflow-y: auto;
-    color: #fff;
-    text-align: center;
-}
+
+
 
 .infoSlider2 {
     width: 100%;
@@ -1193,10 +1194,7 @@ input {
 
 
 
-.slide2:hover>.descriptionEvenementSlide {
-    opacity: 100%;
-    top: 29%;
-}
+
 
 .containerElementSlide2::-webkit-scrollbar {
     height: 5px;
@@ -1212,19 +1210,7 @@ input {
     background-color: #fff;
 }
 
-.descriptionEvenementSlide::-webkit-scrollbar {
-    width: 5px;
-}
 
-.descriptionEvenementSlide::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #092C4C;
-}
-
-.descriptionEvenementSlide::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #ffffff;
-}
 
 
 
@@ -1430,6 +1416,12 @@ input {
     align-items: center;
 }
 
+.imagesEtButtons a {
+    font-family: 'Roboto',sans-serif;
+    font-size: 18px;
+    font-weight: 700 ;
+    color: #fff;
+}
 .containerEelments img {
     height: 70vh;
     width: 100%;
@@ -1448,6 +1440,12 @@ input {
 
 
 
+}
+.discreption a strong {
+    color: wheat;
+    font-family: 'Roboto',sans-serif;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .discreption {
@@ -1818,12 +1816,10 @@ input {
 
     width: 100%;
     height: 80vh;
-
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-  
+
 
 }
 
@@ -1832,15 +1828,14 @@ input {
     width: 30%;
     height: 50vh;
     padding: 20px;
-    background-color: #1c85e8af;
-
+    /* background-color:#092c4cef; */
     display: flex;
-    gap: 5px;
+    gap: 20px;
     justify-content: center;
     flex-direction: column;
-    border-radius: 10px;
-   
-   
+    border-radius: 5px;
+
+
 
 }
 
@@ -1848,57 +1843,146 @@ input {
 .halfImage {
     position: absolute;
     width: 30%;
-    height: 50%;
+    height: 45%;
     z-index: -1;
-    border-radius: 20%;
-    /* background-color: #092C4C; */
-   
-  
-
-
-  
-  }
-
-
-.formulaireConncextion h1{
-font-size: 20px;
-font-family: 'Roboto',sans-serif;
-font-weight: 900;
-
-
-
-
-}
-.formulaireConncextion label{
-font-size: 18px;
-font-family: 'Roboto',sans-serif;
-font-weight: 500px;
-
- 
-}
-
-
-.formulaireConncextion form .btn-primary{
-    width: 70px;
-    padding: 5px;
+    background-color: #092C4C;
     border-radius: 5px;
-    background-color:#092C4C ;
+    padding: 5px;
+
+
+}
+
+
+.formulaireConncextion h1 {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
     color: white;
 
 
-} 
-.buttonsFormulaireConnextion a {
-    font-size: 14px;
-font-family: 'Roboto',sans-serif;
-font-weight: 500px;
+
 
 }
 
-.buttonsFormulaireConnextion{
+.formulaireConncextion label {
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500px;
+
+
+}
+
+
+.formulaireConncextion form .btn-primary {
+    width: 120px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #1C85E8;
+    color: white;
+    transition: 1s;
+    text-transform: uppercase;
+
+
+
+}
+
+.formulaireConncextion form .btn-primary:hover {
+    background-color: #092C4C;
+    transition: 1s;
+
+
+}
+
+.buttonsFormulaireConnextion a {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500px;
+
+}
+
+.buttonsFormulaireConnextion {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
 }
+
+/* /////////////fin formulaire connection/////////////////// */
+
+
+/* /////////////formulaire connection/////////////////// */
+
+.containerPageInscription {
+
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.formulaireInscription h1 {
+    font-size: 36px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500px;
+    color: white;
+    text-align: center;
+
+}
+
+.formulaireInscription {
+    width: 30%;
+    height: 65vh;
+    padding: 20px;
+    /* background-color:#092c4cac ; */
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+
+}
+
+.halfImageInscription {
+    position: absolute;
+    width: 30%;
+    height: 65%;
+    z-index: -1;
+    border-radius: 5px;
+    background-color: #092C4C;
+    /* background-color: #092C4C; */
+    padding: 5px;
+
+
+}
+
+.formulaireInscription label {
+    color: white;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500px;
+}
+
+.formulaireInscription .btn {
+    width: 120px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #1C85E8;
+    color: white;
+    transition: 1s;
+    text-transform: uppercase;
+}
+.formulaireInscription .btn:hover {
+    background-color: #092C4C;
+    transition: 1s;
+
+
+}
+#registration_form_agreeTerms {
+    width: 10%;
+    text-align: center;
+}
+
 /* /////////////fin formulaire connection/////////////////// */
