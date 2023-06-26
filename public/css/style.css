@@ -89,7 +89,7 @@ nav li {
 .search {
     display: flex;
     gap: 10px;
-    flex-direction: column;
+    flex-direction: row;
 
 
 }
@@ -1999,4 +1999,17 @@ input {
     text-align: center;
 }
 
+
+.buttonConnection {
+    background-color:#1C85E8;
+    padding: 9px 15px 9px 15px;
+    border-radius: 50px;
+    
+}
+
+.buttonConnection a li {
+    
+    color:#fff;
+
+}
 /* /////////////fin formulaire connection/////////////////// */

@@ -31,7 +31,7 @@
 
 
 <div class="Logo">
-<img src="/images/Logo.svg" alt="">
+  <img src="/images/Logo.svg" alt="">
 </div>
 <div class="elementsNav">
   <nav>
@@ -56,18 +56,30 @@
   </nav>
 
   <div class="search">
-
     {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_admin') }}">
       <li>Admin</li>
     </a>
     {% endif %}
+
     {% if app.user %}
     <a href="{{ path('app_logout') }}">
       <li>logout</li>
     </a>
-    {% endif %}
+    {% else %}
 
+    <span class="buttonConnection">
+      <a href="{{ path('app_register') }}">
+        <li>s'inscrire</li>
+      </a>
+    </span>
+    <span class="buttonConnection">
+      <a href="{{ path('app_login') }}">
+        <li> se connecter</li>
+      </a>
+    </span>
+
+    {% endif %}
   </div>
 </div>
 
@@ -92,11 +104,11 @@
           <li><a href="{{ path ('app_categorie') }}"><span>Categories</span></a></li>
           <li><a href="{{ path ('app_categorie') }}"><span>Evénements à Venir</span></a></li>
 
-       
+
 
         </ul>
       </div>
-   
+
       <div class="col-3">
         <div class="link-cat" onclick="footerToggle(this)">
           <span class="footer-toggle"></span>
@@ -115,7 +127,7 @@
         </ul>
       </div>
       <div class="col-3" id="newsletter">
-    
+
 
         <div class="social-links social-2">
           <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -132,7 +144,7 @@
             <li>
               <i class="fa-solid fa-map-location"></i>
               <div>Strasbourg
-               </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -142,7 +154,7 @@
         <a href=""><i class="fab fa-facebook-f"></i></a>
         <a href=""><i class="fab fa-linkedin-in"></i></a>
         <a href=""><i class="fab fa-instagram"></i></a>
-       
+
       </div>
     </div>
     <div id="copyright">
