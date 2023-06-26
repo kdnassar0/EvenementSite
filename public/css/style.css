@@ -1129,7 +1129,7 @@ input {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 5px;
+    gap: 30px;
     overflow-x: auto;
     width: 100%;
     border-radius: 10px;
