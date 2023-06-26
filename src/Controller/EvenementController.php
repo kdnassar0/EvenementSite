@@ -132,7 +132,7 @@ class EvenementController extends AbstractController
               $safeFilename = $slugger->slug($originalFilename);
               $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
               $evenement = $form->getData();
-              $evenement->setImage($newFilename);-
+              $evenement->setImage($newFilename);
               $evenement->setCreateur($this->getUser());
               $evenement->setStatut('en attente');
               $entityManager = $doctrine->getManager();
