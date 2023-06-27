@@ -1893,14 +1893,14 @@ input {
         margin-top: 120px;
     }
     nav ul {
-        gap: 18px;
+        gap: 15px;
     }
     nav ul li {
         background-color:#1C85E8;
         color: rgb(52, 3, 3);
         padding: 5px;
         border-radius: 5px;
-        font-size: 18px;
+        font-size: 14px;
     }
    
 
@@ -1974,6 +1974,79 @@ input {
         font-size: 14px;
      
 }
+.formulaireConncextion form{
+    width: 90%;
+}
+.halfImage{
+    width: 90%;
+
+}
+/* ////////page organiser////////////// */
+.champsFormumlaireOrganiser{
+    width: 100%;
+}
+.textExplique{
+    display: none;
+}
+.formulaireOrganiser .titre {
+    font-size: 18px;
+}
+.formSection {
+   
+    width: 100%;
+/* ////////fin page organiser////////////// */
+}
+/* //////// page lieu////////////// */
+
+.textEtImage img {
+    width: 350px;
+    height: 28vh;
+}
+.textEtImage {
+  
+    width: 100%;
+    padding: 10px;
+
+}
+.infoLieu :first-child {
+    font-size: 24px;
+    
+}
+.infoLieu .villeEtAdress {
+    font-size: 18px;
+}
+.infoLieu .capacity {
+    font-size: 18px;
+    
+}
+
+.containerPageLieu {
+   
+    width: 100%;
+   
+    flex-direction: column;
+   
+}
+.containerElementsLieu {
+   
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+}
+.containerElementsLieu img {
+    width: 250px;
+    height: 150px;
+   
+}
+.titreEvenementPasses {
+    font-size: 14px;
+}
+.evenementsPasseesLieu {
+    flex-direction: column;
+}
+/* ////////fin page lieu////////////// */
 
 /*FIN RESPONSIVE */
 
+}
