@@ -1853,13 +1853,13 @@ input {
 /* RESPONSIVE */
 @media screen and (max-width:320px){
     body {
-        width: 135%;
+        width: 100%;
 
 
     }
     .containerSlider{
         height: 45vh;
-        width: 120%;
+        width: 100%;
         display: flex;
        
         justify-content: center;
@@ -1872,10 +1872,11 @@ input {
         border-radius: 25px;
      
     }
-
     .search{
         display: none;
     }
+
+   
     .containerInfoEvenement{
         display: none;
     }
@@ -1884,7 +1885,7 @@ input {
     }
     .sliderButtons{
         bottom: 0px;
-        left: 38%;
+        left: 33%;
     }
     .elementsNav {
         width: 50%;
@@ -1899,6 +1900,7 @@ input {
         color: rgb(52, 3, 3);
         padding: 5px;
         border-radius: 5px;
+        font-size: 18px;
     }
    
 
@@ -1923,20 +1925,28 @@ input {
     }
     footer .logo {
       
-        margin-bottom: 26px;
+        margin-bottom: 18px;
     }
     .col-3 {
         display: inline-table;
         width: 49%;
         
     }
-
+    footer .footer-cat, #newsletter span {
+        font-size: 18px;
+    }
+    .footer-cat-links a{
+        font-size: 10px;
+    }
     #address{
         display: none;
     }
+    .infoSlider2 .nomEvenement {
+        font-size: 24px;
+    }
 
     .categorieElements h1 {
-        font-size: 18px;
+        font-size: 12px;
         text-shadow: 1px 1px 1px  black;
     }
 
@@ -1944,10 +1954,25 @@ input {
         border-radius: 10px;
     }
     .categorie img {
-        height: 200px;
-       
-      
+        height: 150px;
     }
+    #video2{
+        display: none;
+    }
+    .sectionPageAccueil h1 {
+       margin: 0;
+        font-size: 26px;
+       
+    }
+    .containerSlide2{
+        width: 100%;
+    }
+
+    .sliderButtons button {
+      
+        margin: 5px;
+        font-size: 14px;
+     
 }
 
 /*FIN RESPONSIVE */
