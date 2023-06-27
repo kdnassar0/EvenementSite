@@ -415,7 +415,7 @@ input#subscriber-email::placeholder {
 }
 
 .social-links {
-    bottom: 44px;
+    bottom: 28px;
     position: absolute;
     left: 0;
 }
@@ -809,7 +809,7 @@ input {
 }
 
 .containerInfoEvenement .nomEvenement {
-    font-size: 48px;
+    font-size: 36px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     color: #F6F9FC;
@@ -1014,7 +1014,7 @@ input {
     padding: 2%;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 30px;
     text-shadow:1px 1px 2px black;
 }
 
@@ -1434,6 +1434,23 @@ input {
     text-align: end;
     margin: 20px;
 }
+.imagesEtButtons a{
+ 
+    
+    background-color: blue;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 1s;
+    
+   }
+   .imagesEtButtons a:hover{
+   
+    background-color:#092C4C;
+    transition: 1s;
+   
+    
+   }
 
 
 /*---------------------fin details evenement--------------------*/
@@ -1981,6 +1998,19 @@ input {
     width: 90%;
 
 }
+.formulaireInscription h1 {
+    font-size: 18px;
+  
+}
+.halfImageInscription {
+  
+    width: 90%;
+    
+   
+}
+.formulaireInscription{
+    width: 90%;
+}
 /* ////////page organiser////////////// */
 .champsFormumlaireOrganiser{
     width: 100%;
@@ -2046,6 +2076,61 @@ input {
     flex-direction: column;
 }
 /* ////////fin page lieu////////////// */
+
+
+/* //////// page details////////////// */
+
+
+.containerEelments {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.imagesEtButtons {
+ 
+    width: 90%;
+    display: flex;
+  
+    gap: 5px;
+ 
+}
+.imagesEtButtons a{
+ 
+ font-size: 14px;
+ background-color: blue;
+ padding: 5px;
+ border-radius: 5px;
+ text-decoration: none;
+ transition: 1s;
+ 
+}
+.imagesEtButtons a:hover{
+
+ background-color:#092C4C;
+ transition: 1s;
+
+ 
+}
+
+.discreption{
+    width: 100%;
+}
+.discreption h1{
+    font-size: 24px;
+}
+.discreption img{
+    width: 80%;
+}
+.descriptionPageDetails{
+    font-size: 14px;
+}
+.ecrireUnCommentaire textarea{
+    width: 90vw;
+}
+
+
+/* ////////fin page details////////////// */
 
 /*FIN RESPONSIVE */
 

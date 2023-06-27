@@ -24,7 +24,7 @@
                                 {% endif %}
                             {% endfor %}
                 {% else %}
-                    {% set link = '<a href="' ~ path('app_login') ~ '">Connectez-vous</a> pour participer' %}
+                    {% set link = 'Pour participer notre événement<a href="' ~ path('app_login') ~ '">Connectez-vous</a> ' %}
                 {% endif %}
                 {{ link | raw}}
              
