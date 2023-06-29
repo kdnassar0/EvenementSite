@@ -4,13 +4,13 @@
 
 {% block body %}
 
+
+
 {% if app.session.flashBag.has('warning') %}
 {% for message in app.flashes('warning') %}
 {{ message }}
 {% endfor %}
 {% endif %}
-
-
 <div class="formulaireConncextion">
     <form method="post">
         <div>

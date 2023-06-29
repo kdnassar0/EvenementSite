@@ -67,6 +67,12 @@
     <div class="commentaires">
 
         {% for commentaire in commentaires %}
+        {% if commentaire.utilisateur == null %}
+            <span>Utilisateur supprimé</span>
+            <div class="cmmentaireEtSupprimer">
+                <span class="commentaire"> {{ commentaire }} </span>
+                </div>
+       {% else %}
         <span>{{ commentaire.utilisateur.pseudo }}</span>
         <div class="cmmentaireEtSupprimer">
             <span class="commentaire"> {{ commentaire }} </span>
@@ -74,9 +80,11 @@
             <a href="{{ path('supprimer_commentaire',{'id':commentaire.id})}}"><i class="fa-solid fa-trash"></i></a>
             <a
                 href="{{ path('edit_commentaire',{'idEvent':commentaire.evenement.id ,'idCommentaire':commentaire.id})}}"><i
-                    class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+             
+               class="fa-sharp fa-solid fa-pen-to-square"></i></a>
             {% endif %}
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 

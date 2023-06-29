@@ -48,12 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="createur",cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="createur")
      */
     private $evenements;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur",cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur")
      */
     private $commentaires;
 

@@ -127,7 +127,7 @@ class UserController extends AbstractController
             'id' => $evenement->getId(),
             'start'=>$evenement->getDateDebut()->format('Y-m-d H:i:s'),
             'end' =>$evenement->getDateFin()->format('Y-m-d H:i:s' ),
-            'title'=>$evenement->getNom(),
+            'title'=> $evenement->getNom(),
           ] ;
         }
     
@@ -218,10 +218,19 @@ class UserController extends AbstractController
      */
     public function suppimerCompte(ManagerRegistry $doctrine,User $compte = null)
     {
-        if ($compte) {
+        if ($compte == $this->getUser()) {
         $entityManager =$doctrine->getManager();
+        foreach ($compte->getCommentaires() as $commentaire) {
+            $commentaire->setUtilisateur(null);
+          
+        }
+        foreach ($compte->getEvenements() as $evenement) {
+            $evenement->setCreateur(null);
+        }
         $entityManager->remove($compte);
         $entityManager->flush();
+        $this->container->get('security.token_storage')->setToken(null);
+        $this->addFlash('success','Compte supprimé');
 
     
         return $this->redirectToRoute('app_categorie');

@@ -62,3 +62,11 @@ function resumeSlider() {
 
 
 
+  document.querySelector('.navOpenBtn').addEventListener('click',function(){
+
+    document.querySelector('.espaceNav').classList.add('active');
+  })
+  document.querySelector('.navCloseBtn').addEventListener('click',function(){
+
+    document.querySelector('.espaceNav').classList.remove('active');
+  })

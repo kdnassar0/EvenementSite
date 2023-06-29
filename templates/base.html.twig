@@ -36,7 +36,8 @@
 </div>
 <div class="elementsNav">
   <nav>
-    <ul>
+    <ul class="espaceNav">
+      <i class="fa-solid fa-xmark navCloseBtn"></i>
       <a href="{{ path ('app_categorie')}}">
         <li>Accueil</li>
       </a>
@@ -51,37 +52,35 @@
       <a href="{{ path ('app_oragnisateur',{'id':app.user.id}) }}">
         <li>Profil</li>
       </a>
+     
+      {% endif %}
+
+      {% if is_granted('ROLE_ADMIN')%}
+      <a href="{{ path('app_admin') }}">
+        <li>Admin</li>
+      </a>
+      <a href="{{ path('app_logout') }}">
+        <li>logout</li>
+      </a>
+      {% elseif app.user %}
+      <a href="{{ path('app_logout') }}">
+        <li>logout</li>
+      </a>
+       {% else %}
+      
+        <a href="{{ path('app_register') }}">
+          <li>s'inscrire</li>
+        </a>
+        <a href="{{ path('app_login') }}">
+          <li> se connecter</li>
+        </a>
+      
+  
       {% endif %}
 
     </ul>
   </nav>
-
-  <div class="search">
-    {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_admin') }}">
-      <li>Admin</li>
-    </a>
-    {% endif %}
-
-    {% if app.user %}
-    <a href="{{ path('app_logout') }}">
-      <li>logout</li>
-    </a>
-    {% else %}
-
-    <span class="buttonConnection">
-      <a href="{{ path('app_register') }}">
-        <li>s'inscrire</li>
-      </a>
-    </span>
-    <span class="buttonConnection">
-      <a href="{{ path('app_login') }}">
-        <li> se connecter</li>
-      </a>
-    </span>
-
-    {% endif %}
-  </div>
+  <i class="fa-solid fa-bars navOpenBtn"></i>
 </div>
 
 <body>
@@ -167,11 +166,14 @@
       </span>
     </div>
   </footer>
+  {% block javascripts %}
+  <script src="{{ asset('/js/slide1.js') }}"></script>
+ 
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"
     integrity="sha256-l/Q/fg7VLyQWHGXpOMURmGwE3FDMtEPcaGTJtcOqLR8=" crossorigin="anonymous"></script>
 
-  {% block javascripts %}
+ 
 
 
   {% endblock javascripts %}

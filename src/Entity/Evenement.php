@@ -70,7 +70,7 @@ class Evenement
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="evenements")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $createur; 
 
