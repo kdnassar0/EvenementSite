@@ -41,7 +41,6 @@
       <a href="{{ path ('app_categorie')}}">
         <li>Accueil</li>
       </a>
-
       <a href=" {{ path ('app_lieu') }}">
         <li>Lieu</li>
       </a>
@@ -52,7 +51,6 @@
       <a href="{{ path ('app_oragnisateur',{'id':app.user.id}) }}">
         <li>Profil</li>
       </a>
-     
       {% endif %}
 
       {% if is_granted('ROLE_ADMIN')%}
@@ -129,14 +127,6 @@
       <div class="col-3" id="newsletter">
 
 
-        <div class="social-links social-2">
-          <a href=""><i class="fab fa-facebook-f"></i></a>
-          <a href=""><i class="fab fa-twitter"></i></a>
-          <a href=""><i class="fab fa-linkedin-in"></i></a>
-          <a href=""><i class="fab fa-instagram"></i></a>
-          <a href=""><i class="fab fa-tumblr"></i></a>
-          <a href=""><i class="fab fa-reddit-alien"></i></a>
-        </div>
 
         <div id="address">
           <span>Adresse</span>
@@ -150,12 +140,7 @@
         </div>
 
       </div>
-      <div class="social-links social-1 col-6">
-        <a href=""><i class="fab fa-facebook-f"></i></a>
-        <a href=""><i class="fab fa-linkedin-in"></i></a>
-        <a href=""><i class="fab fa-instagram"></i></a>
-
-      </div>
+     
     </div>
     <div id="copyright">
       &copy; All Rights Reserved 2023-2024

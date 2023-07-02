@@ -43,22 +43,22 @@ class EvenementRepository extends ServiceEntityRepository
 
 
 
-    public function findEvenementsAvenir()
+    public function findEvenementsAvenirParCategorie($categorieId)
     {
-        // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
         $now = new DateTime('Europe/paris');
-        // on fait createquerybuilder
+       
         return $this->createQueryBuilder('e')
-        // on fait une condition 
-        ->andWhere('e.date_debut >= :val')
-        // on met les paramettre
-        ->setParameter('val',$now)
-        ->orderBy('e.date_debut','ASC')
-        ->getQuery()
-        ->getResult() ;
+            ->innerJoin('e.categorie', 'c')
+            ->andWhere('c.id = :categorie_id')
+            ->andWhere('e.date_debut > :date_now')
+            ->setParameter('categorie_id', $categorieId)
+            ->setParameter('date_now', $now)
+            ->orderBy('e.date_debut', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
-    public function findEvenementsSlides()
+    public function findEvenementsSlide()
     {
         // on va comparer la date fin de l'evenement avec la date d'ahujoud'hui 
         $now = new DateTime('Europe/paris');

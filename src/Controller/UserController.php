@@ -30,7 +30,7 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', []);
     }
-    
+
     /**
      * @Route("/conditions", name="app_conditions")
      */
@@ -52,12 +52,12 @@ class UserController extends AbstractController
 
     public function detailsEvenement(
         ManagerRegistry $doctrine,
-        Evenement $evenement =null  ,
+        Evenement $evenement = null,
         Request $request,
         Commentaire $commentaire = null
     ) {
 
-        $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C","#1C85E8"];
+        $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C", "#1C85E8"];
 
         if ($evenement) {
 
@@ -66,49 +66,48 @@ class UserController extends AbstractController
             } else {
                 $commentaires = $commentaire;
             }
-           
+
             $createur = $evenement->getCreateur();
             $commentaires = $evenement->getCommentaires();
 
             $form = $this->createForm(CommentaireType::class, $commentaire);
             $form->handleRequest($request);
 
-            
-                if ($commentaire->getUtilisateur() == $this->getUser()) {
+
+            if ($commentaire->getUtilisateur() == $this->getUser()) {
+            }
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                if (!$this->getUser()) {
+                    $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
+                    return $this->redirectToRoute('app_login');
                 }
 
-                if ($form->isSubmitted() && $form->isValid()) {
+                $commentaire->setEvenement($evenement);
+                $commentaire->setUtilisateur($this->getUser());
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($commentaire);
+                $entityManager->flush();
 
-                    if (!$this->getUser()) {
-                        $this->addFlash('warning', ' Veuillez vous connecter pour ajouter un commentaire.');
-                        return $this->redirectToRoute('app_login');
-                    }
-
-                    $commentaire->setEvenement($evenement);
-                    $commentaire->setUtilisateur($this->getUser());
-                    $entityManager = $doctrine->getManager();
-                    $entityManager->persist($commentaire);
-                    $entityManager->flush();
-
-                    return $this->redirectToRoute('details_evenement', [
-                        'idEvent' => $evenement->getId()
-                    ]);
-                }
-
-
-
-
-                return $this->render('evenement/details.html.twig', [
-                    "evenement" => $evenement,
-                    "createur" => $createur,
-                    "commentaires" => $commentaires,
-                    'formAddCommentaire' => $form->createView(),
-                    'couleurs'=>$couleurs
-
+                return $this->redirectToRoute('details_evenement', [
+                    'idEvent' => $evenement->getId()
                 ]);
             }
-            return $this->redirectToRoute('app_categorie');
-    
+
+
+
+
+            return $this->render('evenement/details.html.twig', [
+                "evenement" => $evenement,
+                "createur" => $createur,
+                "commentaires" => $commentaires,
+                'formAddCommentaire' => $form->createView(),
+                'couleurs' => $couleurs
+
+            ]);
+        }
+        return $this->redirectToRoute('app_categorie');
     }
 
     /**
@@ -120,19 +119,19 @@ class UserController extends AbstractController
 
         $evenementsAvenir = $e->findEvenementsAvenir();
 
-        $rdvs = [] ; 
-    
-        foreach($evenementsAvenir as $evenement){
-          $rdvs [] =[
-            'id' => $evenement->getId(),
-            'start'=>$evenement->getDateDebut()->format('Y-m-d H:i:s'),
-            'end' =>$evenement->getDateFin()->format('Y-m-d H:i:s' ),
-            'title'=> $evenement->getNom(),
-          ] ;
+        $rdvs = [];
+
+        foreach ($evenementsAvenir as $evenement) {
+            $rdvs[] = [
+                'id' => $evenement->getId(),
+                'start' => $evenement->getDateDebut()->format('Y-m-d H:i:s'),
+                'end' => $evenement->getDateFin()->format('Y-m-d H:i:s'),
+                'title' => $evenement->getNom(),
+            ];
         }
-    
-        $rdvs =json_encode($rdvs);
-       
+
+        $rdvs = json_encode($rdvs);
+
 
         return $this->render('user/admin.html.twig', [
             'evenementsAvenir' => $evenementsAvenir,
@@ -159,14 +158,14 @@ class UserController extends AbstractController
      * @Route("/infoCreateur/{id}",name="app_createur")
      */
 
-    public function Createur(UserRepository $user,$id)
+    public function Createur(UserRepository $user, $id)
     {
-     
-        $Createursevenements = $user->findBy(['id'=>$id]);
- 
+
+        $Createursevenements = $user->findBy(['id' => $id]);
+
 
         return $this->render('user/createurInfo.html.twig', [
-         'Createursevenements'=>$Createursevenements
+            'Createursevenements' => $Createursevenements
         ]);
     }
 
@@ -213,37 +212,31 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('app_categorie');
     }
+
+    
     /**
      * @Route("/user/{id}/supprimer", name="supprimer_user")
      */
-    public function suppimerCompte(ManagerRegistry $doctrine,User $compte = null)
+    public function suppimerCompte(ManagerRegistry $doctrine, User $compte = null)
     {
         if ($compte == $this->getUser()) {
-        $entityManager =$doctrine->getManager();
-        foreach ($compte->getCommentaires() as $commentaire) {
-            $commentaire->setUtilisateur(null);
-          
-        }
-        foreach ($compte->getEvenements() as $evenement) {
-            $evenement->setCreateur(null);
-        }
-        $entityManager->remove($compte);
-        $entityManager->flush();
-        $this->container->get('security.token_storage')->setToken(null);
-        $this->addFlash('success','Compte supprimé');
+            $entityManager = $doctrine->getManager();
+            foreach ($compte->getCommentaires() as $commentaire) {
+                $commentaire->setUtilisateur(null);
+            }
+            foreach ($compte->getEvenements() as $evenement) {
+                $evenement->setCreateur(null);
+            }
+            $entityManager->remove($compte);
+            $entityManager->flush();
+            $this->container->get('security.token_storage')->setToken(null);
+            $this->addFlash('success', 'Compte supprimé');
 
-    
+
+            return $this->redirectToRoute('app_categorie');
+        }
+
+
         return $this->redirectToRoute('app_categorie');
     }
-
-  
-    return $this->redirectToRoute('app_categorie');
-
-
-    }
-  
-
-
- 
-
 }

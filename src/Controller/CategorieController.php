@@ -30,9 +30,9 @@ class CategorieController extends AbstractController
     {
 
 
-        $evenementsAvenir = $e->findEvenementsAvenir();
+     
         $categories = $ca->findBy([], ['nomCategorie' => 'ASC']);
-        $evenemetInfo = $e->findEvenementsSlides();
+        $evenemetInfo = $e->findEvenementsSlide();
         $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C","#1C85E8"];
         $isAdmin = $security->isGranted('ROLE_ADMIN');
 
@@ -89,7 +89,7 @@ class CategorieController extends AbstractController
             return $this->render('categorie/index.html.twig', [
                 'categories' => $categories,
                 'formAddCategorie' => $form->createView(),
-                'evenementsAvenir' => $evenementsAvenir,
+              
                 'evenemetInfo'=>$evenemetInfo,
                 'couleurs'=>$couleurs
 
@@ -98,7 +98,7 @@ class CategorieController extends AbstractController
         // Si l'utilisateur n'est pas un administrateur, n'afficher que les événements et les catégories
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
-            'evenementsAvenir' => $evenementsAvenir,
+          
             'formAddCategorie' => null,
             'evenemetInfo'=>$evenemetInfo,
             'couleurs'=>$couleurs

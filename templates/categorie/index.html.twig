@@ -87,36 +87,20 @@
   {% endif %}
 </div>
 
-
-
-
-<div class="sectionPageAccueil">
-  <h1> Agenda : </h1>
-  <div class="containerSlide2">
-    <video autoplay muted loop id="video2">
-      <source src="/videos/354432577_6256783571025403_256348927289396645_n.mp4" type="video/mp4">
-  </video>
-    <div class="containerElementSlide2">
-      {% for evenementAvenir in evenementsAvenir %}
-      {% if evenementAvenir.statut == 'validé' %}
-      <div class="slide2">
-        <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
-        <div class="infoSlider2">
-          <a href=" {{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
-            <div class="nomEvenement">{{ evenementAvenir.nom }}</div>
-          </a>
-          <div class="dateEvenementSlide"> {{ evenementAvenir.dateDebut |date('d-m-Y H:m') }}
-            <br>{{ evenementAvenir.dateFin |date('d-m-Y H:m') }}
-          </div>
-        </div>
-
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
+<section class="sectionEspaceTextPageHome">
+<div class="espaceTextPageHome">
+  <p>Que vous soyez seul,en entreprise, en couple, entre amis ou en famille </p>
+  <p>
+  Harmony est ouvert à tous ceux qui cherchent à s'évader du quotidien et à vivre des moments magiques.</p>
+  <p> Rejoignez-nous et créez des souvenirs précieux avec vos proches.</p>
+  <div class="social-links">
+    <p class="faceBook"><a href=""><i class="fa-brands fa-facebook"></i></a></p>
+    <p class="linkedIn"><a href=""> <i class="fa-brands fa-linkedin-in"></i></a></p>
+    <p class="instegram"><a href=""><i class="fab fa-instagram"></i></a></p>
   </div>
-
 </div>
+</section>
+
 
 
 

@@ -38,21 +38,20 @@ class EvenementController extends AbstractController
 
    
     $evenementsEncours = $e->findEvenementsEncoursParCategorie($categorie->getId());
-
+    $evenementsAvenir = $e->findEvenementsAvenirParCategorie($categorie->getId());
 
  
-
-
     return $this->render('evenement/index.html.twig', [
       
-      'evenementsEncours' => $evenementsEncours
+      'evenementsEncours' => $evenementsEncours,
+      'evenementsAvenir' => $evenementsAvenir
     
     ]);
   }
 
 
 
-  /**
+  /** 
    * @Route("/evenement/add",name="add_evenement")
    * @Route("/evenement/{id}/Edit",name ="edit_evenement")
    */
