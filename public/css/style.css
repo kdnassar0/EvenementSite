@@ -1034,8 +1034,10 @@ input {
    align-items: center;
    justify-content: center;
    transition: 2s;
+ 
 }
 .espaceTextPageHome{
+    margin-top: 50px;
     width: 60%;
     height: 60vh;
     display: flex;
@@ -1066,12 +1068,12 @@ input {
    
 }
 .social-links i{
-    border: 4px dashed;
+    border: 1px dashed;
     font-size: 40px;
     padding: 25px;
     border-radius: 50%;
     color: #fff;
-    border-color: #092c4c71;
+    /* border-color: #092c4c71; */
     visibility: hidden;
     transform: translateX(-5em);
    
@@ -1952,7 +1954,30 @@ input {
         bottom: 0px;
         left: 33%;
     }
-
+    .sectionEspaceTextPageHome {
+  
+        width: 100vw;
+    }
+    .espaceTextPageHome{
+        width: 100%;
+    }
+    .espaceTextPageHome p {
+        font-size: 18px;
+    }
+    .social-links i{
+      
+        font-size: 20px;
+        transform: translateX(0em);
+        visibility: visible;
+      
+    
+    }
+    .social-links{
+     
+        gap: 10px;
+       
+    }
+    
     /* /////////////////////menu//////////////////// */
     .espaceNav {
         /* display: none; */
@@ -2256,6 +2281,7 @@ input {
     .ecrireUnCommentaire textarea {
         width: 90vw;
     }
+
 
 
     /* ////////fin page details////////////// */
