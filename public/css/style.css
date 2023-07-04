@@ -1028,47 +1028,52 @@ input {
 
 /*-------------------text et reseaux page home----------------- */
 
-.sectionEspaceTextPageHome{
+.sectionEspaceTextPageHome {
     background-color: #2cc8a6;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   transition: 2s;
- 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 2s;
+
 }
-.espaceTextPageHome{
+
+.espaceTextPageHome {
     margin-top: 50px;
     width: 60%;
     height: 60vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     gap: 10px;
-   
+
 }
 
 .espaceTextPageHome p {
     font-size: 36px;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     color: #092C4C;
+    font-weight: 600;
 
 }
-.social-links{
+
+.social-links {
     display: flex;
-    margin-top: 50px;
     align-items: center;
     justify-content: center;
     gap: 400px;
-   
+    margin-top: 15px;
+
 }
-.social-links a{
-   text-decoration: none;
-   
+
+.social-links a {
+    text-decoration: none;
+
 }
-.social-links i{
-    border: 1px dashed;
+
+.social-links i {
+    border: 1px solid black;
     font-size: 40px;
     padding: 25px;
     border-radius: 50%;
@@ -1076,29 +1081,32 @@ input {
     /* border-color: #092c4c71; */
     visibility: hidden;
     transform: translateX(-5em);
-   
+
 
 
 }
 
 
-.social-links .faceBook a i{
+.social-links .faceBook a i {
 
     background-color: #1C85E8;
 }
-.linkedIn a i{
+
+.linkedIn a i {
     background-color: #0c4e8b;
- 
+
 
 }
-.instegram a i{
+
+.instegram a i {
     background-color: rgb(217, 30, 83);
 }
-.sectionEspaceTextPageHome:hover .social-links i{
-   visibility: visible;
+
+.sectionEspaceTextPageHome:hover .social-links i {
+    visibility: visible;
     transform: translateX(0em);
     transition: 2s;
-  
+
 }
 
 /*-------------------text et reseaux page home------------------ */
@@ -1954,30 +1962,35 @@ input {
         bottom: 0px;
         left: 33%;
     }
+
     .sectionEspaceTextPageHome {
-  
+
         width: 100vw;
     }
-    .espaceTextPageHome{
+
+    .espaceTextPageHome {
         width: 100%;
     }
+
     .espaceTextPageHome p {
         font-size: 18px;
     }
-    .social-links i{
-      
+
+    .social-links i {
+
         font-size: 20px;
         transform: translateX(0em);
         visibility: visible;
-      
-    
+
+
     }
-    .social-links{
-     
+
+    .social-links {
+
         gap: 10px;
-       
+
     }
-    
+
     /* /////////////////////menu//////////////////// */
     .espaceNav {
         /* display: none; */
@@ -1997,10 +2010,12 @@ input {
         border-radius: 0 0px 10px 10px;
 
     }
-.elementsNav {
 
-    margin-top: 50px;
-}
+    .elementsNav {
+
+        margin-top: 50px;
+    }
+
     .active {
         /* display: flex; */
         transform: translateY(0px);
@@ -2012,7 +2027,7 @@ input {
         color: white;
     }
 
-    
+
     .navCloseBtn {
         position: absolute;
         top: 24px;
@@ -2033,9 +2048,10 @@ input {
     /* /////////////////////fin menu//////////////////// */
 
 
-.formulaire-categorie{
-    margin: 0px;
-} 
+    .formulaire-categorie {
+        margin: 0px;
+    }
+
     .Logo img {
         width: 100%;
         left: -66px;
@@ -2107,14 +2123,15 @@ input {
         width: 100%;
     }
 
-    .sliderButtons{
+    .sliderButtons {
         z-index: 0;
     }
+
     .sliderButtons button {
 
         margin: 5px;
         font-size: 14px;
-       
+
 
     }
 

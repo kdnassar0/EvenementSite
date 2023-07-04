@@ -116,10 +116,10 @@ class UserController extends AbstractController
 
     public function admin(EvenementRepository $e): Response
     {
-
         $evenementsAvenir = $e->findEvenementsAvenir();
-
+        
         $rdvs = [];
+     
 
         foreach ($evenementsAvenir as $evenement) {
             $rdvs[] = [
