@@ -35,6 +35,7 @@ class CategorieController extends AbstractController
         $evenemetInfo = $e->findEvenementsSlide();
         $couleurs = ["#FF8083", "#1C85E8", "#2CC8A7", "#FFC258", "#092C4C","#1C85E8"];
         $isAdmin = $security->isGranted('ROLE_ADMIN');
+        $description = 'description de page home';
 
     
 
@@ -89,19 +90,19 @@ class CategorieController extends AbstractController
             return $this->render('categorie/index.html.twig', [
                 'categories' => $categories,
                 'formAddCategorie' => $form->createView(),
-              
                 'evenemetInfo'=>$evenemetInfo,
-                'couleurs'=>$couleurs
+                'couleurs'=>$couleurs,
+                
 
             ]);
         }
         // Si l'utilisateur n'est pas un administrateur, n'afficher que les événements et les catégories
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
-          
             'formAddCategorie' => null,
             'evenemetInfo'=>$evenemetInfo,
-            'couleurs'=>$couleurs
+            'couleurs'=>$couleurs,
+            'description'=>$description
            
         ]);
     }

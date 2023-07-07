@@ -598,7 +598,7 @@ input {
 
 .containerPageEvenements {
     width: 100%;
-    min-height: 80vh;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -614,6 +614,7 @@ input {
     color: #092C4C;
     margin-top: 50px;
     font-size: 36px;
+    font-family: 'Roboto',sans-serif;
 }
 
 
@@ -662,6 +663,9 @@ input {
     gap: 20px;
     border: 1px #1C85E8;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+.evenementCarte h2 {
+    font-family: 'Roboto',sans-serif;
 }
 
 
