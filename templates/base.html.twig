@@ -2,13 +2,59 @@
 <html>
 
 <head>
+  <script src="/tarteaucitron/tarteaucitron.js"></script>
+
+  <script type="text/javascript">
+    tarteaucitron.init({
+      "privacyUrl": "", /* Privacy policy url */
+      "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+
+      "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+      "cookieName": "tarteaucitron", /* Cookie name */
+
+      "orientation": "middle", /* Banner position (top - bottom) */
+
+      "groupServices": false, /* Group services by category */
+      "serviceDefaultState": "wait", /* Default state (true - wait - false) */
+
+      "showAlertSmall": true, /* Show the small banner on bottom right */
+      "cookieslist": true, /* Show the cookie list */
+
+      "closePopup": false, /* Show a close X on the banner */
+
+      "showIcon": true, /* Show cookie icon to manage cookies */
+      //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+      "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
+
+      "adblocker": false, /* Show a Warning if an adblocker is detected */
+
+      "DenyAllCta": true, /* Show the deny all button */
+      "AcceptAllCta": true, /* Show the accept all button when highPrivacy on */
+      "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+
+      "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+      "removeCredit": false, /* Remove credit link */
+      "moreInfoLink": true, /* Show more info link */
+
+      "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+      "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+
+      //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+
+      "readmoreLink": "", /* Change the default readmore link */
+
+      "mandatory": true, /* Show a message about mandatory cookies */
+      "mandatoryCta": true /* Show the disabled accept button when mandatory on */
+    });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Welcome!{% endblock %}</title>
   <link rel="icon" href="/images/fond-formulaire.svg">
-   {% if description is defined %}
-   <meta name="description" content= "{{ description }}">
-   {% endif %}
+  {% if description is defined %}
+  <meta name="description" content="{{ description }}">
+  {% endif %}
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -35,7 +81,7 @@
 
 
 <div class="Logo">
-  <img src="/images/Logo.svg" alt="">
+  <img src="/images/Logo.svg" alt="le logo">
 </div>
 <div class="elementsNav">
   <nav>
@@ -47,12 +93,13 @@
       <a href=" {{ path ('app_lieu') }}">
         <li>Lieu</li>
       </a>
-      <a href="{{ path ('add_evenement') }}">
-        <li>Organiser</li>
-      </a>
+     
       {% if app.user %}
       <a href="{{ path ('app_oragnisateur',{'id':app.user.id}) }}">
         <li>Profil</li>
+      </a>
+      <a href="{{ path ('add_evenement') }}">
+        <li>Organiser</li>
       </a>
       {% endif %}
 
@@ -67,16 +114,16 @@
       <a href="{{ path('app_logout') }}">
         <li>logout</li>
       </a>
-       {% else %}
-      
-        <a href="{{ path('app_register') }}">
-          <li>s'inscrire</li>
-        </a>
-        <a href="{{ path('app_login') }}">
-          <li> se connecter</li>
-        </a>
-      
-  
+      {% else %}
+
+      <a href="{{ path('app_register') }}">
+        <li>s'inscrire</li>
+      </a>
+      <a href="{{ path('app_login') }}">
+        <li> se connecter</li>
+      </a>
+
+
       {% endif %}
 
     </ul>
@@ -123,7 +170,7 @@
           <span class="footer-cat">Quick Links</span>
         </div>
         <ul class="footer-cat-links">
-        
+
           <li><a href="{{path('app_conditions')}}"><span>Politique de confidentialité</span></a></li>
           <li><a href=""><span>Conditions d'utilisation</span></a></li>
         </ul>
@@ -144,7 +191,7 @@
         </div>
 
       </div>
-     
+
     </div>
     <div id="copyright">
       &copy; All Rights Reserved 2023-2024
@@ -157,12 +204,12 @@
   </footer>
   {% block javascripts %}
   <script src="{{ asset('/js/slide1.js') }}"></script>
- 
+
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.3.0/main.min.js"
     integrity="sha256-l/Q/fg7VLyQWHGXpOMURmGwE3FDMtEPcaGTJtcOqLR8=" crossorigin="anonymous"></script>
 
- 
+
 
 
   {% endblock javascripts %}
