@@ -1398,8 +1398,23 @@ input {
     display: flex;
     width: 50%;
     flex-direction: column;
+   
 
+}
+.espaceCommentaire p {
+width: 100%;
+text-align: center;
+margin: 40px 0px 40px 0px;
+font-size: 36px;
+font-family: 'Martian Mono', monospace;
+font-weight: 400;
+color: #092C4C;
+/* background-color:#2cc8a6; */
 
+}
+.espaceCommentaire p a {
+
+text-decoration: none;
 
 
 }

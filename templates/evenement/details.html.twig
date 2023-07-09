@@ -21,18 +21,19 @@
                             {% for participant in evenement.participant %}
                                 {% if participant.id == app.user.id %}
                                    {% set link = 'vous etes inscrits' %}
+                                   <a href="{{ path('app_contact', {'id': evenement.id}) }}">contacter l'organisateur</a>
                                 {% endif %}
                             {% endfor %}
-                {% else %}
-                    {% set link = 'Pour participer notre événement<a href="' ~ path('app_login') ~ '">Connectez-vous</a> ' %}
-                {% endif %}
+               
+                  
                 {{ link | raw}}
+                {% endif %}
              
             {% if evenement.createur == app.user or is_granted ("ROLE_ADMIN") %}
                 <a href="{{ path('supprimer_evenement',{'id':evenement.id}) }}"><i class="fa-solid fa-trash"></i></a>
                 <a href="{{ path('edit_evenement',{'id':evenement.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
             {% endif %}
-            <a href="{{path('app_contact',{'id':evenement.id})}}">contacter l'organisateur</a>
+       
         </div>
 
         <div class="discreption">
@@ -88,6 +89,8 @@
         {% endfor %}
     </div>
 
+    {% if  app.user %}
+
     <div class="ecrireUnCommentaire">
         {{form_start( formAddCommentaire) }}
         {{ form_row(formAddCommentaire.text, {'label': false,'attr': {'placeholder': 'Ajouter un commentaire'}})
@@ -97,6 +100,9 @@
         </span>
         {{form_end( formAddCommentaire) }}
     </div>
+    {% else %}
+    <p><a href="{{path('app_login')}}"> Connectez-vous</a> <br>Si vous souhaitez laisser un commentaire ou participer à notre événement ou organiser  votre événement</p>
+   {% endif %}
 </div>
 
 
