@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Evenements{% endblock %}
@@ -7,51 +5,64 @@
 {% block body %}
 
 <div class="containerPageEvenements">
-    <h1>Evenements Encours</h1>
-    <div class="evenementsListes">
-        {% for evenementsEncours in evenementsEncours %}
-        <div class="evenementCarte">
-           <h2> {{ evenementsEncours.nom }} </h2>
-            <a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}"><img
-                    src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
-            <strong>{{evenementsEncours.dateDebut | date('d-m-y H:i') }} </strong>
-                <h3><a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}">  En savoir plus</a></h3>
-        </div>
-        {% endfor %}
-    </div>
+
+  <h1>Evenements Encours</h1>
+
+  <div class="evenementsListes">
+    {% for evenementsEncours in evenementsEncours %}
+    {% if evenementsEncours.statut == 'validé' %}
+      
+   
+    <div class="evenementCarte">
+      <h2> {{ evenementsEncours.nom }} </h2>
+
+      <a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}"><img
+          src="{{asset('images/evenement/'~ evenementsEncours.image) }}" alt=""></a>
+
+      <strong>{{evenementsEncours.dateDebut | date('d-m-y H:i') }} </strong>
+
+      <h3><a href=" {{ path('details_evenement',{'idEvent':evenementsEncours.id}) }}"> En savoir plus</a></h3>
+      
+    </div>{% else %}
+    <p>il y a pas des événements encours dans cette catégorie</p>
+    {% endif %} 
+    {% endfor %}
+  </div>
 </div>
 
-{% if evenementsAvenir  %}
+{% if evenementsAvenir %}
 
 <div class="sectionPageAccueil">
-    <h1> Agenda : </h1>
-    <div class="containerSlide2">
-      <video autoplay muted loop id="video2">
-        <source src="/videos/354432577_6256783571025403_256348927289396645_n.mp4" type="video/mp4">
+  <h1> Agenda : </h1>
+  <div class="containerSlide2">
+    <video autoplay muted loop id="video2">
+      <source src="/videos/354432577_6256783571025403_256348927289396645_n.mp4" type="video/mp4">
     </video>
-      <div class="containerElementSlide2">
-        {% for evenementAvenir in evenementsAvenir %}
-        {% if evenementAvenir.statut == 'validé' %}
-        <div class="slide2">
-          <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
-          <div class="infoSlider2">
-            <a href=" {{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
-              <div class="nomEvenement">{{ evenementAvenir.nom }}</div>
-            </a>
-            <div class="dateEvenementSlide"> {{ evenementAvenir.dateDebut |date('d-m-Y H:m') }}
-              <br>{{ evenementAvenir.dateFin |date('d-m-Y H:m') }}
-            </div>
+    <div class="containerElementSlide2">
+      {% for evenementAvenir in evenementsAvenir %}
+      {% if evenementAvenir.statut == 'validé' %}
+      <div class="slide2">
+        <img src="{{asset('images/evenement/'~ evenementAvenir.image) }}" alt="">
+        <div class="infoSlider2">
+          <a href=" {{ path('details_evenement',{'idEvent':evenementAvenir.id}) }}">
+            <div class="nomEvenement">{{ evenementAvenir.nom }}</div>
+          </a>
+          <div class="dateEvenementSlide"> {{ evenementAvenir.dateDebut |date('d-m-Y H:m') }}
+            <br>{{ evenementAvenir.dateFin |date('d-m-Y H:m') }}
           </div>
-  
         </div>
-        {% endif %}
-        {% endfor %}
+
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
-  {% else %}
+</div>
+{% else %}
 
-  <a href="{{ path('add_evenement') }}"><p>Organiser</p></a>
-  {% endif %}
+<a href="{{ path('add_evenement') }}">
+  <p>Organiser</p>
+</a>
+{% endif %}
 
 {% endblock %}

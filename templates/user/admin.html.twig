@@ -6,6 +6,8 @@
 {% block body %}
 
 
+{% if is_granted('ROLE_ADMIN') %}
+    
 
 {% set hasEventsToValidate = false %}
 <div class="containerPageAdmin">
@@ -17,7 +19,6 @@
             <th>Date de début</th>
             <th>Date de fin</th>
             <th>Déscription</th>
-
             <th>valider</th>
             <th>refuser</th>
         </tr>
@@ -113,5 +114,6 @@
     }
 
 </script>
+{% endif %}
 
 {% endblock %}
